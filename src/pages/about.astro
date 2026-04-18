@@ -5,52 +5,52 @@ import TrustStrip from '../components/TrustStrip.astro';
 import CTABlock from '../components/CTABlock.astro';
 import { BASE } from '../data/business';
 
-const title = 'About Sorn Handyman Services | Fraser & Aidan, East Ayrshire';
-const description = 'Fraser and Aidan run Sorn Handyman Services — East Ayrshire, 24/7. Joinery, plumbing, painting, flat-pack, gutters, fencing and more.';
+const title = 'About Sorn Handyman Services | Fraser and Aidan, East Ayrshire';
+const description = 'Fraser and Aidan run Sorn Handyman Services from the village of Sorn in East Ayrshire. Joinery, plumbing, painting, flat-pack, gutters, fencing and general repairs.';
 ---
 <BaseLayout title={title} description={description} canonicalPath="/about/">
   <Breadcrumbs trail={[{ name: 'Home', href: `${BASE}/` }, { name: 'About' }]} />
   <article class="container-x py-12 max-w-3xl prose-sorn">
     <span class="eyebrow">Who we are</span>
-    <h1 class="mt-3 font-serif text-5xl font-black text-navy-900">One van. One phone number. Always on.</h1>
+    <h1 class="mt-3 font-serif text-5xl font-black text-navy-900">One van. One phone number.</h1>
 
     <p class="mt-6 text-lg">
-      Sorn Handyman Services is Fraser and Aidan — based in the village of Sorn, in the heart of East Ayrshire. We cover the villages of the Irvine and Ayr valleys from Kilmarnock to Troon and everywhere between, seven days a week, twenty-four hours a day.
+      Sorn Handyman Services is Fraser and Aidan, a father-and-son team based in the village of Sorn, East Ayrshire. We cover the Irvine and Ayr valleys from Kilmarnock to Troon and the towns in between, seven days a week.
     </p>
 
     <h2>Fraser</h2>
     <p>
-      Fraser handles joinery first and foremost — you can tell by the way he sets a door into a cottage frame that was cut before central heating was invented — but he takes on every adjacent job the trade demands: tiling, rendering, slating, slabbing, decking, and the hundred small repairs that sit between trades.
+      Fraser leads on joinery. He hangs doors, frames stud walls, fits kitchens and takes on the tiling, rendering, slating, slabbing and decking that sit alongside. If it needs a saw or a spirit level, the job goes to Fraser.
     </p>
 
     <h2>Aidan</h2>
     <p>
-      Aidan handles the water side of the job, the flat-pack builds that need a steady hand with an Allen key, and the spreadsheet paperwork that keeps the business running. If the quote is written, Aidan wrote it; if the kitchen tap stopped dripping at 3am, Aidan was the one with the wrench.
+      Aidan handles the water side of the business, the flat-pack builds and the paperwork. Quotes, invoices, WhatsApp replies and the late-night tap calls come through him.
     </p>
 
-    <h2>Why 24/7?</h2>
+    <h2>Always on the phone</h2>
     <p>
-      Because problems don\u2019t respect office hours. A leaking pipe at 11pm is not waiting till Monday. A cracked pane on Christmas Eve is not a January job. When we started this business we made a deal with ourselves: one of us answers every call. The phone number in the van is a real phone, and one of us always has it.
+      We answer every call, day or night. A burst pipe at 11pm is not a Monday job. A broken window on Christmas Eve is not a January job. The number on the van is a real phone, and one of us has it on us.
     </p>
     <p>
-      Non-urgent call at 2am? We book you in for first light and get back to sleep. Flooding kitchen at 2am? We are in the van. Either way, you get a real voice and a plan in thirty seconds.
+      If the job can wait until morning, we book you in and go back to sleep. If it cannot, we are in the van. Either way, you get a real voice and a clear answer in under a minute.
     </p>
 
     <h2>How we quote</h2>
     <ul>
-      <li>Photo over WhatsApp for a <strong>ballpark within the hour</strong>.</li>
-      <li>Site visit and <strong>written, fixed-price quote</strong> for anything over £200.</li>
-      <li>No call-out fee. We only charge once we\u2019re on the tools.</li>
+      <li>Send a photo on WhatsApp for a <strong>ballpark price within the hour</strong>.</li>
+      <li>Site visit and <strong>written fixed-price quote</strong> for any job over £200.</li>
+      <li>No call-out fee. We charge once we are on the tools.</li>
     </ul>
 
-    <h2>Local, not hypothetical</h2>
+    <h2>Local</h2>
     <p>
-      We live here. A handyman who is four miles away and who cares what the neighbours think is a different handyman to one who\u2019s dispatched from an algorithm.
+      We live in Sorn. Most of our customers are within a 10-mile drive. You are hiring two people who walk the same high street you do.
     </p>
     <p>
-      If you have a job, call <a href="tel:+447900255876">07900 255876</a> — or message us on WhatsApp — and whoever is closer will be there first.
+      For a job, call Fraser on <a href="tel:+447900255876">07900 255876</a> or WhatsApp Aidan on <a href="https://wa.me/447472223323">07472 223323</a>. Whoever is closer will be there first.
     </p>
   </article>
   <TrustStrip />
-  <CTABlock heading="Any job. Any hour. One call." />
+  <CTABlock heading="Need a job done? One call to Fraser or Aidan." />
 </BaseLayout>

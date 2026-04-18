@@ -10,9 +10,9 @@ import FacebookFeed from '../components/FacebookFeed.astro';
 import { services, areas, faqs, BASE } from '../data/business';
 import { faqSchema } from '../lib/schema';
 
-const title = 'Sorn Handyman Services — father & son team covering Ayrshire';
+const title = 'Sorn Handyman Services — father and son team covering Ayrshire';
 const description =
-  'Fencing, decking, plumbing, joinery, roofing, landscaping and more across Ayrshire. Father-and-son team — no job too small, free quotes, WhatsApp a photo to 07472 223323.';
+  'Joinery, plumbing, painting, flat-pack, gutters, fencing, decking and general repairs across Ayrshire. Free quotes. Call Fraser on 07900 255876 or WhatsApp Aidan on 07472 223323.';
 
 // Top 6 services for the home grid (full list lives at /services/)
 const featuredServices = services.slice(0, 6);
@@ -35,8 +35,8 @@ const featuredFaqs = faqs.slice(0, 6);
       <div class="flex items-end justify-between gap-6 flex-wrap">
         <div class="max-w-2xl">
           <span class="eyebrow">What we do</span>
-          <h2 class="mt-4 font-display text-h1 text-navy-800">Fencing, decking, plumbing, joinery, roofing, landscaping — and more.</h2>
-          <p class="mt-3 text-navy-500 text-body-lg leading-relaxed">No job too small. If it needs fixing, fitting or freshening up, send Fraser or Aidan a photo on WhatsApp and we will come back with a free quote.</p>
+          <h2 class="mt-4 font-display text-h1 text-navy-800">Joinery, plumbing, painting, gutters, flat-pack, fencing, decking and more.</h2>
+          <p class="mt-3 text-navy-500 text-body-lg leading-relaxed">Send Fraser or Aidan a photo on WhatsApp and you will have a free written quote back the same day. Small repairs booked inside the week. Bigger jobs inside the fortnight.</p>
         </div>
         <a href={`${BASE}/services/`} class="btn-outline btn-sm">See all services</a>
       </div>
@@ -50,13 +50,13 @@ const featuredFaqs = faqs.slice(0, 6);
   <section class="bg-cream-100 border-y border-cream-200">
     <div class="container-site py-16 md:py-24 grid gap-10 lg:grid-cols-[1.1fr_1fr] items-center">
       <div>
-        <span class="eyebrow">Father & son</span>
-        <h2 class="mt-4 font-display text-h1 text-navy-800">Fraser and Aidan. Two trades, one van, one phone number.</h2>
+        <span class="eyebrow">Father and son</span>
+        <h2 class="mt-4 font-display text-h1 text-navy-800">Fraser and Aidan. Two tradesmen, one van, one phone number.</h2>
         <p class="mt-4 text-navy-500 text-body-lg leading-relaxed">
-          We are a father-and-son handyman team based in Sorn, East Ayrshire. Every call goes to one of us personally — no call centres, no chains of sub-contractors. We specialise in small repairs and we get to you quickly, but we can also take on larger projects when they come up.
+          We are a father-and-son handyman team based in Sorn, East Ayrshire. Every call goes to Fraser or Aidan. No call centres. No sub-contractors. We take on small repairs and larger projects across Ayrshire.
         </p>
         <p class="mt-4 text-navy-500 leading-relaxed">
-          Every job on our Facebook page is a real job for a real Ayrshire customer, posted on the day we finished. That is the only marketing we do — the work, and photos of the work.
+          Every job on our Facebook page is a real job for a real Ayrshire customer, posted the day we finish it. That is our marketing: the work, and photos of the work.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href={`${BASE}/about/`} class="btn-outline btn-sm">More about us</a>
@@ -86,8 +86,8 @@ const featuredFaqs = faqs.slice(0, 6);
       <div class="flex items-end justify-between gap-6 flex-wrap">
         <div class="max-w-2xl">
           <span class="eyebrow">Where we work</span>
-          <h2 class="mt-4 font-display text-h1 text-navy-800">All of Ayrshire. One van, one phone number.</h2>
-          <p class="mt-3 text-navy-500 text-body-lg leading-relaxed">Based in Sorn and working the whole of East Ayrshire plus the coast — Ayr, Troon, Prestwick, Irvine, Kilmarnock, Mauchline and the villages in between.</p>
+          <h2 class="mt-4 font-display text-h1 text-navy-800">Across Ayrshire, from one van.</h2>
+          <p class="mt-3 text-navy-500 text-body-lg leading-relaxed">Based in Sorn. We cover East Ayrshire and the coast: Ayr, Troon, Prestwick, Irvine, Kilmarnock, Mauchline and the villages in between.</p>
         </div>
         <a href={`${BASE}/areas/`} class="btn-outline btn-sm">See all areas</a>
       </div>

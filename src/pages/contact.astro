@@ -4,8 +4,8 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CTABlock from '../components/CTABlock.astro';
 import { business, BASE } from '../data/business';
 
-const title = 'Contact Sorn Handyman — 24/7 Phone, WhatsApp & Form | East Ayrshire';
-const description = 'Call 07900 255876 any time — day, night, weekend. WhatsApp +44 7472 223323 for photo quotes. Send a message and Fraser or Aidan will reply the same day.';
+const title = 'Contact Sorn Handyman Services | Phone, WhatsApp and Form';
+const description = 'Call Fraser on 07900 255876 day or night. WhatsApp Aidan on +44 7472 223323 for photo quotes. Send the form and we reply the same day.';
 
 // If PUBLIC_WEB3FORMS_KEY is unset at build time, skip Web3Forms and show phone/WhatsApp fallback.
 const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length > 0);
@@ -14,9 +14,9 @@ const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length
   <Breadcrumbs trail={[{ name: 'Home', href: `${BASE}/` }, { name: 'Contact' }]} />
   <section class="container-x py-12 grid gap-10 lg:grid-cols-5">
     <div class="lg:col-span-2">
-      <span class="eyebrow">Contact · 24/7</span>
-      <h1 class="mt-3 font-serif text-5xl font-black text-navy-900">Call us. Anytime.</h1>
-      <p class="mt-4 text-lg text-navy-900/75">We answer every call. If it\u2019s 3am and you need help, you get a real voice. If it\u2019s 3am and you don\u2019t really, you still get a real voice.</p>
+      <span class="eyebrow">Contact</span>
+      <h1 class="mt-3 font-serif text-5xl font-black text-navy-900">Call Fraser or Aidan.</h1>
+      <p class="mt-4 text-lg text-navy-900/75">One of us answers every call. Daytime, evening, weekend or three in the morning, you get a real voice and a straight answer.</p>
 
       <div class="mt-8 space-y-4">
         <a href={`tel:${business.phoneE164}`} class="card flex items-center gap-4 hover:bg-amber-500/5">
@@ -38,15 +38,15 @@ const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length
           <div>
             <p class="text-sm text-navy-900/60">Based in</p>
             <p class="font-serif text-lg font-bold text-navy-900">{business.address.locality}, {business.address.region} {business.address.postalCode}</p>
-            <p class="mt-1 text-sm text-navy-900/70">Call-outs across the whole of East Ayrshire and into South + North Ayrshire. No call-out fee.</p>
+            <p class="mt-1 text-sm text-navy-900/70">Call-outs across East Ayrshire, and into South and North Ayrshire. No call-out fee.</p>
           </div>
         </div>
         <div class="card flex items-start gap-4">
           <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900/5 text-navy-900 text-xl">⏰</span>
           <div>
             <p class="text-sm text-navy-900/60">Hours</p>
-            <p class="font-serif text-lg font-bold text-navy-900">Open 24 hours · 7 days a week</p>
-            <p class="mt-1 text-sm text-navy-900/70">Out-of-hours emergencies (10pm–6am) — £60 minimum call fee applies to the job total.</p>
+            <p class="font-serif text-lg font-bold text-navy-900">Open 24 hours, 7 days a week</p>
+            <p class="mt-1 text-sm text-navy-900/70">Out-of-hours call-outs between 10pm and 6am carry a £60 minimum, added to the job total.</p>
           </div>
         </div>
       </div>
@@ -56,9 +56,9 @@ const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length
       <div class="card">
         <h2 class="font-serif text-2xl font-bold text-navy-900">Send a message</h2>
         {hasFormKey ? (
-          <p class="mt-1 text-sm text-navy-900/60">Form posts to Web3Forms — no account or login needed. We read it straight into email and WhatsApp.</p>
+          <p class="mt-1 text-sm text-navy-900/60">Form posts straight to our email and WhatsApp. No account needed.</p>
         ) : (
-          <p class="mt-1 text-sm text-navy-900/60">Quickest reply is a call or WhatsApp photo — we pick up 24/7. Buttons below go straight through.</p>
+          <p class="mt-1 text-sm text-navy-900/60">The fastest reply is a call or a WhatsApp photo. Buttons below go straight through to Fraser and Aidan.</p>
         )}
 
         {hasFormKey ? (
