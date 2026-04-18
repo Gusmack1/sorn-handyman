@@ -1,18 +1,43 @@
 ---
-const badges = [
-  { icon: '🕐', label: 'Open 24 / 7' },
-  { icon: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', label: 'Based in East Ayrshire' },
-  { icon: '💷', label: 'Free written quotes' },
-  { icon: '🚫', label: 'No call-out fee' },
+// Trust signals — Facebook-grounded ONLY. No invented "20+ years" / "insured" / "DBS".
+const pillars = [
+  {
+    title: 'Father & son team',
+    body: "Fraser and Aidan. Family-run, one call answered personally.",
+    icon: 'team',
+  },
+  {
+    title: 'Covers all of Ayrshire',
+    body: 'Sorn, Mauchline, Cumnock, Kilmarnock, Ayr, Troon and every town in between.',
+    icon: 'map',
+  },
+  {
+    title: 'Free quotes, fast response',
+    body: 'No call-out fee. Send a photo on WhatsApp and we ballpark first.',
+    icon: 'chat',
+  },
 ];
 ---
-<section class="bg-white border-y border-navy-900/5">
-  <div class="container-x py-6">
-    <ul class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-medium text-navy-900/70">
-      {badges.map((b) => (
-        <li class="flex items-center gap-2">
-          <span aria-hidden>{b.icon}</span>
-          <span>{b.label}</span>
+<section class="bg-cream-100 border-y border-cream-200" aria-label="What to know about us">
+  <div class="container-site py-12 md:py-16">
+    <ul class="grid gap-6 md:gap-10 md:grid-cols-3">
+      {pillars.map((p) => (
+        <li class="flex items-start gap-4">
+          <span class="shrink-0 inline-flex h-12 w-12 items-center justify-center rounded-full bg-cream-50 ring-1 ring-navy-100 text-navy-700 shadow-elev-1" aria-hidden="true">
+            {p.icon === 'team' && (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            )}
+            {p.icon === 'map' && (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            )}
+            {p.icon === 'chat' && (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            )}
+          </span>
+          <div>
+            <h3 class="font-display text-lg font-semibold text-navy-800 leading-snug">{p.title}</h3>
+            <p class="mt-1 text-navy-500 text-sm leading-relaxed">{p.body}</p>
+          </div>
         </li>
       ))}
     </ul>
