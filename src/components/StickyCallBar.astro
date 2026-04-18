@@ -1,0 +1,19 @@
+---
+import { business, BASE } from '../data/business';
+---
+<div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-navy-900 text-white shadow-2xl border-t border-navy-950">
+  <div class="grid grid-cols-3 divide-x divide-white/10 text-center">
+    <a href={`tel:${business.phoneE164}`} class="flex flex-col items-center justify-center gap-0.5 py-3 hover:bg-navy-950 active:bg-navy-950">
+      <span class="text-xl" aria-hidden>📞</span>
+      <span class="text-[11px] font-semibold uppercase tracking-wide">Call now</span>
+    </a>
+    <a href={`https://wa.me/${business.whatsapp.replace('+','')}?text=Hi%20Sorn%20Handyman%2C%20can%20I%20get%20a%20quote%20for%3A%20`} class="flex flex-col items-center justify-center gap-0.5 py-3 hover:bg-navy-950 active:bg-navy-950">
+      <span class="text-xl" aria-hidden>💬</span>
+      <span class="text-[11px] font-semibold uppercase tracking-wide">WhatsApp</span>
+    </a>
+    <a href={`${BASE}/quote/`} class="flex flex-col items-center justify-center gap-0.5 py-3 bg-amber-500 text-navy-900 hover:bg-amber-600">
+      <span class="text-xl" aria-hidden>📝</span>
+      <span class="text-[11px] font-semibold uppercase tracking-wide">Free quote</span>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import AreaCard from '../components/AreaCard.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import FAQ from '../components/FAQ.astro';
+import CTABlock from '../components/CTABlock.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import FacebookFeed from '../components/FacebookFeed.astro';
+import SchemaBlock from '../components/SchemaBlock.astro';
+import { services, areas, faqs, business, BASE } from '../data/business';
+import { faqSchema } from '../lib/schema';
+
+const title = '24/7 Handyman East Ayrshire | Sorn Handyman Services — Fraser & Aidan';
+const description = 'Father-and-son handyman team in Sorn, Mauchline, Cumnock, Kilmarnock and across East Ayrshire — open 24 hours, 7 days a week. Joinery, plumbing, guttering, fencing, decking. Call 07900 255876 anytime.';
+---
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/"
+  extraSchema={faqSchema(faqs)}
+>
+  <Hero />
+  <TrustStrip />
+
+  <!-- Services grid -->
+  <section class="container-x py-16" id="services">
+    <div class="flex items-end justify-between gap-6 flex-wrap">
+      <div class="max-w-2xl">
+        <span class="eyebrow">14 trades · one number</span>
+        <h2 class="mt-4 font-serif text-4xl font-bold text-navy-900">Everything that goes wrong in a house — we fix it.</h2>
+        <p class="mt-3 text-navy-900/70">From a sticking door to a full back-garden deck. If it\u2019s on the list, call. If it\u2019s not on the list, call anyway.</p>
+      </div>
+      <a href={`${BASE}/services/`} class="btn-secondary !py-2 !px-4 text-sm">All services →</a>
+    </div>
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((s) => <ServiceCard service={s} />)}
+    </div>
+  </section>
+
+  <!-- Areas grid -->
+  <section class="bg-navy-50/60 border-y border-navy-900/5">
+    <div class="container-x py-16">
+      <div class="flex items-end justify-between gap-6 flex-wrap">
+        <div class="max-w-2xl">
+          <span class="eyebrow">Where we work</span>
+          <h2 class="mt-4 font-serif text-4xl font-bold text-navy-900">11 East Ayrshire towns. No call-out fee in any of them.</h2>
+          <p class="mt-3 text-navy-900/70">If you\u2019re between towns, you\u2019re probably still in our patch — give us a ring.</p>
+        </div>
+        <a href={`${BASE}/areas/`} class="btn-secondary !py-2 !px-4 text-sm">All areas →</a>
+      </div>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {areas.map((a) => <AreaCard area={a} />)}
+      </div>
+    </div>
+  </section>
+
+  <ProcessSteps />
+
+  <FacebookFeed
+    title="Recent jobs — straight from Facebook"
+    subtitle="Every photo here is a real job for a real Ayrshire customer, posted on the day we finished. Tap any card to see the original post on Facebook."
+  />
+
+  <!-- Reviews strip (honest: no reviews yet) -->
+  <section class="container-x py-16">
+    <div class="max-w-2xl">
+      <span class="eyebrow">What customers say</span>
+      <h2 class="mt-4 font-serif text-4xl font-bold text-navy-900">Fresh brand, real trade.</h2>
+      <p class="mt-3 text-navy-900/70">
+        We only started the Google Business Profile recently — real reviews are on the way. In the meantime, ask around Sorn, Mauchline and Cumnock. Someone will know us.
+      </p>
+    </div>
+    <div class="mt-8 grid gap-4 md:grid-cols-3">
+      <TestimonialCard
+        name="Your review here"
+        town="Ayrshire"
+        stars={5}
+        body="We'd love to hear how we did. Scan the QR on our business card or visit our Google Business Profile after the job."
+        job="First 20 reviews get a year-end thank-you coffee voucher"
+      />
+      <TestimonialCard
+        name="Your review here"
+        town="East Ayrshire"
+        stars={5}
+        body="Honest, local, always-on. If we earned it, please tell Google — it helps your neighbours find us."
+      />
+      <TestimonialCard
+        name="Your review here"
+        town="KA5"
+        stars={5}
+        body="Tell us what worked and (just as important) what didn't — we fix things, including ourselves."
+      />
+    </div>
+    <div class="mt-8 text-center">
+      <a href={business.gbpUrl} rel="noopener" class="btn-secondary">Leave a Google review →</a>
+    </div>
+  </section>
+
+  <FAQ />
+  <CTABlock />
+</BaseLayout>

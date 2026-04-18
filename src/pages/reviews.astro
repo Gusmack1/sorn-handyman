@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import FacebookFeed from '../components/FacebookFeed.astro';
+import CTABlock from '../components/CTABlock.astro';
+import { business, BASE } from '../data/business';
+
+const title = 'Reviews — Sorn Handyman Services | Honest & Local';
+const description = 'Help your neighbours find us by leaving a Google review. Real reviews are on the way — we only started the profile recently.';
+---
+<BaseLayout title={title} description={description} canonicalPath="/reviews/">
+  <Breadcrumbs trail={[{ name: 'Home', href: `${BASE}/` }, { name: 'Reviews' }]} />
+  <section class="container-x py-12 max-w-4xl">
+    <span class="eyebrow">Reviews</span>
+    <h1 class="mt-3 font-serif text-5xl font-black text-navy-900">Honest, local, new.</h1>
+    <p class="mt-4 text-lg text-navy-900/75">
+      We only started the Google Business Profile recently, so the review count is low but climbing fast. If we\u2019ve done a job for you — in Sorn, Mauchline, Cumnock or anywhere else — please spare thirty seconds to leave one. It helps your neighbours find us, and it keeps us honest.
+    </p>
+
+    <div class="mt-8 card bg-navy-900 text-white">
+      <p class="font-serif text-2xl font-bold">Leave a Google review in 30 seconds</p>
+      <p class="mt-2 text-white/75">Tap the button, give us stars and a line. That\u2019s it.</p>
+      <a href={business.gbpUrl} rel="noopener" class="mt-4 inline-flex btn-primary">⭐ Leave a review</a>
+    </div>
+
+    <div class="mt-10 grid gap-4 md:grid-cols-2">
+      <TestimonialCard name="First review goes here" town="Ayrshire" stars={5} body="Your first real review will land on this page and replace the placeholder. Ask Fraser or Aidan for a review card at the end of the job." />
+      <TestimonialCard name="Second review goes here" town="East Ayrshire" stars={5} body="We read every review and reply to every one — including the awkward ones. That\u2019s the deal." />
+    </div>
+
+  </section>
+
+  <FacebookFeed
+    title="Real work, posted real-time to our Facebook"
+    subtitle="Until the Google reviews roll in, here is the honest evidence — every completed job goes on our Facebook the day it is done. No stock photos, no embellishment."
+  />
+
+  <section class="container-x py-12 max-w-4xl">
+    <!-- GBP reviews embed instructions (for Gus) -->
+    <section class="mt-14 prose-sorn">
+      <h2>How we display reviews</h2>
+      <p>
+        Google does not allow direct iframe embedding of the review list. On this page we display verified copy-paste reviews with the reviewer\u2019s first name + last initial, linked back to the Google profile. Once we hit 10+ reviews we\u2019ll add an automated widget (Elfsight or a light first-party fetch of the Places API daily). Until then every review here is manually mirrored and dated.
+      </p>
+    </section>
+  </section>
+  <CTABlock heading="Leave a review, or book a job — either helps." />
+</BaseLayout>

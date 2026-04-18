@@ -1,0 +1,18 @@
+---
+import { processSteps } from '../data/business';
+---
+<section class="container-x py-16">
+  <div class="max-w-2xl">
+    <span class="eyebrow">How it works</span>
+    <h2 class="mt-4 font-serif text-4xl font-bold text-navy-900">Three steps. No waiting round.</h2>
+  </div>
+  <ol class="mt-10 grid gap-6 md:grid-cols-3">
+    {processSteps.map((s) => (
+      <li class="card relative">
+        <span class="absolute -top-3 left-6 inline-flex items-center justify-center h-8 w-8 rounded-full bg-amber-500 text-navy-900 font-black">{s.n}</span>
+        <h3 class="mt-2 font-serif text-xl font-bold text-navy-900">{s.title}</h3>
+        <p class="mt-2 text-navy-900/70 leading-relaxed">{s.body}</p>
+      </li>
+    ))}
+  </ol>
+</section>

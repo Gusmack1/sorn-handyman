@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import AreaCard from '../../components/AreaCard.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
+import FAQ from '../../components/FAQ.astro';
+import { services, areas, BASE, business } from '../../data/business';
+import { areaSchema, faqSchema } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return areas.map((a) => ({ params: { slug: a.slug }, props: { area: a } }));
+}
+
+const { area } = Astro.props;
+const canonical = `/areas/${area.slug}/`;
+const canonicalUrl = `${business.siteUrl}${canonical}`;
+
+const title = `Handyman in ${area.name} — 24/7, Fully Insured | Sorn Handyman Services`;
+const description = `Handyman in ${area.name}${area.postcode ? ' (' + area.postcode + ')' : ''} — 24/7, fully insured. Joinery, plumbing, painting, flat-pack, gutters, fencing. Free quotes, no call-out fee. Call ${business.phone}.`;
+
+// Pick 9 core services to card-link on every area page (per site spec)
+const NINE_SLUGS = [
+  'joinery',
+  'plumbing',
+  'painting-decorating',
+  'flat-pack-assembly',
+  'gutter-cleaning',
+  'fencing',
+  'deck-building',
+  'power-washing',
+  'property-maintenance',
+];
+const nineServices = NINE_SLUGS
+  .map((slug) => services.find((s) => s.slug === slug))
+  .filter(Boolean) as typeof services;
+
+// Split extended copy into paragraphs for rendering
+const paragraphs = (area.extendedCopy || area.intro).split('\n\n');
+
+// Page-level FAQ
+const pageFaqs = [
+  {
+    q: `Do you cover all of ${area.name}?`,
+    a: `Yes — we cover the full ${area.name}${area.postcode ? ' ' + area.postcode : ''} postcode and a 10-mile radius around the town centre. Base is Sorn, so we're in and out of ${area.name} most weeks.`,
+  },
+  {
+    q: `Are you really open 24/7 for ${area.name} call-outs?`,
+    a: `Yes. Fraser or Aidan picks up every call, day or night. For non-urgent jobs in ${area.name} we'll book you the next open slot; for burst pipes and emergencies we're in the van.`,
+  },
+  {
+    q: `Do you charge a call-out fee in ${area.name}?`,
+    a: `No. Free written quotes, no minimum job size. Out-of-hours emergencies (10pm\u20136am) carry a £60 minimum — normal hours don't.`,
+  },
+  {
+    q: `Are you insured?`,
+    a: 'Yes — £2m public liability. Certificate available on request before we start.',
+  },
+  {
+    q: `How do I get a quote?`,
+    a: `Call Fraser on ${business.phone} or WhatsApp Aidan on ${business.whatsappDisplay}. Send a couple of photos and we'll ballpark the price before we drive over.`,
+  },
+];
+
+const schemas = [
+  ...(areaSchema(area.slug, canonicalUrl) || []),
+  faqSchema(pageFaqs),
+];
+---
+<BaseLayout title={title} description={description} canonicalPath={canonical} extraSchema={schemas}>
+  <Breadcrumbs trail={[
+    { name: 'Home', href: `${BASE}/` },
+    { name: 'Areas', href: `${BASE}/areas/` },
+    { name: area.name },
+  ]} />
+
+  <section class="container-x py-12">
+    <div class="flex flex-wrap items-center gap-2 text-sm">
+      <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-500 text-navy-900 px-3 py-1 font-semibold">
+        <span class="h-2 w-2 rounded-full bg-navy-900 animate-pulse"></span>
+        Open 24/7
+      </span>
+      <span class="inline-flex rounded-full border border-navy-900/15 bg-white px-3 py-1 font-medium text-navy-900/80">Fully insured</span>
+      <span class="inline-flex rounded-full border border-navy-900/15 bg-white px-3 py-1 font-medium text-navy-900/80">Father &amp; son — Fraser + Aidan</span>
+      <span class="inline-flex rounded-full border border-navy-900/15 bg-white px-3 py-1 font-medium text-navy-900/80">Free written quotes</span>
+      {area.postcode && <span class="inline-flex rounded-full border border-navy-900/15 bg-white px-3 py-1 font-medium text-navy-900/80">{area.postcode}</span>}
+    </div>
+
+    <h1 class="mt-5 font-serif text-5xl font-black text-navy-900 max-w-4xl">Handyman in {area.name} &mdash; 24/7, Fully Insured</h1>
+    <p class="mt-4 text-lg text-navy-900/75 max-w-3xl">{area.intro}</p>
+
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href={`tel:${business.phoneE164}`} class="btn-primary">📞 Call now {business.phone}</a>
+      <a
+        href={`https://wa.me/${business.whatsapp.replace('+','')}?text=${encodeURIComponent(`Hi, I'm in ${area.name} and I need a quote for...`)}`}
+        class="btn-secondary bg-[#25D366] !text-white hover:!bg-[#1fb858]">💬 WhatsApp Aidan</a>
+      <a href={`${BASE}/quote/`} class="btn-secondary">Free written quote →</a>
+    </div>
+  </section>
+
+  <section class="container-x pb-4">
+    <div class="prose prose-navy max-w-3xl">
+      {paragraphs.map((p) => <p class="mt-4 text-navy-900/85 leading-relaxed">{p}</p>)}
+    </div>
+  </section>
+
+  {area.localJobs && area.localJobs.length > 0 && (
+    <section class="container-x py-10">
+      <h2 class="font-serif text-3xl font-bold text-navy-900">Typical {area.name} jobs this month</h2>
+      <ul class="mt-4 grid gap-2 sm:grid-cols-2 max-w-3xl">
+        {area.localJobs.map((j) => (
+          <li class="flex gap-3 text-navy-900/80"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-amber-500"></span>{j}</li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="bg-navy-50/60 border-y border-navy-900/5">
+    <div class="container-x py-16">
+      <span class="eyebrow">Services in {area.name}</span>
+      <h2 class="mt-3 font-serif text-4xl font-bold text-navy-900">Nine core services — one local team.</h2>
+      <p class="mt-3 max-w-2xl text-navy-900/75">Bundle as many as you like into one visit and save the second call-out fee. Every job comes with a written quote and £2m public-liability cover.</p>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {nineServices.map((s) => <ServiceCard service={s} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="container-x py-16">
+    <div class="card bg-navy-900 text-white">
+      <h2 class="font-serif text-3xl font-bold">Ready to sort it in {area.name} today?</h2>
+      <p class="mt-2 text-white/80 max-w-2xl">Open 24/7 for emergency call-outs. Call Fraser direct or WhatsApp Aidan a couple of photos and we'll ballpark the price before we even drive over.</p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href={`tel:${business.phoneE164}`} class="btn-primary">📞 Call now {business.phone}</a>
+        <a
+          href={`https://wa.me/${business.whatsapp.replace('+','')}`}
+          class="btn-secondary bg-[#25D366] !text-white hover:!bg-[#1fb858]">💬 WhatsApp {business.whatsappDisplay}</a>
+        <a href={business.socials.googleReview} target="_blank" rel="noopener" class="btn-secondary !text-white !border-white/40 hover:!bg-white/10">⭐ Leave a Google review</a>
+      </div>
+      <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-white/70">
+        <span>Follow:</span>
+        <a href={business.socials.facebook} target="_blank" rel="noopener" class="hover:text-amber-400">Facebook</a>
+        <a href={business.socials.instagram} target="_blank" rel="noopener" class="hover:text-amber-400">@sornhandyman</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-navy-50/60 border-y border-navy-900/5">
+    <div class="container-x py-16">
+      <span class="eyebrow">Nearby</span>
+      <h2 class="mt-3 font-serif text-3xl font-bold text-navy-900">Other Ayrshire towns we cover</h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {areas.filter((a) => a.slug !== area.slug).slice(0, 6).map((a) => <AreaCard area={a} />)}
+      </div>
+      <p class="mt-6"><a class="text-amber-600 font-semibold hover:underline" href={`${BASE}/areas/`}>See all areas →</a></p>
+    </div>
+  </section>
+
+  <FAQ faqs={pageFaqs} heading={`${area.name} — your questions`} />
+  <TrustStrip />
+  <CTABlock heading={`Handyman in ${area.name}? Call us anytime.`} />
+</BaseLayout>

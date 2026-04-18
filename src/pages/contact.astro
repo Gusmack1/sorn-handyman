@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CTABlock from '../components/CTABlock.astro';
+import { business, BASE } from '../data/business';
+
+const title = 'Contact Sorn Handyman — 24/7 Phone, WhatsApp & Form | East Ayrshire';
+const description = 'Call 07900 255876 any time — day, night, weekend. WhatsApp +44 7472 223323 for photo quotes. Send a message and Fraser or Aidan will reply the same day.';
+
+// If PUBLIC_WEB3FORMS_KEY is unset at build time, skip Web3Forms and show phone/WhatsApp fallback.
+const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length > 0);
+---
+<BaseLayout title={title} description={description} canonicalPath="/contact/">
+  <Breadcrumbs trail={[{ name: 'Home', href: `${BASE}/` }, { name: 'Contact' }]} />
+  <section class="container-x py-12 grid gap-10 lg:grid-cols-5">
+    <div class="lg:col-span-2">
+      <span class="eyebrow">Contact · 24/7</span>
+      <h1 class="mt-3 font-serif text-5xl font-black text-navy-900">Call us. Anytime.</h1>
+      <p class="mt-4 text-lg text-navy-900/75">We answer every call. If it\u2019s 3am and you need help, you get a real voice. If it\u2019s 3am and you don\u2019t really, you still get a real voice.</p>
+
+      <div class="mt-8 space-y-4">
+        <a href={`tel:${business.phoneE164}`} class="card flex items-center gap-4 hover:bg-amber-500/5">
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500 text-navy-900 text-xl">📞</span>
+          <div>
+            <p class="text-sm text-navy-900/60">Tap to call</p>
+            <p class="font-serif text-2xl font-bold text-navy-900">{business.phone}</p>
+          </div>
+        </a>
+        <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="card flex items-center gap-4 hover:bg-[#25D366]/5">
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#25D366] text-white text-xl">💬</span>
+          <div>
+            <p class="text-sm text-navy-900/60">WhatsApp — send us a photo</p>
+            <p class="font-serif text-2xl font-bold text-navy-900">{business.whatsappDisplay}</p>
+          </div>
+        </a>
+        <div class="card flex items-start gap-4">
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900 text-amber-500 text-xl">📍</span>
+          <div>
+            <p class="text-sm text-navy-900/60">Based in</p>
+            <p class="font-serif text-lg font-bold text-navy-900">{business.address.locality}, {business.address.region} {business.address.postalCode}</p>
+            <p class="mt-1 text-sm text-navy-900/70">Call-outs across the whole of East Ayrshire and into South + North Ayrshire. No call-out fee.</p>
+          </div>
+        </div>
+        <div class="card flex items-start gap-4">
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900/5 text-navy-900 text-xl">⏰</span>
+          <div>
+            <p class="text-sm text-navy-900/60">Hours</p>
+            <p class="font-serif text-lg font-bold text-navy-900">Open 24 hours · 7 days a week</p>
+            <p class="mt-1 text-sm text-navy-900/70">Out-of-hours emergencies (10pm–6am) — £60 minimum call fee applies to the job total.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-3">
+      <div class="card">
+        <h2 class="font-serif text-2xl font-bold text-navy-900">Send a message</h2>
+        {hasFormKey ? (
+          <p class="mt-1 text-sm text-navy-900/60">Form posts to Web3Forms — no account or login needed. We read it straight into email and WhatsApp.</p>
+        ) : (
+          <p class="mt-1 text-sm text-navy-900/60">Quickest reply is a call or WhatsApp photo — we pick up 24/7. Buttons below go straight through.</p>
+        )}
+
+        {hasFormKey ? (
+        <form
+          action="https://api.web3forms.com/submit"
+          method="POST"
+          class="mt-5 grid gap-4"
+        >
+          <input type="hidden" name="access_key" value={business.web3formsKey} />
+          <input type="hidden" name="subject" value="New lead — sornhandyman.co.uk /contact" />
+          <input type="hidden" name="from_name" value="Sorn Handyman website" />
+          <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <label class="grid gap-1">
+            <span class="text-sm font-medium text-navy-900">Name</span>
+            <input name="name" required class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
+          </label>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="grid gap-1">
+              <span class="text-sm font-medium text-navy-900">Phone</span>
+              <input name="phone" type="tel" required class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
+            </label>
+            <label class="grid gap-1">
+              <span class="text-sm font-medium text-navy-900">Email</span>
+              <input name="email" type="email" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
+            </label>
+          </div>
+          <label class="grid gap-1">
+            <span class="text-sm font-medium text-navy-900">Town / postcode</span>
+            <input name="location" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" placeholder="e.g. Mauchline KA5" />
+          </label>
+          <label class="grid gap-1">
+            <span class="text-sm font-medium text-navy-900">What needs doing?</span>
+            <textarea name="message" rows="5" required class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" placeholder="Short description is fine — we'll come back with questions."></textarea>
+          </label>
+          <div class="flex items-start gap-2 text-sm text-navy-900/70">
+            <input id="urgent" name="urgent" type="checkbox" class="mt-1" />
+            <label for="urgent">Urgent — this is an emergency (water, security, fire risk).</label>
+          </div>
+          <button type="submit" class="btn-primary">Send message</button>
+          <p class="text-xs text-navy-900/50">We reply inside the hour during the day, inside 2 hours overnight. By sending this form you agree we can contact you on the phone / email / WhatsApp provided.</p>
+        </form>
+        ) : (
+        <div class="mt-5 grid gap-3">
+          <a href={`tel:${business.phoneE164}`} class="btn-primary w-full text-center">📞 Call {business.phone}</a>
+          <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="btn-secondary w-full text-center">💬 WhatsApp {business.whatsappDisplay}</a>
+          <p class="text-xs text-navy-900/50">Online form coming back shortly — in the meantime phone and WhatsApp are the fastest ways to reach Fraser or Aidan.</p>
+        </div>
+        )}
+      </div>
+
+      <div class="mt-4 aspect-video rounded-xl overflow-hidden ring-1 ring-navy-900/10">
+        <iframe
+          title="Map of Sorn Handyman Services service area"
+          src={business.googleMapsEmbed}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="w-full h-full border-0"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+  <CTABlock />
+</BaseLayout>

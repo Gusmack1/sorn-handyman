@@ -1,0 +1,241 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import { business, BASE } from '../../data/business';
+import { postBySlug } from '../../data/posts';
+
+const post = postBySlug('24-7-emergency-handyman-ayr')!;
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+const url = `${siteUrl}/blog/${post.slug}/`;
+const ogImage = `${siteUrl}${post.ogImage}`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: post.title,
+  description: post.description,
+  inLanguage: 'en-GB',
+  datePublished: post.date,
+  dateModified: post.date,
+  author: {
+    '@type': 'Person',
+    name: post.author,
+    worksFor: { '@id': `${siteUrl}/#business` },
+  },
+  publisher: { '@id': `${siteUrl}/#business` },
+  image: [ogImage],
+  mainEntityOfPage: url,
+  articleSection: 'Emergency handyman',
+  keywords: [post.keyword, 'burst pipe Ayr', 'broken lock Ayr', 'smashed window Ayr', 'flooded drain Ayr', '24/7 handyman Ayrshire'],
+  wordCount: post.wordCount,
+  about: { '@type': 'Place', name: 'Ayr, Scotland' },
+};
+---
+<BaseLayout
+  title={`${post.title} | Sorn Handyman Services`}
+  description={post.description}
+  canonicalPath={`/blog/${post.slug}/`}
+  ogImage={ogImage}
+  extraSchema={articleSchema}
+>
+  <Breadcrumbs trail={[
+    { name: 'Home', href: `${BASE}/` },
+    { name: 'Blog', href: `${BASE}/blog/` },
+    { name: post.title },
+  ]} />
+
+  <article class="container-x py-10 lg:py-14 max-w-3xl">
+    <header>
+      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
+        <span>{post.area}</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <span class="text-navy-900/60">{post.readMinutes} min read</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
+      </div>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
+        {post.title}
+      </h1>
+      <p class="mt-5 text-lg text-navy-900/75">
+        The phone going at 2.47am is usually one of five jobs. Here's what
+        genuinely needs us in the van before breakfast — and what can wait.
+      </p>
+    </header>
+
+    <div class="prose-sorn mt-8 text-lg">
+      <p>
+        We run <a href={`${BASE}/areas/ayr/`}>a 24/7 handyman service covering Ayr</a>
+        from our base 15 miles east in Sorn. That "24/7" isn't a marketing line —
+        one of us, me or my dad Fraser, picks up the phone at every hour of every
+        night. No call-centre, no robot, no "leave a message and we'll get back
+        to you by Tuesday". So I can tell you exactly what an emergency call
+        sounds like at 3am in an Ayr flat, because I take them.
+      </p>
+      <p>
+        Not everything that feels like a crisis at midnight actually needs a
+        tradesman out the door in the dark. Plenty of jobs are cheaper and safer
+        to fix at 8am with proper light. But there are a handful of classics
+        that genuinely do need <strong>now</strong>, not first thing, and it's
+        worth knowing the difference before you're the one standing in a
+        puddle looking for a phone.
+      </p>
+
+      <h2>What actually counts as a real emergency?</h2>
+      <p>
+        The honest test is simple: <em>is the damage getting worse every minute
+        you wait?</em> If yes, it's an emergency. If you can contain it with a
+        bucket, a towel or a locked internal door, it can usually wait for
+        daylight and cost you less.
+      </p>
+      <p>
+        Here are the five calls that come in most often from Ayr — the ones
+        where we get boots on straight away.
+      </p>
+
+      <h3>1. Burst pipes and blown flexi hoses</h3>
+      <p>
+        This is the number-one out-of-hours call, hands down. A flexi hose
+        under a kitchen or bathroom sink lasts about ten years, then lets go
+        without warning — usually on a Saturday night. You'll know it because
+        there's a fine spray of mains-pressure water hitting the inside of
+        your unit and seven litres a minute going through your floor.
+      </p>
+      <p>
+        <strong>Do this first, before you ring anyone:</strong> find your
+        stopcock and turn it off. In most Ayr flats it's under the kitchen
+        sink or in a cupboard near the front door. In houses it's often in the
+        garage or the cupboard where the gas meter lives. One turn clockwise.
+        If you can't find it or it won't budge, ring us — we'll find it over
+        the phone.
+      </p>
+      <p>
+        Once the water is off, the emergency is over. We can be on site from
+        Sorn to most Ayr postcodes inside 40 minutes. If your stopcock is
+        broken or the leak is on the <em>street side</em> of the meter, that's
+        a Scottish Water job and the number is 0800 0778 778 — tell the folk
+        answering it's a 24-hour line.
+      </p>
+
+      <h3>2. Broken locks and front doors that won't shut</h3>
+      <p>
+        A house you can't lock at midnight is an emergency. A snapped UPVC
+        handle, a euro-cylinder that won't turn, a slammed Yale with the key
+        inside — we do the lot. I carry a set of universal UPVC handles and a
+        range of euro cylinders in the van specifically because these calls
+        come in at unsociable hours.
+      </p>
+      <p>
+        We're not a locksmith — we won't pick a lock open for you if you're
+        locked out of someone else's property — but if you're the owner or
+        tenant and the door is yours, we'll either get it open non-destructively
+        or replace the cylinder on the spot and leave you with new keys. Expect
+        £70–£120 for a standard cylinder swap plus the out-of-hours surcharge.
+      </p>
+
+      <h3>3. Smashed windows</h3>
+      <p>
+        A smashed ground-floor window in Ayr in December is an emergency
+        because the house is going to freeze and anyone walking past has an
+        invitation. We can't always replace the glass at 2am (glaziers
+        source-order the unit), but we can board up properly, tidy every
+        shard, and book the glass in for the next working day. Think of it
+        as make-safe now, proper fix tomorrow morning.
+      </p>
+      <p>
+        If it's an upper-floor window that's gone and glass is on the street
+        below, please — for the love of the postie's dog — ring 999 first so
+        the footpath can be cordoned. Then ring us to make it safe.
+      </p>
+
+      <h3>4. Dead sockets and "the whole house is off"</h3>
+      <p>
+        We are <strong>not</strong> registered Part-P electricians, and if
+        you're reading this wondering whether you can DIY a fuse-board swap,
+        the answer is no. But a lot of 1am "the power's gone" calls are not
+        actually electrical faults. They're the RCD tripped because the
+        freezer kicked in, or a broken element in a kettle, or water in a
+        socket because the wall above it has a leak.
+      </p>
+      <p>
+        What we can do out-of-hours: isolate the circuit that's tripped,
+        identify which appliance is at fault, make the house safe, and either
+        bypass the offending socket or kill its breaker so the rest of the
+        house stays live until a qualified spark gets out. That's usually
+        enough to get you through the night. We have a couple of local
+        Part-P guys we'll ring for you in the morning.
+      </p>
+
+      <h3>5. Blocked drains that are now flooding</h3>
+      <p>
+        A blocked macerator toilet, a gully that's backed up in a Saturday
+        rainstorm, a kitchen sink that's sending grey water across the floor
+        — these are emergencies when the water is spreading faster than you
+        can mop. We carry drain rods, a wet-vac and a plunger in the van
+        and we'll get it flowing.
+      </p>
+      <p>
+        The one we <em>can't</em> fix in the dark is a collapsed mains
+        sewer — that's a jet-vac tanker and a CCTV survey in daylight. But
+        nine out of ten flooding drain calls in Ayr town-centre flats are
+        rag-and-wipe build-ups that come out with proper equipment inside
+        an hour.
+      </p>
+
+      <h2>What <em>isn't</em> an emergency?</h2>
+      <p>
+        Honestly? Most things. A dripping tap, a loose handle, a fence panel
+        blown over, a squeaky floor, a radiator gone cold in one room, a
+        patch of damp that's been there for six weeks — none of those get
+        worse in the 8 hours between midnight and breakfast. Call us first
+        thing, we'll book you in, and you'll pay daytime rates instead of
+        the £60 out-of-hours minimum.
+      </p>
+      <p>
+        A dripping tap loses around 5,500 litres a year at a steady drip
+        [UNVERIFIED] — irritating, wasteful, worth fixing this week — but
+        nothing is breaking tonight.
+      </p>
+
+      <h2>How the call actually works</h2>
+      <p>
+        Ring <a href={`tel:${business.phoneE164}`}>{business.phone}</a> any
+        hour. Tell us the postcode and what's happening. If you can,
+        <a href={`https://wa.me/${business.whatsapp.replace('+','')}`}>WhatsApp a photo or video</a>
+        — it saves us both time. We'll give you a honest answer:
+      </p>
+      <ul>
+        <li>"We'll be there in 40 minutes" — if it's a real emergency and we're free.</li>
+        <li>"Here's what to do right now, we'll be there at 8am" — if it can be contained.</li>
+        <li>"This is one for [name of trade], their number is 07…" — if it's outside our scope.</li>
+      </ul>
+      <p>
+        We charge a £60 minimum between 10pm and 6am. Quotes during the day
+        are always free — no call-out fee anywhere in
+        <a href={`${BASE}/areas/ayr/`}>Ayr</a>,
+        <a href={`${BASE}/areas/kilmarnock/`}>Kilmarnock</a>,
+        <a href={`${BASE}/areas/troon/`}>Troon</a>, or any of
+        <a href={`${BASE}/areas/`}>our East Ayrshire patch</a>.
+      </p>
+      <p>
+        For non-urgent stuff,
+        <a href={`${BASE}/quote/`}>send us a quote request here</a> and we'll
+        come back same day. For the real 3am calls — save the number now,
+        before you need it.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
+        <p class="text-sm text-navy-900/60">Written by</p>
+        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
+        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
+      </div>
+    </div>
+  </article>
+
+  <CTABlock
+    heading="Real 3am emergency in Ayr? Ring now."
+    sub="One of us is already awake. Call or WhatsApp a photo — we'll tell you straight whether it needs us tonight or whether it can wait."
+    location="Ayr"
+  />
+</BaseLayout>

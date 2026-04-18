@@ -1,0 +1,9 @@
+---
+// Generic JSON-LD block. Pass any object/array.
+// Usage: <SchemaBlock schema={{ "@context": "https://schema.org", ... }} />
+export interface Props {
+  schema: Record<string, unknown> | Array<Record<string, unknown>>;
+}
+const { schema } = Astro.props;
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

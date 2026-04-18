@@ -1,0 +1,16 @@
+{
+  "name": "Sorn Handyman Services",
+  "short_name": "Sorn Handyman",
+  "description": "Family-run handyman team covering Ayr, Troon, Irvine, Kilmarnock, Mauchline and East Ayrshire. 24/7 call-outs.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#D72638",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

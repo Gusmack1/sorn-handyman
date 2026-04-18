@@ -1,0 +1,90 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyCallBar from '../components/StickyCallBar.astro';
+import WhatsAppFab from '../components/WhatsAppFab.astro';
+import SchemaBlock from '../components/SchemaBlock.astro';
+import { business, BASE } from '../data/business';
+import { coreBusiness } from '../lib/schema';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string; // e.g. "/areas/ayr/"
+  ogImage?: string;
+  noindex?: boolean;
+  extraSchema?: any;
+}
+
+const { title, description, canonicalPath = '/', ogImage, noindex = false, extraSchema } = Astro.props;
+
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+const canonical = `${siteUrl}${canonicalPath.startsWith('/') ? canonicalPath : '/' + canonicalPath}`;
+const og = ogImage || `${siteUrl}/og-image.svg`;
+
+const core = coreBusiness(canonical);
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0F2E4C" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="en-GB" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sorn Handyman Services" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={og} />
+    <meta property="og:locale" content="en_GB" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={og} />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href={`${BASE}/favicon.svg`} />
+    <link rel="apple-touch-icon" href={`${BASE}/apple-touch-icon.svg`} />
+    <link rel="manifest" href={`${BASE}/site.webmanifest`} />
+
+    <!-- Font preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Business schema (every page) -->
+    <SchemaBlock schema={core} />
+    {extraSchema && <SchemaBlock schema={extraSchema} />}
+
+    <!-- Lightweight website + sitelinks search schema -->
+    <SchemaBlock schema={{
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      url: siteUrl,
+      name: 'Sorn Handyman Services',
+      publisher: { '@id': `${siteUrl}/#business` },
+    }} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-amber-500 focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <StickyCallBar />
+    <WhatsAppFab />
+  </body>
+</html>
