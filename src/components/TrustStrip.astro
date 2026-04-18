@@ -1,0 +1,22 @@
+---
+const badges = [
+  { icon: '🕐', label: 'Open 24 / 7' },
+  { icon: '👨‍👦', label: 'Father & son' },
+  { icon: '🎓', label: 'Qualified engineer + plumber' },
+  { icon: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', label: 'Based in East Ayrshire' },
+  { icon: '🛡️', label: '£2m public liability' },
+  { icon: '💷', label: 'Free written quotes' },
+];
+---
+<section class="bg-white border-y border-navy-900/5">
+  <div class="container-x py-6">
+    <ul class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-medium text-navy-900/70">
+      {badges.map((b) => (
+        <li class="flex items-center gap-2">
+          <span aria-hidden>{b.icon}</span>
+          <span>{b.label}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

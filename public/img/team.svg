@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" role="img" aria-label="Fraser and Aidan, Sorn Handyman Services — placeholder">
+  <defs>
+    <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#15304d"/>
+      <stop offset="1" stop-color="#0a1f35"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="750" fill="url(#g)"/>
+  <rect width="600" height="750" fill="url(#grid)"/>
+  <g transform="translate(300,330)">
+    <circle r="140" fill="rgba(245,158,11,.15)"/>
+    <circle r="90" fill="#F59E0B"/>
+    <text text-anchor="middle" y="10" font-family="Inter,sans-serif" font-weight="900" font-size="56" fill="#0F2E4C">F + A</text>
+  </g>
+  <text x="300" y="560" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="900" font-size="40" fill="#fff">Fraser &amp; Aidan</text>
+  <text x="300" y="610" text-anchor="middle" font-family="Inter,sans-serif" font-weight="500" font-size="24" fill="rgba(255,255,255,.75)">Photo placeholder — supply a team shot</text>
+  <text x="300" y="644" text-anchor="middle" font-family="Inter,sans-serif" font-weight="500" font-size="20" fill="rgba(255,255,255,.55)">public/img/team.jpg (recommended 800×1000)</text>
+</svg>

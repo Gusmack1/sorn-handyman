@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import SchemaBlock from '../../components/SchemaBlock.astro';
+import { posts } from '../../data/posts';
+import { business, BASE } from '../../data/business';
+
+const title = 'Handyman Blog — Ayr, Kilmarnock, Troon & East Ayrshire | Sorn Handyman Services';
+const description =
+  'Plain-spoken handyman guides from a father-and-son team in Sorn. Emergency call-outs in Ayr, gutter cleaning in Kilmarnock, hiring advice for Troon — written by the folk who actually do the jobs.';
+const canonicalPath = '/blog/';
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': `${siteUrl}/blog/#blog`,
+  name: 'Sorn Handyman Services — Blog',
+  description,
+  url: `${siteUrl}/blog/`,
+  publisher: { '@id': `${siteUrl}/#business` },
+  blogPost: posts.map((p) => ({
+    '@type': 'BlogPosting',
+    headline: p.title,
+    url: `${siteUrl}/blog/${p.slug}/`,
+    datePublished: p.date,
+    dateModified: p.date,
+    author: { '@type': 'Person', name: p.author },
+    description: p.description,
+    keywords: p.keyword,
+    image: `${siteUrl}${p.ogImage}`,
+  })),
+};
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} extraSchema={blogSchema}>
+  <Breadcrumbs trail={[{ name: 'Home', href: `${BASE}/` }, { name: 'Blog' }]} />
+  <section class="container-x py-12">
+    <span class="eyebrow">Blog · {posts.length} posts</span>
+    <h1 class="mt-3 font-serif text-5xl font-black text-navy-900 max-w-3xl">Handyman notes from Sorn, for the folk we work for.</h1>
+    <p class="mt-4 text-lg text-navy-900/75 max-w-2xl">
+      Straight answers on the jobs we do every week in Ayr, Kilmarnock, Troon and right across East Ayrshire.
+      Written by Aidan and Fraser — not a copywriter.
+    </p>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {posts.map((p) => (
+        <article class="group relative rounded-2xl border border-navy-900/10 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg">
+          <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
+            <span>{p.area}</span>
+            <span aria-hidden class="text-navy-900/20">·</span>
+            <span class="text-navy-900/60">{p.readMinutes} min read</span>
+          </div>
+          <h2 class="mt-3 font-serif text-2xl font-black text-navy-900 leading-tight">
+            <a href={`${BASE}/blog/${p.slug}/`} class="after:absolute after:inset-0">{p.title}</a>
+          </h2>
+          <p class="mt-3 text-navy-900/75">{p.description}</p>
+          <div class="mt-5 flex items-center justify-between text-sm">
+            <span class="text-navy-900/60">{p.dateDisplay}</span>
+            <span class="font-semibold text-amber-600 group-hover:text-amber-700">Read &rarr;</span>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-14 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6 md:p-8">
+      <h2 class="font-serif text-2xl font-black text-navy-900">Looking for a specific trade?</h2>
+      <p class="mt-2 text-navy-900/75 max-w-2xl">Jump straight to the service page — prices, what's included, what's not, and a direct call/WhatsApp button.</p>
+      <div class="mt-4 flex flex-wrap gap-2 text-sm">
+        <a href={`${BASE}/services/plumbing/`} class="rounded-full border border-navy-900/15 bg-white px-3 py-1.5 hover:border-amber-500">Plumbing</a>
+        <a href={`${BASE}/services/gutter-cleaning/`} class="rounded-full border border-navy-900/15 bg-white px-3 py-1.5 hover:border-amber-500">Gutter cleaning</a>
+        <a href={`${BASE}/services/guttering/`} class="rounded-full border border-navy-900/15 bg-white px-3 py-1.5 hover:border-amber-500">Gutter repair</a>
+        <a href={`${BASE}/services/general-repairs/`} class="rounded-full border border-navy-900/15 bg-white px-3 py-1.5 hover:border-amber-500">General repairs</a>
+        <a href={`${BASE}/services/joinery/`} class="rounded-full border border-navy-900/15 bg-white px-3 py-1.5 hover:border-amber-500">Joinery</a>
+        <a href={`${BASE}/services/property-maintenance/`} class="rounded-full border border-navy-900/15 bg-white px-3 py-1.5 hover:border-amber-500">Property maintenance</a>
+        <a href={`${BASE}/services/`} class="rounded-full border border-navy-900/15 bg-white px-3 py-1.5 hover:border-amber-500 font-semibold">All 14 services →</a>
+      </div>
+    </div>
+  </section>
+  <CTABlock />
+</BaseLayout>

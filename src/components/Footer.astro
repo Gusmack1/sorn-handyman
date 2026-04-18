@@ -1,0 +1,54 @@
+---
+import { business, BASE } from '../data/business';
+import { services, areas } from '../data/business';
+const year = new Date().getFullYear();
+---
+<footer class="mt-20 bg-navy-900 text-white/80">
+  <div class="container-x py-14 grid gap-10 md:grid-cols-4">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500 text-navy-900 font-black">24/7</span>
+        <span class="font-serif text-2xl font-bold text-white">Sorn Handyman Services</span>
+      </div>
+      <p class="mb-4 max-w-md">
+        Fraser and Aidan — father and son. 20+ years trade, qualified mechanical engineer and plumber, 24 hours a day across East Ayrshire.
+      </p>
+      <div class="space-y-1 text-white">
+        <a href={`tel:${business.phoneE164}`} class="block text-xl font-semibold hover:text-amber-500">📞 {business.phone}</a>
+        <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="block hover:text-amber-500">💬 WhatsApp {business.whatsappDisplay}</a>
+        <span class="block">📍 Based in {business.address.locality}, {business.address.region} {business.address.postalCode}</span>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="text-white font-semibold mb-3">Services</h3>
+      <ul class="space-y-2 text-sm">
+        {services.slice(0,8).map((s) => (
+          <li><a class="hover:text-amber-500" href={`${BASE}/services/${s.slug}/`}>{s.name}</a></li>
+        ))}
+        <li><a class="hover:text-amber-500" href={`${BASE}/services/`}>See all →</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-white font-semibold mb-3">Areas</h3>
+      <ul class="space-y-2 text-sm">
+        {areas.slice(0,8).map((a) => (
+          <li><a class="hover:text-amber-500" href={`${BASE}/areas/${a.slug}/`}>Handyman {a.name}</a></li>
+        ))}
+        <li><a class="hover:text-amber-500" href={`${BASE}/areas/`}>See all →</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="container-x flex flex-col md:flex-row gap-3 justify-between py-6 text-xs text-white/60">
+      <p>© {year} Sorn Handyman Services. Family-run, fully insured.</p>
+      <div class="flex gap-4">
+        <a href={business.socials.facebook} class="hover:text-amber-500" rel="noopener">Facebook</a>
+        <a href={`${BASE}/contact/`} class="hover:text-amber-500">Contact</a>
+        <a href={`${BASE}/quote/`} class="hover:text-amber-500">Free quote</a>
+      </div>
+    </div>
+  </div>
+</footer>

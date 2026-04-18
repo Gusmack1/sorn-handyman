@@ -1,0 +1,20 @@
+---
+export interface Props {
+  name: string;
+  town: string;
+  stars?: number;
+  body: string;
+  job?: string;
+}
+const { name, town, stars = 5, body, job } = Astro.props;
+---
+<figure class="card">
+  <div class="flex items-center gap-0.5 text-amber-500" aria-label={`${stars} out of 5 stars`}>
+    {Array.from({ length: stars }).map(() => (<span aria-hidden>★</span>))}
+    {Array.from({ length: 5 - stars }).map(() => (<span class="text-navy-900/15" aria-hidden>★</span>))}
+  </div>
+  <blockquote class="mt-3 font-serif text-lg leading-snug text-navy-900">“{body}”</blockquote>
+  <figcaption class="mt-3 text-sm text-navy-900/60">
+    <span class="font-semibold text-navy-900/80">{name}</span> · {town}{job ? ` · ${job}` : ''}
+  </figcaption>
+</figure>

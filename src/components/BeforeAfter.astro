@@ -1,0 +1,38 @@
+---
+// Zero-JS-until-needed before/after slider. Progressive enhancement via inline JS.
+export interface Props {
+  before: string;
+  after: string;
+  altBefore?: string;
+  altAfter?: string;
+  label?: string;
+}
+const { before, after, altBefore = 'Before', altAfter = 'After', label } = Astro.props;
+---
+<figure class="ba-slider relative aspect-[4/3] w-full rounded-xl ring-1 ring-navy-900/10 shadow-md bg-navy-900/5" role="img" aria-label={label || 'Before and after comparison'}>
+  <img src={before} alt={altBefore} loading="lazy" decoding="async" />
+  <div class="ba-after">
+    <img src={after} alt={altAfter} loading="lazy" decoding="async" />
+  </div>
+  <div class="ba-handle" aria-hidden="true"></div>
+  {label && <figcaption class="absolute top-3 left-3 rounded-full bg-navy-900/80 px-3 py-1 text-xs text-white">{label}</figcaption>}
+</figure>
+<script is:inline>
+  (function(){
+    document.querySelectorAll('.ba-slider').forEach(function(el){
+      var after = el.querySelector('.ba-after');
+      var handle = el.querySelector('.ba-handle');
+      function setPos(clientX){
+        var r = el.getBoundingClientRect();
+        var x = Math.max(0, Math.min(100, ((clientX - r.left) / r.width) * 100));
+        after.style.clipPath = 'inset(0 0 0 ' + x + '%)';
+        handle.style.left = x + '%';
+      }
+      var dragging = false;
+      el.addEventListener('pointerdown', function(e){ dragging=true; el.setPointerCapture(e.pointerId); setPos(e.clientX); });
+      el.addEventListener('pointermove', function(e){ if(dragging) setPos(e.clientX); });
+      el.addEventListener('pointerup', function(){ dragging=false; });
+      el.addEventListener('pointercancel', function(){ dragging=false; });
+    });
+  })();
+</script>

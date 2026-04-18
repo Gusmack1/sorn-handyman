@@ -1,0 +1,595 @@
+// Single source of truth for NAP, hours, services, areas.
+// Change here → propagates everywhere (home, about, service/area pages, schema, footer).
+
+export const BASE = '/sorn-handyman';
+
+export const business = {
+  name: 'Sorn Handyman Services',
+  legalName: 'Sorn Handyman Services',
+  tagline: '24/7 Handyman — Call Anytime',
+  description:
+    'Father-and-son handyman team covering East Ayrshire 24 hours a day, 7 days a week. Fraser brings 20+ years on the tools; Aidan is a qualified mechanical engineer and plumber. Call us any time — day, night, weekend.',
+  phone: '07900 255876',
+  phoneE164: '+447900255876',
+  whatsapp: '+447472223323',
+  whatsappDisplay: '+44 7472 223323',
+  email: 'sornhandyman@gmail.com', // placeholder — confirm with Aidan
+  address: {
+    locality: 'Sorn',
+    region: 'East Ayrshire',
+    postalCode: 'KA5',
+    country: 'GB',
+  },
+  geo: {
+    // Sorn village centre (approx) — OpenStreetMap
+    lat: 55.5183,
+    lon: -4.2947,
+  },
+  priceRange: '££',
+  hours: {
+    // 24/7
+    mon: ['00:00', '23:59'],
+    tue: ['00:00', '23:59'],
+    wed: ['00:00', '23:59'],
+    thu: ['00:00', '23:59'],
+    fri: ['00:00', '23:59'],
+    sat: ['00:00', '23:59'],
+    sun: ['00:00', '23:59'],
+  },
+  socials: {
+    facebook: 'https://www.facebook.com/p/Sorn-Handyman-Services-61573109830217',
+  },
+  googleMapsEmbed:
+    // centred on Sorn, East Ayrshire
+    'https://www.google.com/maps?q=Sorn+Handyman+Services+Sorn+KA5&hl=en-GB&z=11&output=embed',
+  gbpUrl: 'https://www.google.com/maps?cid=&q=Sorn+Handyman+Services', // placeholder — replace with real CID once known
+  web3formsKey: 'REPLACE_WITH_REAL_WEB3FORMS_KEY', // https://web3forms.com (TODO for Gus)
+  siteUrl: 'https://gusmack1.github.io/sorn-handyman',
+};
+
+export type Service = {
+  slug: string;
+  name: string;
+  short: string; // under 80 chars
+  icon: string; // emoji or inline svg name
+  priceFrom?: string;
+  description: string;
+  included: string[];
+  notIncluded?: string[];
+  keywords: string[];
+};
+
+export const services: Service[] = [
+  {
+    slug: 'guttering',
+    name: 'Guttering',
+    short: 'New gutters, downpipes and repairs that survive Ayrshire winters.',
+    icon: '🏠',
+    priceFrom: '£120',
+    description:
+      'Sagging, leaking or blocked gutters turn a small drip into a damp problem fast. We replace cast, PVC and half-round in Ayr, Kilmarnock, Mauchline and right across East Ayrshire — same-day quote, often same-day fix.',
+    included: [
+      'Full gutter replacement (PVC, cast-iron look, half-round)',
+      'Downpipe replacement and re-routing',
+      'Leak sealing and joint repair',
+      'Hopper and outlet installation',
+      'Eaves board repair where rot has started',
+      'All debris bagged and taken away',
+    ],
+    notIncluded: ['Fascia/soffit full replacement (quoted separately)'],
+    keywords: ['gutter replacement Ayrshire', 'leaking gutters Kilmarnock', 'gutter repair Mauchline'],
+  },
+  {
+    slug: 'joinery',
+    name: 'Joinery',
+    short: 'Doors, skirtings, kitchen units, staircases — Fraser\'s 20 years on the saw.',
+    icon: '🪚',
+    priceFrom: '£80',
+    description:
+      'Hung doors that stick? Kitchen cabinets bowing? Staircases loose? Joinery is Fraser\'s core trade — 20 years of real Ayrshire houses means we know what\'s behind the plaster before we cut.',
+    included: [
+      'Internal and external door hanging',
+      'Architrave, skirting and dado rail',
+      'Kitchen and bedroom unit installation',
+      'Built-in wardrobes and alcove shelving',
+      'Staircase tightening, spindle and newel replacement',
+      'Window board and cill joinery',
+    ],
+    keywords: ['joiner Sorn', 'joiner Mauchline', 'door hanging Kilmarnock'],
+  },
+  {
+    slug: 'plumbing',
+    name: 'Plumbing',
+    short: 'Aidan is a qualified plumber — taps, traps, leaks, new installs.',
+    icon: '🔧',
+    priceFrom: '£90',
+    description:
+      'Water where it shouldn\'t be is why most of our 3am calls come in. Aidan is a qualified plumber and mechanical engineer — we isolate, diagnose and fix, then put the space back how we found it.',
+    included: [
+      'Tap and mixer replacement',
+      'Toilet, cistern and waste replacement',
+      'Leak tracing and pipe repair (copper, plastic, lead joins)',
+      'Radiator swap-outs',
+      'Basin, sink and shower installation',
+      'Isolation valve fitting',
+      'Outside tap installation',
+    ],
+    notIncluded: ['Gas work — Gas Safe trade only; we recommend a local engineer'],
+    keywords: ['plumber Ayrshire', 'emergency plumber Kilmarnock', 'leaking tap Sorn'],
+  },
+  {
+    slug: 'painting-decorating',
+    name: 'Painting & Decorating',
+    short: 'Interior and exterior, proper prep, no drips on the carpet.',
+    icon: '🎨',
+    priceFrom: '£150',
+    description:
+      'Prep is 80% of the job. We sand, fill, caulk, prime and cut in by hand before any roller goes near a wall — the finish shows it.',
+    included: [
+      'Interior walls, ceilings, woodwork',
+      'Exterior render, harling, wood and metal',
+      'Feature walls and colour matching',
+      'Wallpaper stripping and hanging',
+      'Filling, sanding and caulking',
+      'Furniture moved and dust-sheeted',
+    ],
+    keywords: ['painter decorator Ayrshire', 'exterior painting Kilmarnock', 'decorator Mauchline'],
+  },
+  {
+    slug: 'roofing',
+    name: 'Small Roofing',
+    short: 'Slipped slates, ridge re-pointing, flat-roof patches — no full re-roofs.',
+    icon: '🏘️',
+    priceFrom: '£100',
+    description:
+      'We don\'t strip roofs, but we fix what a storm broke last night. If your slate is on the lawn or your flat roof is holding water, we\'re up there today.',
+    included: [
+      'Slipped or missing slate/tile replacement',
+      'Ridge and hip re-pointing',
+      'Flashing repair (lead, Ubiflex)',
+      'Flat-roof patching (felt, EPDM)',
+      'Chimney re-pointing (low-level)',
+      'Roof vent and cowl replacement',
+    ],
+    notIncluded: ['Full re-roofs', 'Scaffold-required tall properties'],
+    keywords: ['roof repair Ayrshire', 'slipped slate Kilmarnock', 'flat roof patch Sorn'],
+  },
+  {
+    slug: 'power-washing',
+    name: 'Power-Washing',
+    short: 'Driveways, patios, paths, render — back to the colour you forgot they were.',
+    icon: '💦',
+    priceFrom: '£100',
+    description:
+      'Ayrshire moss loves a damp winter. One afternoon with the pressure washer and your driveway looks new — we seal afterwards if you want it to stay that way.',
+    included: [
+      'Block-paved driveways',
+      'Mono-block paths and patios',
+      'Natural stone and slabs',
+      'Render and harling (low-pressure soft wash)',
+      'Decking and timber',
+      'Optional sealing with polymeric sand or patio sealer',
+    ],
+    keywords: ['power washing Ayrshire', 'driveway cleaning Kilmarnock', 'patio cleaning Sorn'],
+  },
+  {
+    slug: 'slabbing',
+    name: 'Slabbing',
+    short: 'Patios, paths, bin stores — laid level, jointed, no sinking corner.',
+    icon: '🧱',
+    priceFrom: '£35/m²',
+    description:
+      'A slab job lives or dies on the sub-base. We excavate, lay a proper MOT Type 1 base, screed, lay on a full bed and joint with kiln-dried sand or polymeric resin.',
+    included: [
+      'Excavation and disposal',
+      'MOT Type 1 sub-base',
+      'Screeded mortar bed (full bed, not five-point)',
+      'Indian sandstone, porcelain, concrete flag',
+      'Cutting in around drains and manholes',
+      'Polymeric sand jointing',
+    ],
+    keywords: ['patio layer Ayrshire', 'slabber Kilmarnock', 'garden path Sorn'],
+  },
+  {
+    slug: 'fencing',
+    name: 'Fencing',
+    short: 'Timber, closeboard, feather-edge, post replacements — set in post-mix, straight.',
+    icon: '🪵',
+    priceFrom: '£55/panel',
+    description:
+      'Windy nights in East Ayrshire are the reason half our fencing work is replacements. We set posts in fast-set concrete, use 100×100 pressure-treated and don\'t skimp on arris rails.',
+    included: [
+      'Closeboard, feather-edge, overlap, hit-and-miss',
+      'Concrete or timber posts',
+      'Gravel boards',
+      'Garden and driveway gates',
+      'Post-mix foundations',
+      'Old fence tear-out and disposal',
+    ],
+    keywords: ['fencer Ayrshire', 'fence replacement Kilmarnock', 'garden fence Sorn'],
+  },
+  {
+    slug: 'flat-pack-assembly',
+    name: 'Flat-Pack Assembly',
+    short: 'IKEA, B&Q, Wayfair — built properly, wall-fixed where it needs to be.',
+    icon: '🛠️',
+    priceFrom: '£40',
+    description:
+      'PAX, KALLAX, MALM, B&Q kitchens, Wayfair beds — we\'ve built them all and binned enough instruction booklets to paper a hall. Wall-fix included where the instructions say so (and even when they don\'t but should).',
+    included: [
+      'IKEA wardrobes, beds, kitchens, sideboards',
+      'Wayfair, Argos, B&Q, Dunelm equivalents',
+      'Wall-anchoring to timber stud or masonry',
+      'Cable management on desks and TV units',
+      'Disposal of packaging',
+    ],
+    keywords: ['IKEA assembly Ayrshire', 'flat-pack Kilmarnock', 'furniture assembly Sorn'],
+  },
+  {
+    slug: 'gutter-cleaning',
+    name: 'Gutter Cleaning',
+    short: 'Vac-cleaned from the ground — no ladders on your lawn.',
+    icon: '🧹',
+    priceFrom: '£60',
+    description:
+      'We use a gutter-vac pole system so we stay on the ground and there\'s no mess on your drive. Photo confirmation of each run so you know it\'s actually clear.',
+    included: [
+      'All gutters and hoppers vac-cleared',
+      'Downpipe flushed with water',
+      'Photo of cleaned gutter sent to you',
+      'Moss and debris bagged and taken',
+      'Gutter alignment check',
+    ],
+    keywords: ['gutter cleaning Ayrshire', 'gutter vacuum Kilmarnock', 'gutter clean Sorn'],
+  },
+  {
+    slug: 'fence-repair',
+    name: 'Fence Repair',
+    short: 'Post snapped, panels blown out? Half-job price, not full-replace price.',
+    icon: '🔨',
+    priceFrom: '£45',
+    description:
+      'Not every fence needs replacing. We repair rather than replace where it makes sense — snapped posts sistered, panels re-fitted, gravel boards swapped.',
+    included: [
+      'Snapped post repair (sistered or replaced)',
+      'Panel re-fixing',
+      'Gravel board replacement',
+      'Gate re-hang and drop-bolt fit',
+      'Arris rail repair',
+    ],
+    keywords: ['fence repair Ayrshire', 'fence post replace Kilmarnock', 'storm damage fence Sorn'],
+  },
+  {
+    slug: 'property-maintenance',
+    name: 'Property Maintenance',
+    short: 'Landlord and homeowner maintenance contracts — one call, everything.',
+    icon: '🏡',
+    priceFrom: 'POA',
+    description:
+      'We do quarterly and annual maintenance rounds for landlords and second-home owners across East Ayrshire: gutters, boiler service coordination, fence checks, exterior paint touch-ups, garden tidy. One invoice, one point of contact.',
+    included: [
+      'Seasonal gutter clear',
+      'Door and window re-seal',
+      'Exterior paint touch-ups',
+      'Fence and gate check',
+      'Garden tidy and power-wash',
+      'Change-over prep for rentals',
+      'Photo report after each visit',
+    ],
+    keywords: ['property maintenance Ayrshire', 'landlord handyman Kilmarnock', 'holiday home maintenance Sorn'],
+  },
+  {
+    slug: 'general-repairs',
+    name: 'General Repairs',
+    short: 'Sticking door. Loose tile. Blown hinge. If it\'s broken, we fix it.',
+    icon: '🧰',
+    priceFrom: '£40',
+    description:
+      'The catch-all list. If it doesn\'t fit a category but it\'s broken, it\'s here. Most jobs under an hour are £40 flat — call with a photo and we\'ll quote on the spot.',
+    included: [
+      'Door easing, hinge replacement, lock change',
+      'Loose or cracked tile replacement',
+      'Curtain pole, blind, shelf fitting',
+      'TV and mirror wall mounting',
+      'Silicone sealant renewal',
+      'Loft hatch, drop-down ladder install',
+      'Squeaky floor screw-down',
+    ],
+    keywords: ['handyman repairs Ayrshire', 'odd job man Kilmarnock', 'small repair Sorn'],
+  },
+  {
+    slug: 'deck-building',
+    name: 'Deck Building',
+    short: 'Timber and composite decks, balustrading, steps — ten-year jobs, not five.',
+    icon: '🪜',
+    priceFrom: '£90/m²',
+    description:
+      'Composite or pressure-treated timber, laid over a proper joist cage with air-gap, on concrete or adjustable pedestals. Balustrades, steps and built-in benches all in-house.',
+    included: [
+      'Joist cage and bearers',
+      'Pressure-treated timber or WPC composite boards',
+      'Balustrade with spindles',
+      'Steps and landings',
+      'Integrated bench or planter seats',
+      'LED step lighting (on request)',
+      'Old deck tear-out and disposal',
+    ],
+    keywords: ['deck builder Ayrshire', 'composite decking Kilmarnock', 'garden decking Sorn'],
+  },
+];
+
+export type Area = {
+  slug: string;
+  name: string; // display name
+  postcode?: string;
+  intro: string;
+  distance: string; // miles from Sorn HQ
+  localJobs: string[]; // common local jobs, 3-5 bullets
+  landmark?: string; // something to ground local-ness
+  geo?: { lat: number; lon: number };
+  keywords: string[];
+  // extendedCopy: long-form, ~350+ words of genuinely local copy per town.
+  // Rendered inside the area template as prose paragraphs (\n\n = new paragraph).
+  extendedCopy: string;
+};
+
+export const areas: Area[] = [
+  {
+    slug: 'sorn',
+    name: 'Sorn',
+    postcode: 'KA5',
+    intro:
+      'Sorn is home. Our van is parked here most nights and the signs on the High Street are ours. Jobs in Sorn are usually on-site within an hour of the call — a thirty-second drive for us.',
+    distance: '0 miles — our base',
+    localJobs: [
+      'Sandstone cottage gutter replacements on the Ayr Road',
+      'Sorn Castle estate cottage repairs',
+      'Back-lane fencing after winter storms',
+      'River Ayr wall re-pointing',
+    ],
+    landmark: 'Sorn Parish Church',
+    geo: { lat: 55.5183, lon: -4.2947 },
+    keywords: ['handyman Sorn', 'joiner Sorn', 'plumber Sorn KA5'],
+    extendedCopy: `Sorn is a small East Ayrshire village — one street wide, half a mile long, ringed by the River Ayr and a conservation area that keeps the sandstone buildings looking the way they did when Burns walked through. Most of the houses on the Main Street are 18th and 19th century stone, which means two things for a handyman: the walls are thick and solid, and absolutely nothing is square.\n\nWe know every close, every lane and every corner here. If you call from a Sorn postcode at 9am, we are usually on site by 9.30. We keep a full van stocked with the odd sizes — the long brass screws that 1840 joinery needs, the kind of render mix that matches harling without standing out.\n\nTypical jobs we do in Sorn week in, week out: gutter replacement on the Ayr Road cottages (sagging cast-iron swapped for deep-flow PVC in a matching black); dry-rot-adjacent sash-and-case window work on the High Street; fence and decking repairs behind the Cross; and the occasional late-night plumbing rescue when a burst pipe catches someone off guard.\n\nSorn Castle estate cottages are part of our regular rounds, too — holiday lets and estate staff homes that need steady maintenance. If you manage one, get in touch about our quarterly property-care rounds.\n\nWe are the only dedicated handyman business based in the village itself. Because we live and work here, we care what the postie, the pub landlord and the primary-school parents think — which is the most honest quality-control a trade can have.\n\nCall 07900 255876 at any hour. If it\u2019s an emergency, we\u2019re almost certainly already awake — we live just round the corner.`,
+  },
+  {
+    slug: 'mauchline',
+    name: 'Mauchline',
+    postcode: 'KA5',
+    intro:
+      'Four miles west of the base, Mauchline is Robert Burns country — and the mix of Victorian stone terraces, post-war housing and new estates off the Cumnock Road means we\'re there most weeks.',
+    distance: '4 miles',
+    localJobs: [
+      'Sash-and-case window joinery in the Cross',
+      'Rear-garden decking on the new-builds off Barskimming Road',
+      'Gutter replacements on High Street and Loudoun Street',
+      'Fencing repairs after Auld Brig winds',
+    ],
+    landmark: 'Burns House Museum',
+    geo: { lat: 55.5162, lon: -4.3881 },
+    keywords: ['handyman Mauchline', 'joiner Mauchline', 'plumber Mauchline KA5'],
+    extendedCopy: `Mauchline is Burns country — a working East Ayrshire town of about 4,000 people, best known for the Burns House Museum on the Cross and Poosie Nansie\u2019s Inn which is still pulling pints a quarter of a millennium on. For a handyman business four miles away, it is one of our busiest patches.\n\nThe housing mix is unusual and genuinely interesting to work with. Around the Cross and Loudoun Street you have 18th and 19th century stone terraces with original sash windows and box-cornice gutters — proper joinery country. Head out towards Barskimming Road or Kilmarnock Road and it becomes post-war semi-detached council stock that needs steady maintenance: gutters, fascias, kitchens and bathrooms due a swap. Then on the edges of town you have newer estates — the fences blow down in the same winds, the decks rot at the same joists, the bathrooms leak at the same silicone lines.\n\nWe are in Mauchline almost every working day. If you call from a KA5 postcode, we can often come straight from a previous job — which usually means a same-day look or a same-day fix for small stuff.\n\nJobs we do most often here: gutter replacement and hopper repairs on High Street, joinery in the conservation area (where matching the existing moulding matters), kitchen-unit installation on the newer estates, fence-post replacement after the winter gales, bathroom tap-and-waste swap-outs, and a steady stream of flat-pack assembly for people who\u2019ve just moved in.\n\nOur landlord and letting-agent customers in Mauchline use our property maintenance package — quarterly check-ups and a change-over visit between tenants. One point of contact, one invoice, photo reports after each visit.\n\nCall 07900 255876 or WhatsApp a photo of the job to +44 7472 223323. One of us — Fraser or Aidan — will reply personally inside the hour.`,
+  },
+  {
+    slug: 'cumnock',
+    name: 'Cumnock',
+    postcode: 'KA18',
+    intro:
+      'Cumnock is our busiest town outside Sorn. The old Barrhill and Netherthird estates throw up a steady stream of roofing and fencing work, and the Town Square conservation area keeps our joinery skills honest.',
+    distance: '7 miles',
+    localJobs: [
+      'Gutter and flashing repairs around Keir Hardie Hill',
+      'Kitchen fitting on new-builds off Ayr Road',
+      'Fence replacement across Netherthird',
+      'Sash window repair on Glaisnock Street',
+    ],
+    landmark: 'Cumnock Town Hall',
+    geo: { lat: 55.4530, lon: -4.2647 },
+    keywords: ['handyman Cumnock', 'joiner Cumnock', 'fencer Cumnock KA18'],
+    extendedCopy: `Cumnock is the largest town in our patch after Kilmarnock — a former mining town of around 9,000 people, seven miles south of Sorn, and the administrative heart of East Ayrshire Council. For us it is one of those places where the work never really stops: homes, rental stock, small shops, an endless list of the thousand maintenance jobs that keep a town ticking.\n\nWhen we work in Cumnock it is usually in one of four areas. Around the Square and Glaisnock Street you have the Victorian heart — stone tenements, shopfronts with old timber, the kind of joinery that deserves care. Around Keir Hardie Hill and into Netherthird you have post-war terraced housing; gutters and fencing are the workhorse of our week there. Up towards Barshare and Skerrington you get solid semis that are often 1970s and 1980s builds — kitchens and bathrooms hitting the end of their life all at once. And on the outer ring — the Bellfield Road estates and new-builds off the Ayr Road — it is all decking, fencing, flat-pack, and the occasional tap replacement.\n\nBecause Cumnock is the council seat, we get a steady flow of landlord maintenance work there too. Quarterly visits, change-over prep for rentals, exterior paint touch-ups, fence and gate check-ups before a new tenant signs. One call, one invoice, photo reports each time.\n\nCumnock is also where we get a surprising number of out-of-hours calls. Water fixture failures — a burst flexi hose under a sink, a toilet syphon blowing at midnight — always seem to happen here on a Saturday night. Aidan is on the WhatsApp at that point, and usually in the van within twenty minutes.\n\nCall 07900 255876 any time. If it\u2019s not urgent, tell us — we\u2019ll book you in for the next open slot and get back to sleep. If it is, we\u2019re already getting boots on.`,
+  },
+  {
+    slug: 'auchinleck',
+    name: 'Auchinleck',
+    postcode: 'KA18',
+    intro:
+      'Auchinleck (pronounced Ah-fleck locally, as you\'ll know) is five minutes up the road and full of solid post-war council stock that needs steady maintenance — perfect for our landlord contract work.',
+    distance: '5 miles',
+    localJobs: [
+      'Internal door and skirting replacement across rented stock',
+      'Bathroom tap and waste replacement',
+      'Slabbing paths and bin store foundations',
+      'Driveway power-wash and seal',
+    ],
+    landmark: 'Boswell Museum',
+    geo: { lat: 55.4736, lon: -4.2920 },
+    keywords: ['handyman Auchinleck', 'plumber Auchinleck', 'landlord handyman KA18'],
+    extendedCopy: `Auchinleck — pronounced Ah-fleck if you\u2019re local, Ock-in-leck if you\u2019re not and we don\u2019t mind either way — sits five miles south-west of the base and is one of those East Ayrshire villages with a long history punching above its weight. James Boswell\u2019s Auchinleck House is on its edge, the Boswell Museum is in the village, and the housing stock tells the full story of 20th-century Scotland compressed into a few streets.\n\nA lot of our work in Auchinleck is landlord maintenance. The older council terraces around the High Street and the post-war estates behind them are solid bones but need steady attention — kitchens and bathrooms that were new in 1985 are ready for 2026. We specialise in rapid tap-and-waste swap-outs, flooring repairs, skirting and architrave renewal, and the full bathroom silicone-and-grout refresh that brings a rental back to a \u201cmove-in-ready\u201d photograph.\n\nSlabbing and power-wash work is surprisingly busy in Auchinleck too. Drives and back paths that haven\u2019t been touched since the cul-de-sac was built come back to life with a morning\u2019s pressure washing and a re-joint. Fence replacement is steady on the Chapel Road and Lugar Crescent estates — solid 100\u00d7100 posts into fast-set, new concrete or timber, gravel boards, no shortcuts.\n\nAidan has a soft spot for Auchinleck because it is where a lot of his flat-pack calls come from — the village seems to take delivery of more KALLAX than it is entitled to. Short-notice IKEA builds, often same-evening, wall-anchored properly into stud or masonry, no wobble, packaging out of the house.\n\nIf you rent, let or live in Auchinleck and you want one number for the unglamorous maintenance side of the house — we are it. Call 07900 255876 or WhatsApp a photo to +44 7472 223323 any time.`,
+  },
+  {
+    slug: 'catrine',
+    name: 'Catrine',
+    postcode: 'KA5',
+    intro:
+      'Catrine village, three miles from the base down the River Ayr, is all cottages and stone terraces. Mill-town stone sucks in damp and throws it out slow — gutters, harling and sash windows keep us busy here.',
+    distance: '3 miles',
+    localJobs: [
+      'Harling touch-up and soft-wash on Mill Square',
+      'Sash-and-case window draught-proofing',
+      'River-facing garden fence and decking',
+      'Slipped slate replacement across the old mill cottages',
+    ],
+    landmark: 'Catrine Voes',
+    geo: { lat: 55.5046, lon: -4.3399 },
+    keywords: ['handyman Catrine', 'sash window Catrine', 'gutter Catrine KA5'],
+    extendedCopy: `Catrine sits three miles west of Sorn along the River Ayr — a former mill village with the kind of stone-built, slate-roofed cottages that make a handyman\u2019s week interesting. The Voes (the old mill reservoirs, now nature reserve) and the Old Kirk give the village a postcard centre; the streets spreading out from it are a patchwork of terrace rows, individual houses and a few modern infills.\n\nWhen we work in Catrine, we work carefully. A lot of these cottages were built with lime mortar, solid walls and rubble cores — they do not forgive a heavy-handed render job or a power-wash set at the wrong pressure. Our approach is always low-pressure soft wash for stone and harling, lime-based filler where possible, and a matched colour rather than a close one.\n\nJobs we do a lot of here: sash-and-case window draught-proofing and sash-cord replacement (a Fraser speciality — he can rebalance a sash in an afternoon); slipped slate replacement on the old mill-row roofs; gutter renewal in cast-iron-look PVC for the conservation streets; river-facing garden fencing and decking that has to put up with occasional flood-adjacent damp; and the slow, steady work of bringing an older cottage interior into the 21st century without ripping out what should stay.\n\nCatrine also sees us for the small, sociable stuff — shelves up, loft hatches, curtain poles, TV brackets, silicone strips that should have been replaced three winters ago. Small jobs under one hour are a flat £40 in Catrine most of the time because the drive is nothing.\n\nOne last thing. If you have an older Catrine house with rising damp you are not sure about, call us — we won\u2019t quote you for a chemical DPC unless it genuinely needs one. Nine times out of ten in Catrine stone, the \u201cdamp\u201d is a blocked gutter and a downpipe throwing water at the wall. We\u2019d rather fix it for £120 than gut your skirtings for £2,000.`,
+  },
+  {
+    slug: 'muirkirk',
+    name: 'Muirkirk',
+    postcode: 'KA18',
+    intro:
+      'Muirkirk sits up on the moor — the weather is its own problem. We\'ve replaced more ridge tiles here than anywhere else, and our fencing trucks carry extra post-mix because the wind takes fences down twice a year.',
+    distance: '9 miles',
+    localJobs: [
+      'Ridge and chimney pointing after winter storms',
+      'Fence replacement along the Glasgow Road',
+      'Gutter replacement with extra brackets for the wind',
+      'Exterior timber re-paint every 3–4 years',
+    ],
+    landmark: 'Kames Institute',
+    geo: { lat: 55.5192, lon: -4.0659 },
+    keywords: ['handyman Muirkirk', 'roof repair Muirkirk', 'fencer KA18'],
+    extendedCopy: `Muirkirk sits up on the moor, nine miles east of the base on the A70, and the weather there is its own thing. When the lowland is still, Muirkirk is breezy. When the lowland is breezy, Muirkirk is gale-force. When the lowland is in a gale, Muirkirk is on the news.\n\nWhich means our van carries extra post-mix, extra brackets, extra ridge vents, a couple of spare slates per style and a lot of weather-rated screws specifically for Muirkirk jobs. Fencing here, we use nothing less than 100\u00d7100 posts into fast-set concrete, arris rails through the post rather than nailed to the face, and we sink the post a clear 600mm minimum. It costs a little more up front — and it saves you replacing the whole line twice in five years.\n\nRoofing is the other Muirkirk speciality. We do not strip and re-roof (that\u2019s a roofer-with-scaffold job), but we fix what the wind takes off. Ridge-tile bedding after storms, slipped slates replaced, flashing re-dressed, chimney-head re-pointing where the mortar has gone. Almost every winter we end up on someone\u2019s ridge in Muirkirk at 8am the day after the worst of it.\n\nGutter work here is a slightly different beast too. Because the rain on the moor comes in sideways, we tend to recommend deep-flow gutters over standard half-round, and double brackets at every run to stop flex. Little details, long lives.\n\nMuirkirk\u2019s housing stock is mostly solid 19th and early 20th century stone cottages along Main Street, plus post-war semis at the Glasgow Road end. The bones are excellent — the weather is the maintenance problem. We know that, and we work to it.\n\nCall 07900 255876 the morning after the storm. We are very probably already on the A70 heading your way.`,
+  },
+  {
+    slug: 'galston',
+    name: 'Galston',
+    postcode: 'KA4',
+    intro:
+      'Galston, over the hill into the Irvine valley, mixes lace-town terraces with the newer Barr Castle developments. We do fencing, decking and general maintenance here week in, week out.',
+    distance: '10 miles',
+    localJobs: [
+      'Back-garden deck and balustrade',
+      'Feather-edge fence replacement on Brewland Street',
+      'Bathroom and kitchen tap changes',
+      'Driveway and patio power-wash',
+    ],
+    landmark: 'Barr Castle',
+    geo: { lat: 55.5996, lon: -4.3850 },
+    keywords: ['handyman Galston', 'fencer Galston', 'decking Galston KA4'],
+    extendedCopy: `Galston is over the hill into the Irvine Valley — the lace town, as the older generation still call it, a reference to the 19th-century textile trade. Barr Castle in the middle of the town is a clue to how far back the settlement goes. For us it is a 10-mile run from the base and a steady patch for fencing, decking and general household work.\n\nThe housing mix here is good for a handyman trade. Around Cross Street, Brewland Street and Henrietta Street you have the Victorian lace-town terraces — solid stone, original sashes, the kind of gutter work and re-pointing we enjoy doing properly. Moving out, the post-war estates (Alexander Drive, Bentinck Drive) keep a steady stream of fencing, decking and flat-pack jobs coming in. At the Barr Castle end of town you get the newer-build estates where back-garden deck projects are a summer staple.\n\nDecking is a Galston speciality for us. The gardens here are good-sized and south-facing in the right spots, so a raised composite deck with a proper joist cage and balustrade genuinely transforms how a family uses the garden for six months of the year. We build on adjustable pedestals over concrete or on concrete pad foundations, in WPC composite or pressure-treated timber, with spindles or glass balustrading. Expect £90/m\u00b2 upwards, lifespan ten years plus.\n\nFencing around Galston is our other big workload — feather-edge on Brewland Street, close-board on the estates, post repairs after the valley winds. We set posts into Postfix fast-set concrete, use 100\u00d7100 pressure-treated, and don\u2019t skimp on arris rails. No short cuts.\n\nAnd the small stuff. Taps, tiles, silicones, squeaky floors, loose banisters, Wayfair wardrobe builds. It all gets the same answer: give us a ring and we\u2019ll be round this week.`,
+  },
+  {
+    slug: 'kilmarnock',
+    name: 'Kilmarnock',
+    postcode: 'KA1',
+    intro:
+      'The big town — 12 miles north of Sorn but we\'re in Kilmarnock almost every day. The mix of Victorian tenements around the Cross, post-war estates and new-builds at Riverside means every kind of job is a call away.',
+    distance: '12 miles',
+    localJobs: [
+      'Tenement stair and close joinery',
+      'Kitchen and bathroom plumbing swaps',
+      'Back-court gutter and downpipe replacements',
+      'Fence and decking across Onthank, Shortlees, Crookedholm',
+    ],
+    landmark: 'Dean Castle',
+    geo: { lat: 55.6117, lon: -4.4957 },
+    keywords: ['handyman Kilmarnock', 'joiner Kilmarnock', 'plumber Kilmarnock KA1'],
+    extendedCopy: `Kilmarnock is the biggest town in our patch — around 46,000 people, twelve miles north of Sorn, and we are there almost every working day. The range of work we do in Killie covers everything the business offers: joinery in the Victorian tenements around the Cross, kitchen and bathroom swap-outs across the post-war estates, decking and fencing on the new-builds at Riverside, landlord maintenance on the rental stock in Onthank and Shortlees, and a steady flow of flat-pack, TV-mount, shelf-up work anywhere the high street reaches.\n\nKilmarnock\u2019s old centre — King Street, Bank Street, John Finnie Street — is a slow-moving conservation-area pocket where joinery matters. Sash-and-case windows, cornice details, original skirtings. Fraser came up on these kinds of houses. If you have a tenement flat that has been chopped about by a previous owner and you want it restored properly, we are the right call — not the cheapest, but the ones who will leave it looking like it always was.\n\nKilmarnock\u2019s 1960s-1980s housing around Onthank, Bellfield, Shortlees, Crookedholm and New Farm Loch is our property-maintenance sweet spot. Landlords and private homeowners alike ring us for quarterly rounds: gutters, silicones, paint touch-ups, tap swap-outs, fence checks. One invoice, photo report each time.\n\nRiverside and the newer estates off the Ayr Road are our decking and fencing workload — new garden builds, composite or timber, with balustrades, integrated planters and LED step lighting if you want it.\n\nKilmarnock also generates most of our out-of-hours plumbing emergencies. Burst pipes, blown flexi hoses, toilets that choose the worst possible moment. Aidan handles those calls himself — qualified plumber, mechanical engineer, reliably grumpy at 2am, always in the van within 30 minutes.\n\nCall 07900 255876 or WhatsApp +44 7472 223323. For Kilmarnock jobs we can usually get a same-day look in, and we don\u2019t charge a call-out for quotes anywhere in East Ayrshire.`,
+  },
+  {
+    slug: 'ayr',
+    name: 'Ayr',
+    postcode: 'KA7',
+    intro:
+      'Ayr is 15 miles west. We cover the whole town — seafront Victorian terraces, Alloway cottages and the Prestwick-edge new-builds — and salt-air maintenance is a big part of it. Render, timber and gutters all take a hammering.',
+    distance: '15 miles',
+    localJobs: [
+      'Seafront render repair and soft-wash',
+      'Timber window and door maintenance on Alloway cottages',
+      'Decking and garden rooms on the new estates',
+      'Emergency plumbing across the town centre',
+    ],
+    landmark: 'Auld Brig o\' Ayr',
+    geo: { lat: 55.4586, lon: -4.6292 },
+    keywords: ['handyman Ayr', 'plumber Ayr', 'decking Ayr KA7'],
+    extendedCopy: `Ayr is fifteen miles west — a town of around 47,000 on the Firth of Clyde coast, with one of the oldest town centres in Scotland and a housing mix from medieval masonry to 2020s new-build. For a handyman business, working in Ayr means adapting constantly: every house has a different story and every street has a different problem.\n\nThe seafront and Esplanade properties are Ayr\u2019s signature and Ayr\u2019s maintenance headache. Salt-laden air is hard on render, timber and metal — render cracks, window frames soften, gutters and railings rust. Our Ayr workload is heavy on soft-wash render cleaning, exterior paint with marine-grade systems, and gutter renewal in robust deep-flow PVC. The mile of Victorian terraces running back from the seafront — Wellington Square, Racecourse Road, Barns Street — all benefit from the same treatment on a rolling five-to-seven year cycle.\n\nAlloway, where Burns was born, is a different set of problems. The listed cottages and the 20th-century houses around Rozelle and the Auld Brig need careful, slow, matched work — proper lime mortar, original-profile joinery, paint colours that blend rather than shout. We have the right paints and the right hand-planes in the van for Alloway days.\n\nNewer Ayr — the Prestwick-edge estates off the Monument Road and the big developments out past Dalmilling — is more straightforward: kitchens and bathrooms hitting their first refit, gardens wanting composite decking or new fencing, and a steady drumbeat of flat-pack assembly.\n\nAyr also gets us out on emergency plumbing more than any other town besides Kilmarnock. Town-centre flats with older copper supply lines, blocked macerator toilets, main-stopcock failures on a Sunday morning. Aidan is qualified and answers the WhatsApp — one of us is in the van within the hour.\n\nCall 07900 255876 any time. No call-out fee for quotes anywhere in Ayr or the surrounding villages — Mossblown, Coylton, Tarbolton, Annbank.`,
+  },
+  {
+    slug: 'troon',
+    name: 'Troon',
+    postcode: 'KA10',
+    intro:
+      'Troon, famous for the Open Championship course, sits on the coast 18 miles from Sorn. We handle holiday-home and second-home maintenance along the front, plus the high-spec new estates inland off the Prestwick Road.',
+    distance: '18 miles',
+    localJobs: [
+      'Holiday-home change-over maintenance',
+      'Exterior paint and render on seafront properties',
+      'Composite decking on inland new-builds',
+      'Gutter and roof repair after coastal gales',
+    ],
+    landmark: 'Royal Troon Golf Club',
+    geo: { lat: 55.5420, lon: -4.6600 },
+    keywords: ['handyman Troon', 'holiday home handyman Troon', 'decking Troon KA10'],
+  },
+  {
+    slug: 'irvine',
+    name: 'Irvine',
+    postcode: 'KA12',
+    intro:
+      'Irvine is the biggest town in North Ayrshire and a 25-minute run from the base. We cover the harbour-side new builds, Bourtreehill and Dreghorn with the same 24/7 call-out, and the industrial-estate landlord work is growing fast.',
+    distance: '20 miles',
+    localJobs: [
+      'Bathroom and kitchen plumbing swaps',
+      'Flat-pack wardrobe and kitchen builds',
+      'Fence replacement across Bourtreehill',
+      'Gutter and downpipe renewal on terraced stock',
+    ],
+    landmark: 'Harbour Arts Centre',
+    geo: { lat: 55.6109, lon: -4.6708 },
+    keywords: ['handyman Irvine', 'plumber Irvine', 'flat-pack Irvine KA12'],
+  },
+];
+
+// FAQ (used on home + FAQ section on contact)
+export const faqs = [
+  {
+    q: 'Are you really open 24/7?',
+    a: 'Yes. One of us — Fraser or Aidan — answers every call, day or night. If it\'s non-urgent at 3am we\'ll book you in for first-light; if your kitchen\'s flooding we\'re in the van. No call-centre.',
+  },
+  {
+    q: 'Do you charge a call-out fee?',
+    a: 'No call-out fee for quotes in East Ayrshire. We only charge once we\'re on the tools. Out-of-hours emergencies (10pm–6am) carry a £60 minimum.',
+  },
+  {
+    q: 'Are you insured?',
+    a: 'Yes — £2m public liability. Certificate available on request before we start any job.',
+  },
+  {
+    q: 'What areas do you cover?',
+    a: 'Sorn, Mauchline, Cumnock, Catrine, Auchinleck, Muirkirk, Galston, Kilmarnock, Ayr, Troon and Irvine as standard. Further afield by arrangement.',
+  },
+  {
+    q: 'Do you do gas or electrical work?',
+    a: 'No gas (we\'re not Gas Safe) and no notifiable electrical work (Part P). We\'ll happily recommend a local trade and coordinate on site.',
+  },
+  {
+    q: 'Can I get a quote without a site visit?',
+    a: 'Often yes — send a WhatsApp photo to +44 7472 223323 with a short description and a measurement if you can. We\'ll come back same-day with a ballpark or a firm price.',
+  },
+  {
+    q: 'How soon can you start?',
+    a: 'Small jobs (under 2 hours) — usually within 24–48 hours. Bigger jobs — 1 to 2 weeks. Emergencies — now.',
+  },
+  {
+    q: 'Do you clean up after the job?',
+    a: 'Always. Dust sheets down before we start, everything bagged and taken away before we leave. We pay the tip fees, not you.',
+  },
+  {
+    q: 'What payment do you accept?',
+    a: 'Bank transfer or card (Stripe link sent by text). No cash surcharge; no card surcharge.',
+  },
+  {
+    q: 'Do you give written quotes?',
+    a: 'Every job over £200 gets a written quote by email or WhatsApp before we start, with a clear line-by-line breakdown and a fixed-price lock. No nasty surprises.',
+  },
+];
+
+export const processSteps = [
+  {
+    n: 1,
+    title: 'Call or WhatsApp',
+    body: 'One of us answers — Fraser or Aidan. 24/7, no call-centre. Send a photo if you can.',
+  },
+  {
+    n: 2,
+    title: 'Same-day quote',
+    body: 'Ballpark price on the call, firm written quote by WhatsApp or email within a few hours.',
+  },
+  {
+    n: 3,
+    title: 'Booked and done',
+    body: 'Small jobs usually within 48 hours. Clean, tidy, one-invoice at the end. Guaranteed.',
+  },
+];

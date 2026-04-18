@@ -1,0 +1,19 @@
+---
+import { BASE } from '../data/business';
+import type { Service } from '../data/business';
+export interface Props {
+  service: Service;
+}
+const { service } = Astro.props;
+---
+<a href={`${BASE}/services/${service.slug}/`} class="card group flex flex-col gap-3">
+  <div class="flex items-center gap-3">
+    <span class="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-amber-500/10 text-2xl ring-1 ring-amber-500/20 group-hover:bg-amber-500 group-hover:text-navy-900 transition">{service.icon}</span>
+    <h3 class="font-serif text-lg font-bold text-navy-900">{service.name}</h3>
+  </div>
+  <p class="text-sm text-navy-900/70 leading-relaxed">{service.short}</p>
+  <div class="mt-auto flex items-center justify-between pt-2 text-sm font-medium">
+    {service.priceFrom && <span class="text-amber-600">From {service.priceFrom}</span>}
+    <span class="text-navy-900/60 group-hover:text-amber-600 group-hover:translate-x-0.5 transition">Details →</span>
+  </div>
+</a>
