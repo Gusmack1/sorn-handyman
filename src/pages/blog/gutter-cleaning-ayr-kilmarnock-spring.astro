@@ -1,0 +1,215 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import { business, BASE } from '../../data/business';
+import { postBySlug } from '../../data/posts';
+
+const post = postBySlug('gutter-cleaning-ayr-kilmarnock-spring')!;
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+const url = `${siteUrl}/blog/${post.slug}/`;
+const ogImage = `${siteUrl}${post.ogImage}`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: post.title,
+  description: post.description,
+  inLanguage: 'en-GB',
+  datePublished: post.date,
+  dateModified: post.date,
+  author: {
+    '@type': 'Person',
+    name: post.author,
+    worksFor: { '@id': `${siteUrl}/#business` },
+  },
+  publisher: { '@id': `${siteUrl}/#business` },
+  image: [ogImage],
+  mainEntityOfPage: url,
+  articleSection: 'Gutter cleaning',
+  keywords: [post.keyword, 'gutter cleaning kilmarnock', 'gutter vacuum ayrshire', 'spring gutter clean', 'blocked gutters ayr'],
+  wordCount: post.wordCount,
+  about: [{ '@type': 'Place', name: 'Ayr, Scotland' }, { '@type': 'Place', name: 'Kilmarnock, Scotland' }],
+};
+---
+<BaseLayout
+  title={`${post.title} | Sorn Handyman Services`}
+  description={post.description}
+  canonicalPath={`/blog/${post.slug}/`}
+  ogImage={ogImage}
+  extraSchema={articleSchema}
+>
+  <Breadcrumbs trail={[
+    { name: 'Home', href: `${BASE}/` },
+    { name: 'Blog', href: `${BASE}/blog/` },
+    { name: post.title },
+  ]} />
+
+  <article class="container-x py-10 lg:py-14 max-w-3xl">
+    <header>
+      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
+        <span>{post.area}</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <span class="text-navy-900/60">{post.readMinutes} min read</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
+      </div>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
+        {post.title}
+      </h1>
+      <p class="mt-5 text-lg text-navy-900/75">
+        Everybody books gutter cleaning in October. They shouldn't — they should
+        book it now. Here's why April is the right month across Ayr, Kilmarnock
+        and the rest of East Ayrshire, and what a proper clean actually looks
+        like from the ground.
+      </p>
+    </header>
+
+    <div class="prose-sorn mt-8 text-lg">
+      <p>
+        I spend more weeks of the year up gutters than I'd like to admit. After
+        doing this in the rain, the dark and the middle of February, I can tell
+        you one thing with confidence: the folk who book their
+        <a href={`${BASE}/services/gutter-cleaning/`}>gutter clean in April</a>
+        have half the problems of the folk who leave it until the leaves are
+        already down.
+      </p>
+      <p>
+        This is the short version of why spring is the right window for Ayr,
+        Kilmarnock and everywhere in between — and what we actually do when we
+        turn up with a vac pole on the lawn.
+      </p>
+
+      <h2>Why spring beats autumn (every time)</h2>
+      <p>
+        The instinct is to clean gutters after the trees drop. Makes sense on
+        paper. In practice it's the wrong call for three reasons.
+      </p>
+
+      <h3>1. Winter has already done its damage</h3>
+      <p>
+        If your gutters were blocked through Ayrshire's wet season — roughly
+        November to March — water has been backing up behind that dam of
+        leaves and moss for four months. It's been soaking into your fascia,
+        dribbling down the wall behind the downpipe, and freezing expansion-cracks
+        into your joints. By April you can <em>see</em> that damage. By October
+        it's hidden behind a fresh summer's growth.
+      </p>
+      <p>
+        We find most fascia rot, hopper cracks and loose downpipe brackets on
+        spring jobs. Fixing them in April costs a fraction of finding them in
+        October when they've had another six months to worsen.
+      </p>
+
+      <h3>2. The moss is softer and lighter</h3>
+      <p>
+        Ayrshire roofs grow moss like a permanent feature. Through the summer
+        it dries, hardens and welds itself to your tile joints. In spring it's
+        still damp from winter — it comes out of the gutter run with about half
+        the effort. We get the job done quicker and you pay less.
+      </p>
+
+      <h3>3. You get the summer for the proper fixes</h3>
+      <p>
+        If a spring clean flags a sagging run, a leaking joint or a broken
+        bracket, there's a full dry season ahead to
+        <a href={`${BASE}/services/guttering/`}>replace or repair</a> properly.
+        Leaving it to autumn means you're chasing a fix in November weather
+        with the next storm a week away.
+      </p>
+
+      <h2>What we actually do on a gutter clean</h2>
+      <p>
+        No ladders on your lawn, no boot marks on the roof, no mess on the
+        driveway. We use a gutter-vacuum pole system — a long carbon-fibre
+        pole with a camera on the end and a high-suction vac at the base. I
+        stand on the ground, run the pole up, look down the gutter on a screen,
+        and hoover out every run.
+      </p>
+      <ul>
+        <li>All gutters, hoppers and outlets vac-cleared</li>
+        <li>Downpipes flushed with water to confirm flow</li>
+        <li>Photo of every cleaned run, sent by WhatsApp before we leave</li>
+        <li>Moss and debris bagged and taken away — we pay the tip fee</li>
+        <li>Bracket and joint check while the pole's up there</li>
+      </ul>
+      <p>
+        That last point matters more than folk realise. Half the time we clear
+        a blocked gutter and <em>then</em> find the joint's been leaking
+        quietly for a year. We photograph it, quote a repair, and you decide
+        whether to book it in. No pressure, no upsell — we'd rather leave you
+        with information than a surprise invoice.
+      </p>
+
+      <h2>The warning signs you shouldn't leave till June</h2>
+      <p>
+        Before you book, walk outside and look up. If you see any of these,
+        ring us this week:
+      </p>
+      <ul>
+        <li><strong>A gutter that's sagging visibly</strong> — the bracket is failing or the fascia behind it is soft.</li>
+        <li><strong>Water staining on your wall</strong> under a joint or hopper — that joint has been leaking a while.</li>
+        <li><strong>Plants growing out of the gutter</strong> — silt has built up deep enough to seed. That gutter is probably 50% full.</li>
+        <li><strong>Water overshooting the front of the gutter</strong> in heavy rain — the run is blocked or the gutter has dropped out of level.</li>
+        <li><strong>Damp inside an upstairs corner of the house</strong> — classic sign that a gutter is backing up and soaking the wall-top through the eaves.</li>
+      </ul>
+      <p>
+        Any of those, don't just book a clean — book a clean <em>and</em> a
+        quote for the repair. We'll do both in one visit if we can.
+      </p>
+
+      <h2>Ayr vs. Kilmarnock — any difference?</h2>
+      <p>
+        Honest answer: a bit.
+      </p>
+      <p>
+        <a href={`${BASE}/areas/ayr/`}>Ayr</a> properties, especially the
+        seafront and Esplanade terraces, get hit with salt-laden air all year.
+        Gutter metalwork and paint suffer, and the runs at the front of the
+        house silt up with fine sand as well as leaves. We often recommend
+        deep-flow replacement gutters on those streets rather than standard
+        half-round, because the volume of water coming off big slate roofs
+        overwhelms the shallower profile in a proper downpour.
+      </p>
+      <p>
+        <a href={`${BASE}/areas/kilmarnock/`}>Kilmarnock's</a> older tenement
+        stock around the town centre has back-court gutters that nobody looks
+        at for years at a time. Those are our bread-and-butter spring jobs —
+        big cast-iron runs that haven't been touched since the building was
+        modernised, usually full of sixty years of silt and one ball a child
+        threw up there in 1987.
+      </p>
+
+      <h2>What it costs</h2>
+      <p>
+        Our standard gutter clean starts at
+        <strong>£60 for a small terrace</strong> and runs up to about
+        <strong>£120 for a big detached</strong> with a complex run. We quote
+        honest from a photo — send us a WhatsApp of your house front and back
+        and we'll give you a firm number inside an hour.
+      </p>
+      <p>
+        No call-out fee in <a href={`${BASE}/areas/ayr/`}>Ayr</a>,
+        <a href={`${BASE}/areas/kilmarnock/`}>Kilmarnock</a>,
+        <a href={`${BASE}/areas/troon/`}>Troon</a>, or anywhere in
+        <a href={`${BASE}/areas/`}>our East Ayrshire patch</a>. We show up,
+        clean, photograph, tidy, and you pay by card or bank transfer.
+      </p>
+      <p>
+        Book now, not in October. Your fascias will thank you.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
+        <p class="text-sm text-navy-900/60">Written by</p>
+        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
+        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
+      </div>
+    </div>
+  </article>
+
+  <CTABlock
+    heading="Ready for a spring gutter clean in Ayr or Kilmarnock?"
+    sub="Send a photo of your house to WhatsApp — we'll quote in an hour and book you in this week."
+  />
+</BaseLayout>
