@@ -17,8 +17,8 @@ const { area } = Astro.props;
 const canonical = `/areas/${area.slug}/`;
 const canonicalUrl = `${business.siteUrl}${canonical}`;
 
-const title = `Handyman in ${area.name} — 24/7, Fully Insured | Sorn Handyman Services`;
-const description = `Handyman in ${area.name}${area.postcode ? ' (' + area.postcode + ')' : ''} — 24/7, fully insured. Joinery, plumbing, painting, flat-pack, gutters, fencing. Free quotes, no call-out fee. Call ${business.phone}.`;
+const title = `Handyman in ${area.name} — 24/7 | Sorn Handyman Services`;
+const description = `Handyman in ${area.name}${area.postcode ? ' (' + area.postcode + ')' : ''} — 24/7 call-out. Joinery, plumbing, painting, flat-pack, gutters, fencing. Free quotes, no call-out fee. Call ${business.phone}.`;
 
 // Pick 9 core services to card-link on every area page (per site spec)
 const NINE_SLUGS = [
@@ -54,10 +54,6 @@ const pageFaqs = [
     a: `No. Free written quotes, no minimum job size. Out-of-hours emergencies (10pm\u20136am) carry a £60 minimum — normal hours don't.`,
   },
   {
-    q: `Are you insured?`,
-    a: 'Yes — £2m public liability. Certificate available on request before we start.',
-  },
-  {
     q: `How do I get a quote?`,
     a: `Call Fraser on ${business.phone} or WhatsApp Aidan on ${business.whatsappDisplay}. Send a couple of photos and we'll ballpark the price before we drive over.`,
   },
@@ -81,13 +77,12 @@ const schemas = [
         <span class="h-2 w-2 rounded-full bg-navy-900 animate-pulse"></span>
         Open 24/7
       </span>
-      <span class="inline-flex rounded-full border border-navy-900/15 bg-white px-3 py-1 font-medium text-navy-900/80">Fully insured</span>
-      <span class="inline-flex rounded-full border border-navy-900/15 bg-white px-3 py-1 font-medium text-navy-900/80">Father &amp; son — Fraser + Aidan</span>
+      <span class="inline-flex rounded-full border border-navy-900/15 bg-white px-3 py-1 font-medium text-navy-900/80">Fraser + Aidan</span>
       <span class="inline-flex rounded-full border border-navy-900/15 bg-white px-3 py-1 font-medium text-navy-900/80">Free written quotes</span>
       {area.postcode && <span class="inline-flex rounded-full border border-navy-900/15 bg-white px-3 py-1 font-medium text-navy-900/80">{area.postcode}</span>}
     </div>
 
-    <h1 class="mt-5 font-serif text-5xl font-black text-navy-900 max-w-4xl">Handyman in {area.name} &mdash; 24/7, Fully Insured</h1>
+    <h1 class="mt-5 font-serif text-5xl font-black text-navy-900 max-w-4xl">Handyman in {area.name} &mdash; 24/7</h1>
     <p class="mt-4 text-lg text-navy-900/75 max-w-3xl">{area.intro}</p>
 
     <div class="mt-6 flex flex-wrap gap-3">
@@ -120,7 +115,7 @@ const schemas = [
     <div class="container-x py-16">
       <span class="eyebrow">Services in {area.name}</span>
       <h2 class="mt-3 font-serif text-4xl font-bold text-navy-900">Nine core services — one local team.</h2>
-      <p class="mt-3 max-w-2xl text-navy-900/75">Bundle as many as you like into one visit and save the second call-out fee. Every job comes with a written quote and £2m public-liability cover.</p>
+      <p class="mt-3 max-w-2xl text-navy-900/75">Bundle as many as you like into one visit and save the second call-out fee. Every job comes with a written quote.</p>
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {nineServices.map((s) => <ServiceCard service={s} />)}
       </div>
