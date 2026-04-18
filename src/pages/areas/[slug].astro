@@ -17,8 +17,8 @@ const { area } = Astro.props;
 const canonical = `/areas/${area.slug}/`;
 const canonicalUrl = `${business.siteUrl}${canonical}`;
 
-const title = `Handyman in ${area.name} — 24/7 | Sorn Handyman Services`;
-const description = `Handyman in ${area.name}${area.postcode ? ' (' + area.postcode + ')' : ''} — 24/7 call-out. Joinery, plumbing, painting, flat-pack, gutters, fencing. Free quotes, no call-out fee. Call ${business.phone}.`;
+const title = `Handyman in ${area.name} | Sorn Handyman Services`;
+const description = `Handyman in ${area.name}${area.postcode ? ' (' + area.postcode + ')' : ''}. Joinery, plumbing, painting, flat-pack, gutters, fencing. Free quotes, no call-out fee. Call Fraser on ${business.phone}.`;
 
 // Pick 9 core services to card-link on every area page (per site spec)
 const NINE_SLUGS = [
@@ -43,19 +43,19 @@ const paragraphs = (area.extendedCopy || area.intro).split('\n\n');
 const pageFaqs = [
   {
     q: `Do you cover all of ${area.name}?`,
-    a: `Yes — we cover the full ${area.name}${area.postcode ? ' ' + area.postcode : ''} postcode and a 10-mile radius around the town centre. Base is Sorn, so we're in and out of ${area.name} most weeks.`,
+    a: `Yes. We cover the full ${area.name}${area.postcode ? ' ' + area.postcode : ''} postcode and a 10-mile radius around the town centre. Base is Sorn, so we are in and out of ${area.name} most weeks.`,
   },
   {
-    q: `Are you really open 24/7 for ${area.name} call-outs?`,
-    a: `Yes. Fraser or Aidan picks up every call, day or night. For non-urgent jobs in ${area.name} we'll book you the next open slot; for burst pipes and emergencies we're in the van.`,
+    q: `Do you answer the phone out of hours in ${area.name}?`,
+    a: `Yes. Fraser or Aidan picks up every call, day or night. For non-urgent jobs in ${area.name} we book you the next open slot. For burst pipes and other emergencies we are in the van.`,
   },
   {
     q: `Do you charge a call-out fee in ${area.name}?`,
-    a: `No. Free written quotes, no minimum job size. Out-of-hours emergencies (10pm\u20136am) carry a £60 minimum — normal hours don't.`,
+    a: `No. Written quotes are free and there is no minimum job size during normal hours. Out-of-hours call-outs between 10pm and 6am carry a £60 minimum.`,
   },
   {
     q: `How do I get a quote?`,
-    a: `Call Fraser on ${business.phone} or WhatsApp Aidan on ${business.whatsappDisplay}. Send a couple of photos and we'll ballpark the price before we drive over.`,
+    a: `Call Fraser on ${business.phone} or WhatsApp Aidan on ${business.whatsappDisplay}. Send a couple of photos and you will have a ballpark price before we drive over.`,
   },
 ];
 
@@ -82,7 +82,7 @@ const schemas = [
       {area.postcode && <span class="inline-flex rounded-full border border-navy-900/15 bg-white px-3 py-1 font-medium text-navy-900/80">{area.postcode}</span>}
     </div>
 
-    <h1 class="mt-5 font-serif text-5xl font-black text-navy-900 max-w-4xl">Handyman in {area.name} &mdash; 24/7</h1>
+    <h1 class="mt-5 font-serif text-5xl font-black text-navy-900 max-w-4xl">Handyman in {area.name}</h1>
     <p class="mt-4 text-lg text-navy-900/75 max-w-3xl">{area.intro}</p>
 
     <div class="mt-6 flex flex-wrap gap-3">
@@ -114,8 +114,8 @@ const schemas = [
   <section class="bg-navy-50/60 border-y border-navy-900/5">
     <div class="container-x py-16">
       <span class="eyebrow">Services in {area.name}</span>
-      <h2 class="mt-3 font-serif text-4xl font-bold text-navy-900">Nine core services — one local team.</h2>
-      <p class="mt-3 max-w-2xl text-navy-900/75">Bundle as many as you like into one visit and save the second call-out fee. Every job comes with a written quote.</p>
+      <h2 class="mt-3 font-serif text-4xl font-bold text-navy-900">Nine core services from one local team.</h2>
+      <p class="mt-3 max-w-2xl text-navy-900/75">Bundle more than one job into a single visit and we save you a second call-out charge. Every job comes with a written quote.</p>
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {nineServices.map((s) => <ServiceCard service={s} />)}
       </div>
@@ -124,8 +124,8 @@ const schemas = [
 
   <section class="container-x py-16">
     <div class="card bg-navy-900 text-white">
-      <h2 class="font-serif text-3xl font-bold">Ready to sort it in {area.name} today?</h2>
-      <p class="mt-2 text-white/80 max-w-2xl">Open 24/7 for emergency call-outs. Call Fraser direct or WhatsApp Aidan a couple of photos and we'll ballpark the price before we even drive over.</p>
+      <h2 class="font-serif text-3xl font-bold">Book a job in {area.name} today.</h2>
+      <p class="mt-2 text-white/80 max-w-2xl">Call Fraser direct or WhatsApp Aidan a couple of photos. You will have a ballpark price before we drive over. Emergency call-outs taken any hour.</p>
       <div class="mt-5 flex flex-wrap gap-3">
         <a href={`tel:${business.phoneE164}`} class="btn-primary">📞 Call now {business.phone}</a>
         <a
@@ -154,5 +154,5 @@ const schemas = [
 
   <FAQ faqs={pageFaqs} heading={`${area.name} — your questions`} />
   <TrustStrip />
-  <CTABlock heading={`Handyman in ${area.name}? Call us anytime.`} />
+  <CTABlock heading={`Handyman in ${area.name}? Call Fraser on 07900 255876.`} />
 </BaseLayout>
