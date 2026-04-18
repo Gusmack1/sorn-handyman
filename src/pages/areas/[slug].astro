@@ -86,11 +86,11 @@ const schemas = [
     <p class="mt-4 text-lg text-navy-900/75 max-w-3xl">{area.intro}</p>
 
     <div class="mt-6 flex flex-wrap gap-3">
-      <a href={`tel:${business.phoneE164}`} class="btn-primary">📞 Call now {business.phone}</a>
+      <a href={`tel:${business.phoneE164}`} class="btn-primary" aria-label={`Call Fraser on ${business.phone}`}>Call Fraser {business.phone}</a>
       <a
         href={`https://wa.me/${business.whatsapp.replace('+','')}?text=${encodeURIComponent(`Hi, I'm in ${area.name} and I need a quote for...`)}`}
-        class="btn-secondary bg-[#25D366] !text-white hover:!bg-[#1fb858]">💬 WhatsApp Aidan</a>
-      <a href={`${BASE}/quote/`} class="btn-secondary">Free written quote →</a>
+        class="btn-secondary bg-[#25D366] !text-white hover:!bg-[#1fb858]" aria-label="WhatsApp Aidan">WhatsApp Aidan</a>
+      <a href={`${BASE}/quote/`} class="btn-secondary" aria-label="Get a free written quote">Get a free quote</a>
     </div>
   </section>
 
@@ -127,11 +127,11 @@ const schemas = [
       <h2 class="font-serif text-3xl font-bold">Book a job in {area.name} today.</h2>
       <p class="mt-2 text-white/80 max-w-2xl">Call Fraser direct or WhatsApp Aidan a couple of photos. You will have a ballpark price before we drive over. Emergency call-outs taken any hour.</p>
       <div class="mt-5 flex flex-wrap gap-3">
-        <a href={`tel:${business.phoneE164}`} class="btn-primary">📞 Call now {business.phone}</a>
+        <a href={`tel:${business.phoneE164}`} class="btn-primary" aria-label={`Call Fraser on ${business.phone}`}>Call Fraser {business.phone}</a>
         <a
           href={`https://wa.me/${business.whatsapp.replace('+','')}`}
-          class="btn-secondary bg-[#25D366] !text-white hover:!bg-[#1fb858]">💬 WhatsApp {business.whatsappDisplay}</a>
-        <a href={business.socials.googleReview} target="_blank" rel="noopener" class="btn-secondary !text-white !border-white/40 hover:!bg-white/10">⭐ Leave a Google review</a>
+          class="btn-secondary bg-[#25D366] !text-white hover:!bg-[#1fb858]" aria-label={`WhatsApp Aidan on ${business.whatsappDisplay}`}>WhatsApp Aidan {business.whatsappDisplay}</a>
+        <a href={business.socials.googleReview} target="_blank" rel="noopener" class="btn-secondary !text-white !border-white/40 hover:!bg-white/10" aria-label="Leave a Google review for Sorn Handyman">Leave a Google review</a>
       </div>
       <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-white/70">
         <span>Follow:</span>

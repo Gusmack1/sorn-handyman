@@ -26,8 +26,8 @@ const description = 'Handyman work across Ayrshire from our base in Sorn. Eleven
     <p class="mt-4 text-lg text-navy-900/75 max-w-2xl">Based in Sorn (KA5) and working a 10-mile radius around every town below. Pick your area for postcodes, local landmarks and service links, or call Fraser on 07900 255876.</p>
 
     <div class="mt-6 flex flex-wrap gap-3">
-      <a href={`tel:${business.phoneE164}`} class="btn-primary">📞 Call now {business.phone}</a>
-      <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="btn-secondary bg-[#25D366] !text-white hover:!bg-[#1fb858]">💬 WhatsApp Aidan</a>
+      <a href={`tel:${business.phoneE164}`} class="btn-primary" aria-label={`Call Fraser on ${business.phone}`}>Call Fraser {business.phone}</a>
+      <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="btn-secondary bg-[#25D366] !text-white hover:!bg-[#1fb858]" aria-label="WhatsApp Aidan">WhatsApp Aidan</a>
     </div>
 
     <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
