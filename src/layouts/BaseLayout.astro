@@ -1,0 +1,179 @@
+---
+import SEO from "../components/SEO.astro";
+
+export interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  image?: string;
+  type?: "website" | "article" | "profile";
+  noindex?: boolean;
+}
+
+const { title, description, path, image, type, noindex } = Astro.props;
+
+/**
+ * Root LocalBusiness + HomeAndConstructionBusiness JSON-LD.
+ * Facts verified in claude_brain 2026-04-18:
+ *   - Legal name "Sorn Handyman Services" (fact: owners Fraser + Aidan, GBP description).
+ *   - Phone +447900255876 (GBP primary phone).
+ *   - Service areas: Ayr, Troon, Irvine, Kilmarnock, Mauchline KA5, East Ayrshire (GBP service areas, conf=0.99).
+ *   - Hours: 24/7 per Gus override 2026-04-18 (conf=0.99, overrides trade-realistic recommendation).
+ *   - Facebook page 61573109830217 (GBP linked).
+ *   - Instagram @sornhandyman (placeholder pending live account).
+ *   - aggregateRating OMITTED — 0 reviews verified (conf=0.99). Do NOT invent.
+ */
+const SITE = "https://sornhandyman.co.uk";
+const businessSchema = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+  "@id": `${SITE}/#business`,
+  name: "Sorn Handyman Services",
+  url: SITE,
+  telephone: "+447900255876",
+  image: `${SITE}/og/sorn-og.jpg`,
+  priceRange: "££",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Sorn",
+    addressRegion: "East Ayrshire",
+    postalCode: "KA5",
+    addressCountry: "GB",
+  },
+  areaServed: [
+    {
+      "@type": "GeoCircle",
+      geoMidpoint: { "@type": "GeoCoordinates", latitude: 55.519, longitude: -4.287 },
+      geoRadius: 25000,
+      name: "Ayr",
+    },
+    {
+      "@type": "GeoCircle",
+      geoMidpoint: { "@type": "GeoCoordinates", latitude: 55.542, longitude: -4.666 },
+      geoRadius: 15000,
+      name: "Troon",
+    },
+    {
+      "@type": "GeoCircle",
+      geoMidpoint: { "@type": "GeoCoordinates", latitude: 55.614, longitude: -4.668 },
+      geoRadius: 15000,
+      name: "Irvine",
+    },
+    {
+      "@type": "GeoCircle",
+      geoMidpoint: { "@type": "GeoCoordinates", latitude: 55.611, longitude: -4.495 },
+      geoRadius: 20000,
+      name: "Kilmarnock",
+    },
+    {
+      "@type": "GeoCircle",
+      geoMidpoint: { "@type": "GeoCoordinates", latitude: 55.518, longitude: -4.382 },
+      geoRadius: 10000,
+      name: "Mauchline KA5",
+    },
+    {
+      "@type": "AdministrativeArea",
+      name: "East Ayrshire",
+    },
+  ],
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "00:00",
+      closes: "23:59",
+    },
+  ],
+  sameAs: [
+    "https://www.facebook.com/p/Sorn-Handyman-Services-61573109830217",
+    "https://instagram.com/sornhandyman",
+  ],
+};
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <SEO title={title} description={description} path={path} image={image} type={type} noindex={noindex}>
+      <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+      <slot name="jsonld" />
+    </SEO>
+  </head>
+  <body class="min-h-screen bg-white text-slate-900 antialiased">
+    <header class="border-b border-slate-200 bg-white">
+      <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+        <a href="/" class="text-lg font-bold text-brand">Sorn Handyman Services</a>
+        <ul class="hidden gap-6 text-sm font-medium md:flex">
+          <li><a href="/" class="hover:text-brand">Home</a></li>
+          <li><a href="/services/" class="hover:text-brand">Services</a></li>
+          <li><a href="/areas/" class="hover:text-brand">Areas</a></li>
+          <li><a href="/gallery/" class="hover:text-brand">Gallery</a></li>
+          <li><a href="/reviews/" class="hover:text-brand">Reviews</a></li>
+          <li><a href="/blog/" class="hover:text-brand">Blog</a></li>
+          <li><a href="/about/" class="hover:text-brand">About</a></li>
+          <li><a href="/contact/" class="hover:text-brand">Contact</a></li>
+        </ul>
+        <a href="tel:+447900255876" class="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:opacity-90">Call 07900 255876</a>
+      </nav>
+    </header>
+
+    <main><slot /></main>
+
+    <footer class="mt-16 border-t border-slate-200 bg-slate-50">
+      <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
+        <div>
+          <h3 class="text-base font-bold">Sorn Handyman Services</h3>
+          <p class="mt-2 text-sm text-slate-600">Family-run handyman team covering Ayr, Troon, Irvine, Kilmarnock, Mauchline &amp; East Ayrshire. 24/7 call-outs.</p>
+          <p class="mt-3 text-sm"><a href="tel:+447900255876" class="font-semibold text-brand">07900 255876</a></p>
+        </div>
+        <div>
+          <h3 class="text-base font-bold">Explore</h3>
+          <ul class="mt-2 space-y-1 text-sm text-slate-600">
+            <li><a href="/services/" class="hover:text-brand">Services</a></li>
+            <li><a href="/areas/" class="hover:text-brand">Areas we cover</a></li>
+            <li><a href="/quote/" class="hover:text-brand">Request a quote</a></li>
+            <li><a href="/reviews/" class="hover:text-brand">Reviews</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-base font-bold">Follow us</h3>
+          <ul class="mt-2 flex gap-4">
+            <li>
+              <a
+                href="https://www.facebook.com/p/Sorn-Handyman-Services-61573109830217"
+                rel="me noopener"
+                target="_blank"
+                aria-label="Sorn Handyman Services on Facebook"
+                class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#1877F2] text-white hover:opacity-90"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
+                  <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.54V9.84c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.57v1.89h2.78l-.44 2.9h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94Z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://instagram.com/sornhandyman"
+                rel="me noopener"
+                target="_blank"
+                aria-label="@sornhandyman on Instagram"
+                class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 text-white hover:opacity-90"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+          <p class="mt-3 text-sm text-slate-600">@sornhandyman</p>
+        </div>
+      </div>
+      <div class="border-t border-slate-200 bg-slate-100">
+        <div class="mx-auto max-w-6xl px-4 py-4 text-center text-xs text-slate-500">
+          &copy; {new Date().getFullYear()} Sorn Handyman Services. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Handyman Ayr, Troon, Irvine, Kilmarnock & East Ayrshire | Sorn Handyman Services";
+const description =
+  "Family-run handyman team covering Ayr, Troon, Irvine, Kilmarnock, Mauchline and East Ayrshire. Joinery, plumbing, painting, flat-pack, repairs. 24/7 call-outs — free quotes from Fraser and Aidan.";
+---
+<BaseLayout title={title} description={description} path="/">
+  <section class="bg-slate-900 text-white">
+    <div class="mx-auto max-w-6xl px-4 py-20 md:py-28">
+      <h1 class="text-4xl font-extrabold tracking-tight md:text-6xl">
+        Your local handyman in <span class="text-brand">Ayrshire</span>.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-slate-300">
+        Father-and-son team Fraser and Aidan. 20+ years trade experience.
+        Joinery, plumbing, painting, flat-pack and small repairs across Ayr, Troon,
+        Irvine, Kilmarnock, Mauchline and East Ayrshire. No job too small.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="tel:+447900255876" class="rounded-md bg-brand px-6 py-3 text-base font-semibold text-white hover:opacity-90">
+          Call 07900 255876
+        </a>
+        <a href="/quote/" class="rounded-md border border-white/30 px-6 py-3 text-base font-semibold text-white hover:bg-white/10">
+          Request a free quote
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
