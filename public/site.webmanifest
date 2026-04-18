@@ -1,7 +1,7 @@
 {
   "name": "Sorn Handyman Services",
   "short_name": "Sorn Handyman",
-  "description": "24/7 handyman services in East Ayrshire — Fraser and Aidan, father-and-son.",
+  "description": "24/7 handyman services in East Ayrshire — Fraser and Aidan.",
   "start_url": "/sorn-handyman/",
   "scope": "/sorn-handyman/",
   "display": "standalone",
