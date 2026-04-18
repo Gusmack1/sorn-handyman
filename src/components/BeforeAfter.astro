@@ -9,13 +9,13 @@ export interface Props {
 }
 const { before, after, altBefore = 'Before', altAfter = 'After', label } = Astro.props;
 ---
-<figure class="ba-slider relative aspect-[4/3] w-full rounded-xl ring-1 ring-navy-900/10 shadow-md bg-navy-900/5" role="img" aria-label={label || 'Before and after comparison'}>
+<figure class="ba-slider relative aspect-[4/3] w-full rounded-2xl ring-1 ring-navy-100 shadow-elev-2 bg-cream-100" role="img" aria-label={label || 'Before and after comparison'}>
   <img src={before} alt={altBefore} loading="lazy" decoding="async" />
   <div class="ba-after">
     <img src={after} alt={altAfter} loading="lazy" decoding="async" />
   </div>
   <div class="ba-handle" aria-hidden="true"></div>
-  {label && <figcaption class="absolute top-3 left-3 rounded-full bg-navy-900/80 px-3 py-1 text-xs text-white">{label}</figcaption>}
+  {label && <figcaption class="absolute top-3 left-3 rounded-full bg-navy-800/85 backdrop-blur-sm px-3 py-1 text-xs font-semibold text-cream-50">{label}</figcaption>}
 </figure>
 <script is:inline>
   (function(){

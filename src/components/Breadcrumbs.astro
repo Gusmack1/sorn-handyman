@@ -18,12 +18,12 @@ const schema = {
   itemListElement: items,
 };
 ---
-<nav aria-label="Breadcrumb" class="container-x pt-6 text-sm text-navy-900/60">
+<nav aria-label="Breadcrumb" class="container-site pt-6 text-sm text-navy-400">
   <ol class="flex flex-wrap items-center gap-x-1.5">
     {trail.map((t, i) => (
       <li class="flex items-center gap-1.5">
-        {t.href ? <a href={t.href} class="hover:text-amber-600">{t.name}</a> : <span class="text-navy-900/80">{t.name}</span>}
-        {i < trail.length - 1 && <span aria-hidden class="text-navy-900/30">›</span>}
+        {t.href ? <a href={t.href} class="hover:text-amber-700 transition-colors">{t.name}</a> : <span class="text-navy-700 font-medium">{t.name}</span>}
+        {i < trail.length - 1 && <span aria-hidden class="text-navy-200">›</span>}
       </li>
     ))}
   </ol>

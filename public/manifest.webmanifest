@@ -1,16 +1,19 @@
 {
   "name": "Sorn Handyman Services",
   "short_name": "Sorn Handyman",
-  "description": "Handyman team covering Ayr, Troon, Irvine, Kilmarnock, Mauchline and East Ayrshire. 24/7 call-outs.",
-  "start_url": "/",
-  "scope": "/",
+  "description": "Father-and-son handyman team covering Ayrshire — fencing, decking, plumbing, joinery, roofing, landscaping and more. No job too small. Free quotes.",
+  "start_url": "/sorn-handyman/",
+  "scope": "/sorn-handyman/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#D72638",
+  "background_color": "#FBF8F2",
+  "theme_color": "#0F2A3F",
   "icons": [
-    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "/icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
-    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    { "src": "/sorn-handyman/icons/favicon-16.png", "sizes": "16x16", "type": "image/png" },
+    { "src": "/sorn-handyman/icons/favicon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/sorn-handyman/icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/sorn-handyman/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/sorn-handyman/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/sorn-handyman/icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/sorn-handyman/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }

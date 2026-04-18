@@ -11,7 +11,7 @@ import { coreBusiness } from '../lib/schema';
 export interface Props {
   title: string;
   description: string;
-  canonicalPath?: string; // e.g. "/areas/ayr/"
+  canonicalPath?: string;
   ogImage?: string;
   noindex?: boolean;
   extraSchema?: any;
@@ -21,7 +21,7 @@ const { title, description, canonicalPath = '/', ogImage, noindex = false, extra
 
 const siteUrl = business.siteUrl.replace(/\/$/, '');
 const canonical = `${siteUrl}${canonicalPath.startsWith('/') ? canonicalPath : '/' + canonicalPath}`;
-const og = ogImage || `${siteUrl}/og-image.svg`;
+const og = ogImage || `${siteUrl}/brand/og.png`;
 
 const core = coreBusiness(canonical);
 ---
@@ -30,7 +30,8 @@ const core = coreBusiness(canonical);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#0F2E4C" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FBF8F2" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0A1E2E" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -47,6 +48,8 @@ const core = coreBusiness(canonical);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={og} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_GB" />
 
     <!-- Twitter -->
@@ -56,13 +59,29 @@ const core = coreBusiness(canonical);
     <meta name="twitter:image" content={og} />
 
     <!-- Icons -->
-    <link rel="icon" type="image/svg+xml" href={`${BASE}/favicon.svg`} />
-    <link rel="apple-touch-icon" href={`${BASE}/apple-touch-icon.svg`} />
-    <link rel="manifest" href={`${BASE}/site.webmanifest`} />
+    <link rel="icon" type="image/png" href={`${BASE}/icons/favicon-32.png`} sizes="32x32" />
+    <link rel="icon" type="image/png" href={`${BASE}/icons/favicon-16.png`} sizes="16x16" />
+    <link rel="apple-touch-icon" sizes="180x180" href={`${BASE}/icons/apple-touch-icon.png`} />
+    <link rel="icon" type="image/png" href={`${BASE}/brand/icon-source.png`} />
+    <link rel="manifest" href={`${BASE}/manifest.webmanifest`} />
 
-    <!-- Font preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Font preload (Bunny Fonts, GDPR-safe) -->
+    <link rel="preconnect" href="https://fonts.bunny.net" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.bunny.net/css?family=inter-tight:400,500,600,700|bricolage-grotesque:500,600,700&display=swap" />
+
+    <!-- Critical CSS to kill CLS on hero -->
+    <style>
+      .hero-gradient-critical {
+        background-image:
+          radial-gradient(1200px 600px at 85% -20%, rgba(242, 160, 61, 0.22), transparent 60%),
+          linear-gradient(125deg, #0F2A3F 0%, #143249 55%, #8F500A 140%);
+        color: #FBF8F2;
+      }
+      body { background: #FBF8F2; }
+      @media (prefers-color-scheme: dark) {
+        body { background: #0A1E2E; }
+      }
+    </style>
 
     <!-- Business schema (every page) -->
     <SchemaBlock schema={core} />
@@ -78,7 +97,7 @@ const core = coreBusiness(canonical);
     }} />
   </head>
   <body class="min-h-screen flex flex-col">
-    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-amber-500 focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-amber-600 focus:text-white focus:px-3 focus:py-2 focus:rounded-md focus:shadow-elev-2">Skip to content</a>
     <Header />
     <main id="main" class="flex-1">
       <slot />

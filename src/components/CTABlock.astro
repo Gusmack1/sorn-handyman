@@ -7,22 +7,26 @@ export interface Props {
 }
 const {
   heading,
-  sub = 'One of us answers every call, day or night. Photo on WhatsApp and we can quote you in minutes.',
+  sub = 'Send Aidan a photo on WhatsApp and we ballpark first. No call-out fee, no hard sell.',
   location,
 } = Astro.props;
-const finalHeading = heading || (location ? `Need a handyman in ${location}? Call anytime.` : 'Need a handyman? Call us anytime.');
+const finalHeading = heading || (location ? `Need a handyman in ${location}? Give us a ring.` : 'Need a hand with a job? Give us a ring.');
 ---
-<section class="relative overflow-hidden bg-navy-900 text-white">
-  <div class="absolute inset-0 hero-grid-bg opacity-70" aria-hidden></div>
-  <div class="absolute -right-32 -top-24 h-80 w-80 rounded-full bg-amber-500/20 blur-3xl" aria-hidden></div>
-  <div class="container-x relative py-14 md:py-20 text-center">
-    <span class="eyebrow">24/7 · East Ayrshire</span>
-    <h2 class="mt-4 font-serif text-4xl md:text-5xl font-black">{finalHeading}</h2>
-    <p class="mt-4 max-w-xl mx-auto text-white/75">{sub}</p>
+<section class="relative overflow-hidden hero-gradient my-16">
+  <div class="absolute inset-0 opacity-[0.07]" aria-hidden="true" style="background-image: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.4) 1px, transparent 1px); background-size: 28px 28px;"></div>
+  <div class="container-site relative py-16 md:py-20 text-center">
+    <span class="eyebrow !bg-white/10 !text-amber-300 !ring-white/20">Free quote · Ayrshire</span>
+    <h2 class="mt-4 font-display text-h1 md:text-display text-cream-50">{finalHeading}</h2>
+    <p class="mt-4 max-w-xl mx-auto text-cream-100/90 text-body-lg">{sub}</p>
     <div class="mt-8 flex flex-wrap justify-center gap-3">
-      <a href={`tel:${business.phoneE164}`} class="btn-primary text-lg">📞 {business.phone}</a>
-      <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="btn-ghost text-lg">💬 WhatsApp</a>
-      <a href={`${BASE}/quote/`} class="btn-secondary text-lg bg-white !text-navy-900 hover:!bg-amber-500">Free quote form</a>
+      <a href={`${BASE}/quote/`} class="btn-primary btn-lg">Get a free quote</a>
+      <a href={`tel:${business.phoneE164}`} class="btn-ghost-dark btn-lg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.28-1.28a2 2 0 0 1 2.11-.45c.9.35 1.84.59 2.8.72A2 2 0 0 1 22 16.92z"/></svg>
+        Call {business.phone}
+      </a>
+      <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="btn-ghost-dark btn-lg" target="_blank" rel="noopener">
+        WhatsApp Aidan
+      </a>
     </div>
   </div>
 </section>

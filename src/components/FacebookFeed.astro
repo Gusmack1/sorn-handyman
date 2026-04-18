@@ -1,20 +1,18 @@
 ---
 // Static grid of 8 hand-selected Facebook posts harvested from the live
 // @SornHandymanServices page. Content is the client's own (copyright-safe).
-// Source: Supabase public.client_assets, client_id=client_1774201992319.
-// Selection criteria: job-complete photo, specific service, specific area,
-// authentic voice, dated 2025-07 or later. Posts with no permalink omitted.
+import { BASE } from '../data/business';
 
 const PAGE_ID = '569602312902858';
 const PAGE_URL = 'https://www.facebook.com/p/Sorn-Handyman-Services-61573109830217';
 
 type Post = {
-  postId: string;      // numeric part after the underscore in fb_post_id
-  date: string;        // ISO date
-  dateDisplay: string; // human
+  postId: string;
+  date: string;
+  dateDisplay: string;
   service: string;
   area: string;
-  body: string;        // full body text, unmodified client voice
+  body: string;
 };
 
 const posts: Post[] = [
@@ -84,15 +82,12 @@ const posts: Post[] = [
   },
 ];
 
-// Build the standard Facebook permalink form for a Page post.
-// permalink.php?story_fbid=<postId>&id=<pageId> works for any FB Page post.
 function permalink(p: Post) {
   return `https://www.facebook.com/permalink.php?story_fbid=${p.postId}&id=${PAGE_ID}`;
 }
 
 function truncate(s: string, n: number) {
   if (s.length <= n) return s;
-  // cut on nearest word boundary under n
   const cut = s.slice(0, n);
   const space = cut.lastIndexOf(' ');
   return (space > 40 ? cut.slice(0, space) : cut).trimEnd() + '…';
@@ -107,8 +102,6 @@ const {
   subtitle = 'Every photo here is a real job for a real Ayrshire customer, posted on the day we finished. Tap any card to see the original on Facebook.',
 } = Astro.props;
 
-// schema.org JSON-LD: one SocialMediaPosting per card, wrapped in an
-// ItemList so crawlers understand the feed structure.
 const feedSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
@@ -132,60 +125,66 @@ const feedSchema = {
   })),
 };
 ---
-<section class="bg-white border-y border-navy-900/5">
-  <div class="container-x py-16">
-    <div class="max-w-2xl">
-      <span class="eyebrow">Live from our Facebook</span>
-      <h2 class="mt-4 font-serif text-4xl font-bold text-navy-900">{title}</h2>
-      <p class="mt-3 text-navy-900/70">{subtitle}</p>
+<section class="bg-cream-100 border-y border-cream-200">
+  <div class="container-site py-16 md:py-24">
+    <div class="flex items-end justify-between gap-6 flex-wrap">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Live from our Facebook</span>
+        <h2 class="mt-4 font-display text-h1 text-navy-800">{title}</h2>
+        <p class="mt-3 text-navy-500 text-body-lg leading-relaxed">{subtitle}</p>
+      </div>
+      <a
+        href={PAGE_URL}
+        target="_blank"
+        rel="noopener"
+        class="btn-outline btn-sm"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.4H7.7V13h2.7v8h3.1z"/></svg>
+        Follow on Facebook
+      </a>
     </div>
 
     <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {posts.map((p) => (
-        <li class="card flex flex-col h-full">
-          <div class="flex items-center justify-between mb-3">
-            <time datetime={p.date} class="text-xs text-navy-900/60 font-medium">{p.dateDisplay}</time>
+        <li class="surface-card flex flex-col h-full">
+          <!-- Header: logo + name + verified + date -->
+          <div class="flex items-center gap-2.5 mb-3">
+            <img src={`${BASE}/brand/sorn-logo.png`} alt="" width="32" height="32" class="h-8 w-8 rounded-full object-cover ring-1 ring-navy-100" />
+            <div class="flex-1 min-w-0 leading-tight">
+              <p class="flex items-center gap-1 text-[13px] font-semibold text-navy-800 truncate">
+                Sorn Handyman Services
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true" title="Verified Facebook page"><path d="M12 2 9.5 4.5 6 4l-1 3.5L2 9l1.5 3.5L2 16l3 1.5L6 21l3.5-.5L12 23l2.5-2.5L18 21l1-3.5 3-1.5-1.5-3.5L22 9l-3-1.5L18 4l-3.5.5L12 2zm-1 14L7 12l1.4-1.4L11 13.2l4.6-4.6L17 10l-6 6z"/></svg>
+              </p>
+              <time datetime={p.date} class="text-[11px] text-navy-400 font-medium">{p.dateDisplay}</time>
+            </div>
             <a
               href={permalink(p)}
               target="_blank"
               rel="noopener nofollow"
               aria-label={`View ${p.service} post in ${p.area} on Facebook`}
-              class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#1877F2] text-white hover:opacity-90"
+              class="inline-flex h-7 w-7 items-center justify-center rounded-md bg-[#1877F2]/10 text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-colors"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
-                <path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.4H7.7V13h2.7v8h3.1z"/>
-              </svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.4H7.7V13h2.7v8h3.1z"/></svg>
             </a>
           </div>
 
           <div class="flex flex-wrap gap-2 mb-3">
-            <span class="inline-flex items-center rounded-full bg-amber-500/15 text-navy-900 px-2.5 py-1 text-xs font-semibold">{p.service}</span>
-            <span class="inline-flex items-center rounded-full bg-navy-900/5 text-navy-900 px-2.5 py-1 text-xs font-semibold">📍 {p.area}</span>
+            <span class="badge-soft !bg-amber-50 !text-amber-700">{p.service}</span>
+            <span class="badge-dot">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              {p.area}
+            </span>
           </div>
 
-          <p class="text-sm text-navy-900/80 leading-relaxed">
+          <p class="text-sm text-navy-500 leading-relaxed">
             {truncate(p.body, 180)}{' '}
             <a
               href={permalink(p)}
               target="_blank"
               rel="noopener nofollow"
-              class="font-semibold text-navy-900 underline decoration-amber-500 decoration-2 underline-offset-2 hover:text-amber-600"
+              class="font-semibold text-navy-700 underline decoration-amber-500 decoration-2 underline-offset-2 hover:text-amber-700"
             >Read more</a>
           </p>
-
-          <div class="mt-auto pt-4">
-            <a
-              href={permalink(p)}
-              target="_blank"
-              rel="noopener nofollow"
-              class="inline-flex items-center gap-2 text-xs font-semibold text-[#1877F2] hover:underline"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
-                <path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.4H7.7V13h2.7v8h3.1z"/>
-              </svg>
-              View on Facebook
-            </a>
-          </div>
 
           <script type="application/ld+json" set:html={JSON.stringify({
             '@context': 'https://schema.org',
@@ -204,20 +203,6 @@ const feedSchema = {
         </li>
       ))}
     </ul>
-
-    <div class="mt-8 text-center">
-      <a
-        href={PAGE_URL}
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center gap-2 btn-secondary !py-2 !px-4 text-sm"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#1877F2" aria-hidden="true">
-          <path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.4H7.7V13h2.7v8h3.1z"/>
-        </svg>
-        Follow us on Facebook
-      </a>
-    </div>
 
     <script type="application/ld+json" set:html={JSON.stringify(feedSchema)} />
   </div>
