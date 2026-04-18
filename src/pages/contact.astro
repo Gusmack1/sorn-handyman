@@ -19,22 +19,28 @@ const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length
       <p class="mt-4 text-lg text-navy-900/75">One of us answers every call. Daytime, evening, weekend or three in the morning, you get a real voice and a straight answer.</p>
 
       <div class="mt-8 space-y-4">
-        <a href={`tel:${business.phoneE164}`} class="card flex items-center gap-4 hover:bg-amber-500/5">
-          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500 text-navy-900 text-xl">📞</span>
+        <a href={`tel:${business.phoneE164}`} class="card flex items-center gap-4 hover:bg-amber-500/5" aria-label={`Call Fraser on ${business.phone}`}>
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500 text-navy-900" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.28-1.28a2 2 0 0 1 2.11-.45c.9.35 1.84.59 2.8.72A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
           <div>
-            <p class="text-sm text-navy-900/60">Tap to call</p>
+            <p class="text-sm text-navy-900/60">Tap to call Fraser</p>
             <p class="font-serif text-2xl font-bold text-navy-900">{business.phone}</p>
           </div>
         </a>
-        <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="card flex items-center gap-4 hover:bg-[#25D366]/5">
-          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#25D366] text-white text-xl">💬</span>
+        <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="card flex items-center gap-4 hover:bg-[#25D366]/5" aria-label={`WhatsApp Aidan on ${business.whatsappDisplay}`}>
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#25D366] text-white" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11 11 0 0 0 2.9 17l-1.4 5 5.1-1.4A11 11 0 1 0 20.5 3.5zM12 20a8 8 0 0 1-4-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20z"/></svg>
+          </span>
           <div>
-            <p class="text-sm text-navy-900/60">WhatsApp — send us a photo</p>
+            <p class="text-sm text-navy-900/60">WhatsApp Aidan — send a photo</p>
             <p class="font-serif text-2xl font-bold text-navy-900">{business.whatsappDisplay}</p>
           </div>
         </a>
         <div class="card flex items-start gap-4">
-          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900 text-amber-500 text-xl">📍</span>
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900 text-amber-500" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
           <div>
             <p class="text-sm text-navy-900/60">Based in</p>
             <p class="font-serif text-lg font-bold text-navy-900">{business.address.locality}, {business.address.region} {business.address.postalCode}</p>
@@ -42,7 +48,9 @@ const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length
           </div>
         </div>
         <div class="card flex items-start gap-4">
-          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900/5 text-navy-900 text-xl">⏰</span>
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900/5 text-navy-900" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </span>
           <div>
             <p class="text-sm text-navy-900/60">Hours</p>
             <p class="font-serif text-lg font-bold text-navy-900">Open 24 hours, 7 days a week</p>
@@ -73,39 +81,39 @@ const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length
           <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
 
           <label class="grid gap-1">
-            <span class="text-sm font-medium text-navy-900">Name</span>
-            <input name="name" required class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
+            <span class="text-sm font-medium text-navy-900">Your name</span>
+            <input name="name" required aria-required="true" placeholder="First name, last name" title="Tell us your name so we know who to ask for" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
           </label>
           <div class="grid gap-4 sm:grid-cols-2">
             <label class="grid gap-1">
               <span class="text-sm font-medium text-navy-900">Phone</span>
-              <input name="phone" type="tel" required class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
+              <input name="phone" type="tel" required aria-required="true" placeholder="07xxx xxxxxx" title="Enter a phone number we can reach you on" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
             </label>
             <label class="grid gap-1">
-              <span class="text-sm font-medium text-navy-900">Email</span>
-              <input name="email" type="email" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
+              <span class="text-sm font-medium text-navy-900">Email (optional)</span>
+              <input name="email" type="email" placeholder="you@example.co.uk" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
             </label>
           </div>
           <label class="grid gap-1">
-            <span class="text-sm font-medium text-navy-900">Town / postcode</span>
-            <input name="location" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" placeholder="e.g. Mauchline KA5" />
+            <span class="text-sm font-medium text-navy-900">Town and postcode</span>
+            <input name="location" placeholder="Mauchline, KA5 6JL" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
           </label>
           <label class="grid gap-1">
             <span class="text-sm font-medium text-navy-900">What needs doing?</span>
-            <textarea name="message" rows="5" required class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" placeholder="Short description is fine — we'll come back with questions."></textarea>
+            <textarea name="message" rows="5" required aria-required="true" title="Give us a short description of the job" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" placeholder="A short description is plenty — we'll come back with any questions."></textarea>
           </label>
           <div class="flex items-start gap-2 text-sm text-navy-900/70">
             <input id="urgent" name="urgent" type="checkbox" class="mt-1" />
             <label for="urgent">Urgent — this is an emergency (water, security, fire risk).</label>
           </div>
-          <button type="submit" class="btn-primary">Send message</button>
-          <p class="text-xs text-navy-900/50">We reply inside the hour during the day, inside 2 hours overnight. By sending this form you agree we can contact you on the phone / email / WhatsApp provided.</p>
+          <button type="submit" class="btn-primary">Send message to Fraser</button>
+          <p class="text-xs text-navy-900/50">We reply inside the hour during the day, inside 2 hours overnight. Sending the form means we can contact you on the phone, email or WhatsApp provided. If it does not send, call Fraser on {business.phone}.</p>
         </form>
         ) : (
         <div class="mt-5 grid gap-3">
-          <a href={`tel:${business.phoneE164}`} class="btn-primary w-full text-center">📞 Call {business.phone}</a>
-          <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="btn-secondary w-full text-center">💬 WhatsApp {business.whatsappDisplay}</a>
-          <p class="text-xs text-navy-900/50">Online form coming back shortly — in the meantime phone and WhatsApp are the fastest ways to reach Fraser or Aidan.</p>
+          <a href={`tel:${business.phoneE164}`} class="btn-primary w-full text-center" aria-label={`Call Fraser on ${business.phone}`}>Call Fraser {business.phone}</a>
+          <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="btn-secondary w-full text-center" aria-label={`WhatsApp Aidan on ${business.whatsappDisplay}`}>WhatsApp Aidan {business.whatsappDisplay}</a>
+          <p class="text-xs text-navy-900/50">Online form is offline for a moment. Phone and WhatsApp reach Fraser or Aidan fastest.</p>
         </div>
         )}
       </div>
