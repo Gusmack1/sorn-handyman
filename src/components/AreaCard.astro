@@ -6,14 +6,20 @@ export interface Props {
 }
 const { area } = Astro.props;
 ---
-<a href={`${BASE}/areas/${area.slug}/`} class="card group flex flex-col gap-1">
-  <div class="flex items-baseline justify-between">
-    <h3 class="font-serif text-lg font-bold text-navy-900">Handyman in {area.name}</h3>
-    {area.postcode && <span class="text-xs font-medium text-navy-900/50">{area.postcode}</span>}
+<a href={`${BASE}/areas/${area.slug}/`} class="surface-card group flex flex-col gap-2">
+  <div class="flex items-baseline justify-between gap-2">
+    <h3 class="font-display text-h4 font-semibold text-navy-800 leading-snug">Handyman in {area.name}</h3>
+    {area.postcode && <span class="badge-soft text-[10px]">{area.postcode}</span>}
   </div>
-  <p class="text-sm text-navy-900/70 line-clamp-3">{area.intro}</p>
-  <div class="mt-2 flex items-center justify-between text-xs font-medium text-navy-900/60">
-    <span>{area.distance}</span>
-    <span class="group-hover:text-amber-600 group-hover:translate-x-0.5 transition">View →</span>
+  <p class="text-sm text-navy-500 line-clamp-3 leading-relaxed">{area.intro}</p>
+  <div class="mt-2 flex items-center justify-between text-xs font-medium text-navy-400">
+    <span class="flex items-center gap-1.5">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      {area.distance}
+    </span>
+    <span class="group-hover:text-amber-700 transition-all group-hover:translate-x-0.5 flex items-center gap-1 font-semibold">
+      View
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </span>
   </div>
 </a>

@@ -5,15 +5,52 @@ export interface Props {
   service: Service;
 }
 const { service } = Astro.props;
+
+// Map emoji keys → inline SVG names (Lucide-style strokes) for real icons.
+const iconMap: Record<string, string> = {
+  guttering: 'home',
+  joinery: 'hammer',
+  plumbing: 'droplet',
+  'painting-decorating': 'brush',
+  roofing: 'home-roof',
+  'power-washing': 'spray',
+  slabbing: 'layers',
+  fencing: 'fence',
+  'flat-pack-assembly': 'tool',
+  'gutter-cleaning': 'wind',
+  'fence-repair': 'wrench',
+  'property-maintenance': 'clipboard',
+  'general-repairs': 'screwdriver',
+  'deck-building': 'grid',
+};
+const iconName = iconMap[service.slug] ?? 'tool';
 ---
-<a href={`${BASE}/services/${service.slug}/`} class="card group flex flex-col gap-3">
+<a href={`${BASE}/services/${service.slug}/`} class="surface-card group flex flex-col gap-4">
   <div class="flex items-center gap-3">
-    <span class="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-amber-500/10 text-2xl ring-1 ring-amber-500/20 group-hover:bg-amber-500 group-hover:text-navy-900 transition">{service.icon}</span>
-    <h3 class="font-serif text-lg font-bold text-navy-900">{service.name}</h3>
+    <span class="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-amber-50 text-navy-700 ring-1 ring-amber-100 transition group-hover:bg-amber-100" aria-hidden="true">
+      {iconName === 'home' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 3l9 9"/><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/></svg>)}
+      {iconName === 'hammer' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.1 2.1 0 0 1-3-3L12 9"/><path d="M17 7l-3.5 3.5"/><path d="M20 4 17.5 6.5 15 4l2.5-2.5L20 4z"/></svg>)}
+      {iconName === 'droplet' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69 5.64 9.05a9 9 0 1 0 12.72 0L12 2.69z"/></svg>)}
+      {iconName === 'brush' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.06 11.9 4.5 16.46a3.53 3.53 0 0 0 5 5l4.56-4.56M8.49 10.48l6.03-6.03a2 2 0 1 1 2.83 2.83l-6.03 6.03-2.83-2.83z"/></svg>)}
+      {iconName === 'home-roof' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 12 10-9 10 9"/><path d="M6 10v10h12V10"/><path d="M12 15h.01"/></svg>)}
+      {iconName === 'spray' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5"/><path d="M3.05 13a9 9 0 1 0 2.5-6.7L3 8"/></svg>)}
+      {iconName === 'layers' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 6-10 6-10-6 10-6z"/><path d="m2 17 10 6 10-6"/><path d="m2 12 10 6 10-6"/></svg>)}
+      {iconName === 'fence' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3 3 21M8 5v16M13 3v18M18 5v16M21 3v18"/><path d="M3 9h18M3 15h18"/></svg>)}
+      {iconName === 'tool' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 1 1-5.4 5.4L2 19l3 3 7.3-7.3a4 4 0 1 1 5.4-5.4z"/></svg>)}
+      {iconName === 'wind' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2M9.6 4.6A2 2 0 1 1 11 8H2m10.6 11.4A2 2 0 1 0 14 16H2"/></svg>)}
+      {iconName === 'wrench' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/></svg>)}
+      {iconName === 'clipboard' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>)}
+      {iconName === 'screwdriver' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 7 1.5-1.5 3 3L19 10"/><path d="M3 21l12-12"/><path d="m12 6 6 6"/></svg>)}
+      {iconName === 'grid' && (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>)}
+    </span>
+    <h3 class="font-display text-h4 font-semibold text-navy-800 leading-snug">{service.name}</h3>
   </div>
-  <p class="text-sm text-navy-900/70 leading-relaxed">{service.short}</p>
+  <p class="text-sm text-navy-500 leading-relaxed">{service.short}</p>
   <div class="mt-auto flex items-center justify-between pt-2 text-sm font-medium">
-    {service.priceFrom && <span class="text-amber-600">From {service.priceFrom}</span>}
-    <span class="text-navy-900/60 group-hover:text-amber-600 group-hover:translate-x-0.5 transition">Details →</span>
+    {service.priceFrom && <span class="text-amber-700 font-semibold">From {service.priceFrom}</span>}
+    <span class="text-navy-500 group-hover:text-amber-700 transition-all group-hover:translate-x-0.5 flex items-center gap-1">
+      Details
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </span>
   </div>
 </a>
