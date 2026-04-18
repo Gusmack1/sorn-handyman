@@ -1,70 +1,161 @@
+/* Sorn Handyman — global.css
+ * Design tokens implemented per docs/design-system.md.
+ * Fonts: Bunny Fonts (GDPR-safer, no Google call).
+ */
+@import url('https://fonts.bunny.net/css?family=inter-tight:400,500,600,700|bricolage-grotesque:500,600,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Fonts — preloaded via <link rel="preconnect"> in layout */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap');
-
+/* ---------- Base ---------- */
 html {
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
+  color-scheme: light;
 }
 
 body {
-  @apply font-sans text-navy-900 bg-white antialiased;
-  font-feature-settings: 'cv11', 'ss01';
+  @apply font-sans text-navy-500 bg-cream-50 antialiased;
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
 }
 
 h1, h2, h3, h4 {
-  @apply font-serif tracking-tight;
+  @apply font-display text-navy-800;
   text-wrap: balance;
+  letter-spacing: -0.01em;
 }
 
-/* Reusable bits */
-.container-x {
-  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+h1 { @apply tracking-tight; letter-spacing: -0.02em; }
+
+p {
+  max-width: 65ch;
 }
 
-.btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-base font-semibold transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500;
+/* Links */
+a {
+  color: inherit;
 }
 
-.btn-primary {
-  @apply btn bg-amber-500 text-navy-900 hover:bg-amber-600 shadow-lg shadow-amber-500/20;
+/* Focus-visible ring everywhere */
+:where(a, button, input, select, textarea, details > summary):focus-visible {
+  outline: 2px solid theme('colors.amber.600');
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
-.btn-secondary {
-  @apply btn bg-navy-900 text-white hover:bg-navy-950 border border-navy-900;
+/* ---------- Layout utilities ---------- */
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-5 sm:px-6 lg:px-8;
+  }
+  /* Backwards-compat with existing components referencing container-x */
+  .container-x {
+    @apply mx-auto w-full max-w-site px-5 sm:px-6 lg:px-8;
+  }
+
+  .surface-card {
+    @apply bg-cream-100 text-navy-800 ring-1 ring-navy-100 rounded-xl p-6 shadow-elev-1 transition duration-300 ease-trade;
+  }
+  .surface-card:hover {
+    @apply shadow-elev-2 -translate-y-0.5;
+  }
+
+  .surface-elevated {
+    @apply bg-cream-100 text-navy-800 ring-1 ring-navy-100 rounded-2xl p-8 shadow-elev-3;
+  }
+
+  .hero-gradient {
+    background-image:
+      radial-gradient(1200px 600px at 85% -20%, rgba(242, 160, 61, 0.22), transparent 60%),
+      linear-gradient(125deg, theme('colors.navy.800') 0%, theme('colors.navy.700') 55%, theme('colors.amber.700') 140%);
+    color: theme('colors.cream.50');
+  }
+
+  .trade-grid {
+    background-image:
+      linear-gradient(theme('colors.navy.100') 1px, transparent 1px),
+      linear-gradient(90deg, theme('colors.navy.100') 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-color: theme('colors.cream.50');
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-base font-semibold transition duration-200 ease-trade select-none;
+    min-height: 44px;
+  }
+
+  .btn-primary {
+    @apply btn bg-amber-600 text-white hover:bg-amber-700 active:bg-amber-800 shadow-elev-1;
+  }
+
+  .btn-secondary {
+    @apply btn bg-navy-700 text-white hover:bg-navy-800 active:bg-navy-900 shadow-elev-1;
+  }
+
+  .btn-outline {
+    @apply btn bg-transparent text-navy-700 border border-navy-700 hover:bg-navy-50 active:bg-navy-100;
+  }
+
+  .btn-ghost-dark {
+    @apply btn bg-white/10 text-cream-50 hover:bg-white/20 border border-white/25 backdrop-blur-sm;
+  }
+
+  .btn-lg { @apply text-lg px-6 py-3.5; min-height: 48px; }
+  .btn-sm { @apply text-sm px-4 py-2; min-height: 36px; }
+
+  /* ---------- Pills / eyebrow ---------- */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-amber-700 ring-1 ring-amber-100;
+  }
+
+  .badge-soft {
+    @apply inline-flex items-center rounded-full bg-cream-200 px-3 py-1 text-xs font-semibold text-navy-700;
+  }
+
+  .badge-dot {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-navy-50 px-2.5 py-1 text-xs font-semibold text-navy-700;
+  }
+
+  /* ---------- Prose for blog/areas long copy ---------- */
+  .prose-sorn {
+    @apply max-w-prose;
+  }
+  .prose-sorn p { @apply mb-4 leading-relaxed text-navy-500; }
+  .prose-sorn h2 { @apply mt-10 mb-4 font-display text-h2 text-navy-800; }
+  .prose-sorn h3 { @apply mt-8 mb-3 font-display text-h3 text-navy-800; }
+  .prose-sorn ul { @apply mb-4 list-disc pl-6 space-y-2 text-navy-500; }
+  .prose-sorn a { @apply text-amber-700 underline underline-offset-2 hover:text-amber-600; }
+
+  /* ---------- Card alias (keeps old Astro refs working) ---------- */
+  .card {
+    @apply surface-card;
+  }
 }
 
-.btn-ghost {
-  @apply btn bg-white/10 text-white hover:bg-white/20 border border-white/20 backdrop-blur;
+/* ---------- Section divider (cream-200 wavy) ---------- */
+.section-divider {
+  --divider-color: theme('colors.cream.200');
+  height: 48px;
+  background-color: var(--divider-color);
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'><path d='M0,24 C200,48 400,0 600,24 C800,48 1000,0 1200,24 L1200,48 L0,48 Z'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'><path d='M0,24 C200,48 400,0 600,24 C800,48 1000,0 1200,24 L1200,48 L0,48 Z'/></svg>");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
 }
 
-.eyebrow {
-  @apply inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-amber-600;
-}
-
-/* Sticky call bar push */
+/* Mobile safe-area padding for sticky call bar */
 body {
   padding-bottom: env(safe-area-inset-bottom);
 }
-
 @media (max-width: 767px) {
   body {
     padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
   }
 }
 
-/* Subtle animated background for hero */
-.hero-grid-bg {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-/* Before/After slider */
+/* ---------- Before/After slider ---------- */
 .ba-slider {
   position: relative;
   overflow: hidden;
@@ -88,7 +179,7 @@ body {
   bottom: 0;
   left: 50%;
   width: 3px;
-  background: #F59E0B;
+  background: theme('colors.amber.600');
   cursor: ew-resize;
   transform: translateX(-50%);
 }
@@ -101,17 +192,17 @@ body {
   width: 2.25rem;
   height: 2.25rem;
   transform: translate(-50%, -50%);
-  background: #F59E0B;
+  background: theme('colors.amber.600');
   border-radius: 9999px;
-  box-shadow: 0 6px 14px rgba(0,0,0,.25);
+  box-shadow: 0 6px 14px rgba(15, 42, 63, 0.25);
 }
 .ba-slider .ba-handle::after {
-  background: #0F2E4C;
+  background: theme('colors.navy.800');
   width: 1rem;
   height: 1rem;
 }
 
-/* Accordion */
+/* ---------- Accordion ---------- */
 details[data-faq] summary {
   list-style: none;
   cursor: pointer;
@@ -120,23 +211,88 @@ details[data-faq] summary::-webkit-details-marker {
   display: none;
 }
 details[data-faq] summary .faq-chev {
-  transition: transform .2s ease;
+  transition: transform 0.2s ease;
 }
 details[data-faq][open] summary .faq-chev {
   transform: rotate(45deg);
 }
 
-/* Prose tweaks */
-.prose-sorn {
-  @apply max-w-none;
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
 }
-.prose-sorn p { @apply mb-4 leading-relaxed text-navy-900/80; }
-.prose-sorn h2 { @apply mt-10 mb-4 text-3xl font-serif text-navy-900; }
-.prose-sorn h3 { @apply mt-8 mb-3 text-2xl font-serif text-navy-900; }
-.prose-sorn ul { @apply mb-4 list-disc pl-6 space-y-2 text-navy-900/80; }
-.prose-sorn a { @apply text-amber-600 underline-offset-2 hover:underline; }
 
-/* Utility: subtle card */
-.card {
-  @apply rounded-2xl bg-white p-6 shadow-sm ring-1 ring-navy-900/5 transition hover:shadow-md hover:ring-navy-900/10;
+/* ---------- Dark mode (prefers-color-scheme: dark) ---------- */
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-navy-900 text-cream-50;
+  }
+  h1, h2, h3, h4 {
+    @apply text-cream-50;
+  }
+  .surface-card,
+  .card {
+    background-color: theme('colors.navy.800');
+    color: theme('colors.cream.50');
+    box-shadow: inset 0 0 0 1px theme('colors.navy.700'), 0 4px 12px -4px rgba(0, 0, 0, 0.4);
+    border-color: theme('colors.navy.700');
+  }
+  .surface-elevated {
+    background-color: theme('colors.navy.800');
+    color: theme('colors.cream.50');
+    box-shadow: inset 0 0 0 1px theme('colors.navy.700'), 0 8px 24px -6px rgba(0, 0, 0, 0.5);
+  }
+  .btn-primary {
+    @apply bg-amber-400 text-navy-900 hover:bg-amber-300;
+  }
+  .btn-secondary {
+    @apply bg-cream-50 text-navy-900 hover:bg-cream-100;
+  }
+  .btn-outline {
+    @apply text-cream-50 border-cream-100 hover:bg-white/10;
+  }
+  .prose-sorn p,
+  .prose-sorn ul {
+    color: theme('colors.cream.100');
+  }
+  .eyebrow {
+    background-color: rgba(251, 248, 242, 0.08);
+    color: theme('colors.amber.300');
+    box-shadow: inset 0 0 0 1px rgba(251, 248, 242, 0.12);
+  }
+}
+
+/* ---------- Print ---------- */
+@media print {
+  header,
+  footer,
+  .sticky,
+  [data-print-hide],
+  #sticky-call,
+  .whatsapp-fab {
+    display: none !important;
+  }
+  body {
+    background: white;
+    color: #000;
+    padding-bottom: 0;
+  }
+  main::after {
+    content: '📞 07900 255876 (Fraser) · 💬 WhatsApp +44 7472 223323 (Aidan) · sornhandyman.co.uk';
+    display: block;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #000;
+    font-weight: 600;
+  }
 }
