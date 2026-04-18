@@ -6,6 +6,9 @@ import { business, BASE } from '../data/business';
 
 const title = 'Contact Sorn Handyman — 24/7 Phone, WhatsApp & Form | East Ayrshire';
 const description = 'Call 07900 255876 any time — day, night, weekend. WhatsApp +44 7472 223323 for photo quotes. Send a message and Fraser or Aidan will reply the same day.';
+
+// If PUBLIC_WEB3FORMS_KEY is unset at build time, skip Web3Forms and show phone/WhatsApp fallback.
+const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length > 0);
 ---
 <BaseLayout title={title} description={description} canonicalPath="/contact/">
   <Breadcrumbs trail={[{ name: 'Home', href: `${BASE}/` }, { name: 'Contact' }]} />
@@ -52,8 +55,13 @@ const description = 'Call 07900 255876 any time — day, night, weekend. WhatsAp
     <div class="lg:col-span-3">
       <div class="card">
         <h2 class="font-serif text-2xl font-bold text-navy-900">Send a message</h2>
-        <p class="mt-1 text-sm text-navy-900/60">Form posts to Web3Forms — no account or login needed. We read it straight into email and WhatsApp.</p>
+        {hasFormKey ? (
+          <p class="mt-1 text-sm text-navy-900/60">Form posts to Web3Forms — no account or login needed. We read it straight into email and WhatsApp.</p>
+        ) : (
+          <p class="mt-1 text-sm text-navy-900/60">Quickest reply is a call or WhatsApp photo — we pick up 24/7. Buttons below go straight through.</p>
+        )}
 
+        {hasFormKey ? (
         <form
           action="https://api.web3forms.com/submit"
           method="POST"
@@ -93,6 +101,13 @@ const description = 'Call 07900 255876 any time — day, night, weekend. WhatsAp
           <button type="submit" class="btn-primary">Send message</button>
           <p class="text-xs text-navy-900/50">We reply inside the hour during the day, inside 2 hours overnight. By sending this form you agree we can contact you on the phone / email / WhatsApp provided.</p>
         </form>
+        ) : (
+        <div class="mt-5 grid gap-3">
+          <a href={`tel:${business.phoneE164}`} class="btn-primary w-full text-center">📞 Call {business.phone}</a>
+          <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="btn-secondary w-full text-center">💬 WhatsApp {business.whatsappDisplay}</a>
+          <p class="text-xs text-navy-900/50">Online form coming back shortly — in the meantime phone and WhatsApp are the fastest ways to reach Fraser or Aidan.</p>
+        </div>
+        )}
       </div>
 
       <div class="mt-4 aspect-video rounded-xl overflow-hidden ring-1 ring-navy-900/10">

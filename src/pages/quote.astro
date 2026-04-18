@@ -5,6 +5,9 @@ import { business, BASE, services, areas } from '../data/business';
 
 const title = 'Free Handyman Quote — East Ayrshire | Sorn Handyman Services';
 const description = 'Four-step quote form. Pick the service, tell us where, choose a timescale, describe the job. Reply within the hour. No call-out fee.';
+
+// If PUBLIC_WEB3FORMS_KEY is unset at build time, skip Web3Forms and show phone/WhatsApp fallback.
+const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length > 0);
 ---
 <BaseLayout title={title} description={description} canonicalPath="/quote/">
   <Breadcrumbs trail={[{ name: 'Home', href: `${BASE}/` }, { name: 'Free quote' }]} />
@@ -13,6 +16,7 @@ const description = 'Four-step quote form. Pick the service, tell us where, choo
     <h1 class="mt-3 font-serif text-5xl font-black text-navy-900">Tell us what needs doing.</h1>
     <p class="mt-4 text-lg text-navy-900/75">One of us — Fraser or Aidan — will reply with a ballpark within the hour. Written quote inside a day.</p>
 
+    {hasFormKey ? (
     <form
       action="https://api.web3forms.com/submit"
       method="POST"
@@ -95,6 +99,17 @@ const description = 'Four-step quote form. Pick the service, tell us where, choo
         <button type="submit" class="btn-primary text-lg">Send quote request</button>
       </div>
     </form>
+    ) : (
+    <div class="mt-8 card">
+      <h2 class="font-serif text-2xl font-bold text-navy-900">Quickest route: call or WhatsApp</h2>
+      <p class="mt-2 text-navy-900/70">Our online form is briefly offline — phone and WhatsApp hit Fraser and Aidan instantly, 24/7.</p>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2">
+        <a href={`tel:${business.phoneE164}`} class="btn-primary text-center">📞 Call {business.phone}</a>
+        <a href={`https://wa.me/${business.whatsapp.replace('+','')}?text=Hi%20Sorn%20Handyman%20%E2%80%94%20I%27d%20like%20a%20quote.`} class="btn-secondary text-center">💬 WhatsApp {business.whatsappDisplay}</a>
+      </div>
+      <p class="mt-3 text-xs text-navy-900/50">Send a photo on WhatsApp with a short description and we'll reply with a ballpark within the hour.</p>
+    </div>
+    )}
 
     <div class="mt-8 card bg-navy-900 text-white">
       <p class="text-white/80">Would rather talk?</p>

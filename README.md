@@ -68,7 +68,7 @@ Replace each with a real JPG/WebP keeping the same filename for zero code change
 
 ## Contact form
 
-`/contact` and `/quote` post to **Web3Forms** (no server, no account lock-in). The public access key lives in `src/data/business.ts` → `web3formsKey`. Currently a placeholder; swap with Gus's real key or switch the `action=` to Netlify/Formspree.
+`/contact` and `/quote` post to **Web3Forms** (no server, no account lock-in). The public access key is read at build time from `PUBLIC_WEB3FORMS_KEY` (set it in Netlify / Cloudflare Pages / GitHub Actions env). If the env var is missing the forms fall back gracefully to phone + WhatsApp CTAs — no broken submissions.
 
 ## Redesign decisions (PR redesign-v1)
 

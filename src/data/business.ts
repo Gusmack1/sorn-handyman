@@ -44,8 +44,11 @@ export const business = {
   googleMapsEmbed:
     // centred on Sorn, East Ayrshire
     'https://www.google.com/maps?q=Sorn+Handyman+Services+Sorn+KA5&hl=en-GB&z=11&output=embed',
-  gbpUrl: 'https://www.google.com/maps?cid=&q=Sorn+Handyman+Services', // placeholder — replace with real CID once known
-  web3formsKey: 'REPLACE_WITH_REAL_WEB3FORMS_KEY', // https://web3forms.com (TODO for Gus)
+  gbpUrl: 'https://g.page/r/CZryRT85fFQ1EBI/review', // verified GBP review short-link (claude_brain fact #349, 2026-04-18)
+  // web3formsKey now loads from Netlify/Pages env at build time. Add PUBLIC_WEB3FORMS_KEY to env before deploy.
+  // Falsy / missing key → contact + quote forms fall back gracefully to tel: + WhatsApp CTAs.
+  // TODO: verify Sorn business email with Aidan [UNVERIFIED-EMAIL]. Interim fallback uses phone/WhatsApp.
+  web3formsKey: (import.meta.env.PUBLIC_WEB3FORMS_KEY as string | undefined) ?? '',
   siteUrl: 'https://gusmack1.github.io/sorn-handyman',
 };
 
