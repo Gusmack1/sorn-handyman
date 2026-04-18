@@ -1,0 +1,224 @@
+---
+// Static grid of 8 hand-selected Facebook posts harvested from the live
+// @SornHandymanServices page. Content is the client's own (copyright-safe).
+// Source: Supabase public.client_assets, client_id=client_1774201992319.
+// Selection criteria: job-complete photo, specific service, specific area,
+// authentic voice, dated 2025-07 or later. Posts with no permalink omitted.
+
+const PAGE_ID = '569602312902858';
+const PAGE_URL = 'https://www.facebook.com/p/Sorn-Handyman-Services-61573109830217';
+
+type Post = {
+  postId: string;      // numeric part after the underscore in fb_post_id
+  date: string;        // ISO date
+  dateDisplay: string; // human
+  service: string;
+  area: string;
+  body: string;        // full body text, unmodified client voice
+};
+
+const posts: Post[] = [
+  {
+    postId: '122178015530770327',
+    date: '2026-03-22',
+    dateDisplay: '22 Mar 2026',
+    service: 'Roofing',
+    area: 'Kilmarnock',
+    body: 'Dry verge repair completed for a lovely new customer in Kilmarnock. These are the jobs that stop small problems becoming big ones — cracked or loose dry verge lets water in and causes damage over time. We specialise in small repairs and can get to you quickly. If something has been niggling you about your roof or guttering, give us a shout.',
+  },
+  {
+    postId: '122182469564770327',
+    date: '2026-04-17',
+    dateDisplay: '17 Apr 2026',
+    service: 'Bathrooms',
+    area: 'Kilmarnock',
+    body: 'Sorn Handyman Services in Kilmarnock supporting a lovely new customer with bathroom repairs: suite removed, leaking pipework replaced with new plumbing, flooring ripped out and rotten timbers removed, new joists and new flooring installed, suite refitted. We mainly specialise in small repairs but we can also take on larger projects.',
+  },
+  {
+    postId: '122181816938770327',
+    date: '2026-04-13',
+    dateDisplay: '13 Apr 2026',
+    service: 'Joinery',
+    area: 'Sorn',
+    body: 'Sorn Handyman Services in…. Sorn (what a commute) supporting a lovely new customer who required their internal doors to be trimmed then refitted after new flooring was installed. Guaranteed response to all enquires and we aim to get to you quickly so get in touch now for any home or garden needs.',
+  },
+  {
+    postId: '122178015890770327',
+    date: '2026-03-23',
+    dateDisplay: '23 Mar 2026',
+    service: 'Bathrooms',
+    area: 'Ayrshire',
+    body: 'Bath resealed for a repeat customer. No job too small — old sealant can let water behind panels and cause real damage. A proper reseal takes no time and saves a fortune in the long run. Great to be back helping a returning customer. That is what it is all about.',
+  },
+  {
+    postId: '122177747420770327',
+    date: '2026-03-20',
+    dateDisplay: '20 Mar 2026',
+    service: 'Interiors',
+    area: 'Kilmarnock',
+    body: 'Wall panelling, TV mounting, lighting and shelving — Kilmarnock. Just finished this transformation at a property in Kilmarnock — full-wall acoustic slat panelling, TV wall mounted, floating shelf fitted, and light fitting installed throughout. The customer wanted a clean, modern living space and that is exactly what we delivered.',
+  },
+  {
+    postId: '122181443756770327',
+    date: '2026-04-11',
+    dateDisplay: '11 Apr 2026',
+    service: 'Electrical',
+    area: 'Sorn',
+    body: 'Sorn Handyman Services in Sorn fitting a new LED exterior floodlight for a lovely new customer. Phone or message us for any support and we will do our best to get to you quickly.',
+  },
+  {
+    postId: '122180468504770327',
+    date: '2026-04-06',
+    dateDisplay: '6 Apr 2026',
+    service: 'Garden Maintenance',
+    area: 'Mauchline',
+    body: 'Spring Garden Maintenance. Supporting a lovely new customer in Mauchline with a spring garden tidy up — a simple lift ready for the warmer months. No job too small. Get in touch today.',
+  },
+  {
+    postId: '122180467442770327',
+    date: '2026-04-06',
+    dateDisplay: '6 Apr 2026',
+    service: 'Plumbing',
+    area: 'Galston',
+    body: 'No Job Too Small. Sorn Handyman Services in Galston — supporting a lovely repeat customer with a quick repair to a cold water feed pipe in their outhouse. Sink and tap back in action. No job is too small for us, so give us a message now.',
+  },
+];
+
+// Build the standard Facebook permalink form for a Page post.
+// permalink.php?story_fbid=<postId>&id=<pageId> works for any FB Page post.
+function permalink(p: Post) {
+  return `https://www.facebook.com/permalink.php?story_fbid=${p.postId}&id=${PAGE_ID}`;
+}
+
+function truncate(s: string, n: number) {
+  if (s.length <= n) return s;
+  // cut on nearest word boundary under n
+  const cut = s.slice(0, n);
+  const space = cut.lastIndexOf(' ');
+  return (space > 40 ? cut.slice(0, space) : cut).trimEnd() + '…';
+}
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+}
+const {
+  title = 'Recent jobs — straight from Facebook',
+  subtitle = 'Every photo here is a real job for a real Ayrshire customer, posted on the day we finished. Tap any card to see the original on Facebook.',
+} = Astro.props;
+
+// schema.org JSON-LD: one SocialMediaPosting per card, wrapped in an
+// ItemList so crawlers understand the feed structure.
+const feedSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: title,
+  itemListElement: posts.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'SocialMediaPosting',
+      headline: `${p.service} — ${p.area}`,
+      articleBody: p.body,
+      datePublished: p.date,
+      author: {
+        '@type': 'Organization',
+        name: 'Sorn Handyman Services',
+        url: PAGE_URL,
+      },
+      sharedContent: { '@type': 'WebPage', url: permalink(p) },
+      url: permalink(p),
+    },
+  })),
+};
+---
+<section class="bg-white border-y border-navy-900/5">
+  <div class="container-x py-16">
+    <div class="max-w-2xl">
+      <span class="eyebrow">Live from our Facebook</span>
+      <h2 class="mt-4 font-serif text-4xl font-bold text-navy-900">{title}</h2>
+      <p class="mt-3 text-navy-900/70">{subtitle}</p>
+    </div>
+
+    <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {posts.map((p) => (
+        <li class="card flex flex-col h-full">
+          <div class="flex items-center justify-between mb-3">
+            <time datetime={p.date} class="text-xs text-navy-900/60 font-medium">{p.dateDisplay}</time>
+            <a
+              href={permalink(p)}
+              target="_blank"
+              rel="noopener nofollow"
+              aria-label={`View ${p.service} post in ${p.area} on Facebook`}
+              class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#1877F2] text-white hover:opacity-90"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                <path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.4H7.7V13h2.7v8h3.1z"/>
+              </svg>
+            </a>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mb-3">
+            <span class="inline-flex items-center rounded-full bg-amber-500/15 text-navy-900 px-2.5 py-1 text-xs font-semibold">{p.service}</span>
+            <span class="inline-flex items-center rounded-full bg-navy-900/5 text-navy-900 px-2.5 py-1 text-xs font-semibold">📍 {p.area}</span>
+          </div>
+
+          <p class="text-sm text-navy-900/80 leading-relaxed">
+            {truncate(p.body, 180)}{' '}
+            <a
+              href={permalink(p)}
+              target="_blank"
+              rel="noopener nofollow"
+              class="font-semibold text-navy-900 underline decoration-amber-500 decoration-2 underline-offset-2 hover:text-amber-600"
+            >Read more</a>
+          </p>
+
+          <div class="mt-auto pt-4">
+            <a
+              href={permalink(p)}
+              target="_blank"
+              rel="noopener nofollow"
+              class="inline-flex items-center gap-2 text-xs font-semibold text-[#1877F2] hover:underline"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+                <path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.4H7.7V13h2.7v8h3.1z"/>
+              </svg>
+              View on Facebook
+            </a>
+          </div>
+
+          <script type="application/ld+json" set:html={JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'SocialMediaPosting',
+            headline: `${p.service} — ${p.area}`,
+            articleBody: p.body,
+            datePublished: p.date,
+            author: {
+              '@type': 'Organization',
+              name: 'Sorn Handyman Services',
+              url: PAGE_URL,
+            },
+            sharedContent: { '@type': 'WebPage', url: permalink(p) },
+            url: permalink(p),
+          })} />
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-8 text-center">
+      <a
+        href={PAGE_URL}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 btn-secondary !py-2 !px-4 text-sm"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#1877F2" aria-hidden="true">
+          <path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.4H7.7V13h2.7v8h3.1z"/>
+        </svg>
+        Follow us on Facebook
+      </a>
+    </div>
+
+    <script type="application/ld+json" set:html={JSON.stringify(feedSchema)} />
+  </div>
+</section>
