@@ -1,40 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
-import BeforeAfter from '../components/BeforeAfter.astro';
 import CTABlock from '../components/CTABlock.astro';
-import { BASE } from '../data/business';
+import { BASE, business } from '../data/business';
 
-const title = 'Before & After Gallery | Sorn Handyman Services';
-const description = 'Real jobs, real photos. Drag the slider to see before and after — gutters, decking, fencing, power-washing across East Ayrshire.';
-
-// Placeholder slots — replace src with real JPGs as they land.
-const jobs = [
-  { label: 'Gutter replacement — Mauchline', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Driveway power-wash — Cumnock', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Fence replacement — Galston', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Decking — Kilmarnock', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Kitchen fit — Ayr', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Slabbing — Catrine', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Flat-pack (IKEA PAX) — Troon', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Painting & Decorating — Auchinleck', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-];
+const title = 'Job Photos | Sorn Handyman Services';
+const description = 'We are building out a photo gallery as jobs complete. In the meantime — message us on WhatsApp and we will send recent job photos relevant to your job type.';
 ---
 <BaseLayout title={title} description={description} canonicalPath="/gallery/">
-  <Breadcrumbs trail={[{ name: 'Home', href: `${BASE}/` }, { name: 'Gallery' }]} />
+  <Breadcrumbs trail={[{ name: 'Home', href: `${BASE}/` }, { name: 'Job photos' }]} />
   <section class="container-x py-12">
-    <span class="eyebrow">Before &amp; after</span>
-    <h1 class="mt-3 font-serif text-5xl font-black text-navy-900 max-w-3xl">Drag the slider. See the difference.</h1>
-    <p class="mt-4 text-lg text-navy-900/75 max-w-2xl">Real jobs from real East Ayrshire houses — gutters in Mauchline, a deck in Kilmarnock, slabs in Catrine. Some are archive photos, some are last week’s.</p>
+    <span class="eyebrow">Job photos</span>
+    <h1 class="mt-3 font-serif text-5xl font-black text-navy-900 max-w-3xl">Photos from recent jobs — on request.</h1>
+    <p class="mt-4 text-lg text-navy-900/75 max-w-2xl">We are putting together a public before-and-after gallery as jobs complete. It is not live yet. If you want to see recent work that is similar to your job, message us on WhatsApp and we will send the photos straight across.</p>
 
-    <div class="mt-10 grid gap-6 md:grid-cols-2">
-      {jobs.map((j) => (
-        <div>
-          <BeforeAfter before={j.before} after={j.after} label={j.label} />
-          <p class="mt-2 text-sm font-medium text-navy-900/70">{j.label}</p>
-        </div>
-      ))}
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href={`https://wa.me/${business.whatsapp.replace('+','')}`}
+         class="btn-primary bg-[#25D366] hover:bg-[#1fb858]">💬 WhatsApp {business.whatsappDisplay} for photos</a>
+      <a href={business.socials.facebook} target="_blank" rel="noopener" class="btn-secondary">See our Facebook page</a>
     </div>
+
+    <p class="mt-10 text-sm text-navy-900/60 max-w-2xl">Job types we cover on the round: gutters, fencing, decking, slabbing, painting &amp; decorating, power-washing, flat-pack, kitchen and bathroom fits. Ask for whatever is closest to the job you have in mind.</p>
   </section>
-  <CTABlock heading="Got a job like one of these?" />
+  <CTABlock heading="Ready to book a visit?" />
 </BaseLayout>

@@ -38,7 +38,7 @@ export const business = {
   },
   socials: {
     facebook: 'https://www.facebook.com/p/Sorn-Handyman-Services-61573109830217',
-    instagram: 'https://www.instagram.com/sornhandyman', // placeholder — reserved handle
+    instagram: '', // not live — will populate once handle is live
     googleReview: 'https://g.page/r/CZryRT85fFQ1EBI/review',
   },
   googleMapsEmbed:
