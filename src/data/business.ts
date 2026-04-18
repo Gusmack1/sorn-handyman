@@ -38,6 +38,8 @@ export const business = {
   },
   socials: {
     facebook: 'https://www.facebook.com/p/Sorn-Handyman-Services-61573109830217',
+    instagram: 'https://www.instagram.com/sornhandyman', // placeholder — reserved handle
+    googleReview: 'https://g.page/r/CZryRT85fFQ1EBI/review',
   },
   googleMapsEmbed:
     // centred on Sorn, East Ayrshire

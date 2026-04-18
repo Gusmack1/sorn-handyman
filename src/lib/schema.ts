@@ -21,6 +21,9 @@ export function openingHoursSpec() {
   }));
 }
 
+// 10 miles in metres — per site spec, every area page schema uses a 10-mile GeoCircle.
+export const TEN_MILE_RADIUS_M = 16093;
+
 export function areaServed() {
   return areas.map((a) => ({
     '@type': 'GeoCircle',
@@ -28,7 +31,7 @@ export function areaServed() {
     geoMidpoint: a.geo
       ? { '@type': 'GeoCoordinates', latitude: a.geo.lat, longitude: a.geo.lon }
       : undefined,
-    geoRadius: 8000, // 8km
+    geoRadius: TEN_MILE_RADIUS_M,
   }));
 }
 
@@ -136,11 +139,14 @@ export function areaSchema(slug: string, url: string) {
         ? { '@type': 'GeoCoordinates', latitude: a.geo.lat, longitude: a.geo.lon }
         : undefined,
       areaServed: a.geo
-        ? { '@type': 'GeoCircle', geoMidpoint: { '@type': 'GeoCoordinates', latitude: a.geo.lat, longitude: a.geo.lon }, geoRadius: 8000 }
+        ? { '@type': 'GeoCircle', geoMidpoint: { '@type': 'GeoCoordinates', latitude: a.geo.lat, longitude: a.geo.lon }, geoRadius: TEN_MILE_RADIUS_M }
         : { '@type': 'AdministrativeArea', name: a.name },
       openingHoursSpecification: openingHoursSpec(),
       parentOrganization: { '@id': `${SITE}/#business` },
-      sameAs: [business.socials.facebook],
+      sameAs: [
+        business.socials.facebook,
+        business.socials.instagram,
+      ].filter(Boolean),
     },
   ];
 }
