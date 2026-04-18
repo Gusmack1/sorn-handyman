@@ -1,6 +1,6 @@
 # Sorn Handyman Services — Website (redesign-v1)
 
-24/7 handyman services across East Ayrshire. Father-and-son team: Fraser (20+ years trade) and Aidan (qualified mechanical engineer + plumber).
+24/7 handyman services across East Ayrshire. Fraser and Aidan — Sorn-based, one of us answers every call.
 
 Built with **Astro 5 + Tailwind 4** and deployed via **GitHub Pages**.
 

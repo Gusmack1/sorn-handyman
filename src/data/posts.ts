@@ -21,7 +21,7 @@ export type Post = {
 
 export const AUTHOR = 'Aidan at Sorn Handyman Services';
 export const AUTHOR_BIO =
-  'Aidan is a qualified plumber and mechanical engineer. He runs Sorn Handyman Services with his dad Fraser, 20+ years on the tools. Based in Sorn, East Ayrshire. Answers the phone 24/7.';
+  'Aidan runs Sorn Handyman Services with Fraser. Based in Sorn, East Ayrshire. Answers the phone 24/7.';
 
 export const posts: Post[] = [
   {
