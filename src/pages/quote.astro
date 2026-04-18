@@ -30,7 +30,7 @@ const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length
 
       <fieldset class="card">
         <legend class="px-2 text-sm font-semibold text-amber-600">Step 1 of 4 — Service</legend>
-        <p class="mb-3 text-navy-900/70 text-sm">Pick the closest match. If it\u2019s none of these, pick General repairs and describe it in step 4.</p>
+        <p class="mb-3 text-navy-900/70 text-sm">Pick the closest match. If it’s none of these, pick General repairs and describe it in step 4.</p>
         <div class="grid gap-2 sm:grid-cols-2">
           {services.map((s, i) => (
             <label class="flex items-center gap-2 rounded-lg border border-navy-900/10 px-3 py-2 hover:bg-amber-500/5 cursor-pointer">
@@ -45,15 +45,15 @@ const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length
         <legend class="px-2 text-sm font-semibold text-amber-600">Step 2 of 4 — Area</legend>
         <div class="grid gap-4 sm:grid-cols-2">
           <label class="grid gap-1">
-            <span class="text-sm font-medium text-navy-900">Town</span>
+            <span class="text-sm font-medium text-navy-900">Which town are you in?</span>
             <select name="town" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none">
               {areas.map((a) => (<option value={a.name}>{a.name}</option>))}
-              <option value="other">Other — will describe below</option>
+              <option value="other">Somewhere else — I'll say below</option>
             </select>
           </label>
           <label class="grid gap-1">
-            <span class="text-sm font-medium text-navy-900">Postcode (first half is plenty)</span>
-            <input name="postcode" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" placeholder="KA5" />
+            <span class="text-sm font-medium text-navy-900">Rough postcode (KA something)</span>
+            <input name="postcode" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" placeholder="e.g. KA5" />
           </label>
         </div>
       </fieldset>
@@ -74,22 +74,22 @@ const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length
         <legend class="px-2 text-sm font-semibold text-amber-600">Step 4 of 4 — Describe the job + your details</legend>
         <div class="grid gap-4">
           <label class="grid gap-1">
-            <span class="text-sm font-medium text-navy-900">Job description</span>
-            <textarea name="message" rows="5" required placeholder="e.g. Back garden fence blew down in the storm — 6 panels across 9m, posts probably ok. Want same timber replaced, ideally this weekend." class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none"></textarea>
+            <span class="text-sm font-medium text-navy-900">Describe the job (photos help — send on WhatsApp after)</span>
+            <textarea name="message" rows="5" required placeholder="e.g. back garden fence blew down in the storm — 6 panels across 9m, posts probably ok. Want same timber replaced, ideally this weekend." class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none"></textarea>
           </label>
           <div class="grid gap-4 sm:grid-cols-2">
             <label class="grid gap-1">
               <span class="text-sm font-medium text-navy-900">Your name</span>
-              <input name="name" required class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
+              <input name="name" required placeholder="e.g. Morag" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
             </label>
             <label class="grid gap-1">
-              <span class="text-sm font-medium text-navy-900">Phone</span>
-              <input name="phone" required class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
+              <span class="text-sm font-medium text-navy-900">Phone we can ring you back on</span>
+              <input name="phone" required placeholder="07xxx xxxxxx" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
             </label>
           </div>
           <label class="grid gap-1">
-            <span class="text-sm font-medium text-navy-900">Email (optional)</span>
-            <input name="email" type="email" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
+            <span class="text-sm font-medium text-navy-900">Email (only if you prefer email)</span>
+            <input name="email" type="email" placeholder="you@example.com" class="rounded-lg border border-navy-900/15 bg-white px-4 py-2.5 text-base focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none" />
           </label>
         </div>
       </fieldset>
@@ -115,7 +115,7 @@ const hasFormKey = Boolean(business.web3formsKey && business.web3formsKey.length
       <p class="text-white/80">Would rather talk?</p>
       <div class="mt-3 flex flex-wrap gap-3">
         <a href={`tel:${business.phoneE164}`} class="btn-primary">📞 {business.phone}</a>
-        <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="btn-ghost">💬 WhatsApp</a>
+        <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="btn-ghost">💬 WhatsApp {business.whatsappDisplay}</a>
       </div>
     </div>
   </section>

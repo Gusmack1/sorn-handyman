@@ -51,7 +51,7 @@ const pageFaqs = [
   },
   {
     q: `Do you charge a call-out fee in ${area.name}?`,
-    a: `No. Free written quotes, no minimum job size. Out-of-hours emergencies (10pm\u20136am) carry a £60 minimum — normal hours don't.`,
+    a: `No. Free written quotes, no minimum job size. Out-of-hours emergencies (10pm–6am) carry a £60 minimum — normal hours don't.`,
   },
   {
     q: `Are you insured?`,
@@ -95,7 +95,7 @@ const schemas = [
       <a
         href={`https://wa.me/${business.whatsapp.replace('+','')}?text=${encodeURIComponent(`Hi, I'm in ${area.name} and I need a quote for...`)}`}
         class="btn-secondary bg-[#25D366] !text-white hover:!bg-[#1fb858]">💬 WhatsApp Aidan</a>
-      <a href={`${BASE}/quote/`} class="btn-secondary">Free written quote →</a>
+      <a href={`${BASE}/quote/`} class="btn-secondary">Send quote request →</a>
     </div>
   </section>
 
@@ -119,8 +119,8 @@ const schemas = [
   <section class="bg-navy-50/60 border-y border-navy-900/5">
     <div class="container-x py-16">
       <span class="eyebrow">Services in {area.name}</span>
-      <h2 class="mt-3 font-serif text-4xl font-bold text-navy-900">Nine core services — one local team.</h2>
-      <p class="mt-3 max-w-2xl text-navy-900/75">Bundle as many as you like into one visit and save the second call-out fee. Every job comes with a written quote and £2m public-liability cover.</p>
+      <h2 class="mt-3 font-serif text-4xl font-bold text-navy-900">Nine core trades — one local team.</h2>
+      <p class="mt-3 max-w-2xl text-navy-900/75">Stack two or three jobs into one visit and you save the second call-out. Every job over £200 comes with a written fixed-price quote and £2m public-liability cover — certificate on request before we start.</p>
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {nineServices.map((s) => <ServiceCard service={s} />)}
       </div>
@@ -129,8 +129,8 @@ const schemas = [
 
   <section class="container-x py-16">
     <div class="card bg-navy-900 text-white">
-      <h2 class="font-serif text-3xl font-bold">Ready to sort it in {area.name} today?</h2>
-      <p class="mt-2 text-white/80 max-w-2xl">Open 24/7 for emergency call-outs. Call Fraser direct or WhatsApp Aidan a couple of photos and we'll ballpark the price before we even drive over.</p>
+      <h2 class="font-serif text-3xl font-bold">Ready to get it sorted in {area.name} today?</h2>
+      <p class="mt-2 text-white/80 max-w-2xl">Phone’s on 24/7 for emergencies. Ring Fraser direct, or WhatsApp Aidan a couple of photos — we’ll ballpark the price before the van leaves Sorn.</p>
       <div class="mt-5 flex flex-wrap gap-3">
         <a href={`tel:${business.phoneE164}`} class="btn-primary">📞 Call now {business.phone}</a>
         <a
@@ -149,11 +149,11 @@ const schemas = [
   <section class="bg-navy-50/60 border-y border-navy-900/5">
     <div class="container-x py-16">
       <span class="eyebrow">Nearby</span>
-      <h2 class="mt-3 font-serif text-3xl font-bold text-navy-900">Other Ayrshire towns we cover</h2>
+      <h2 class="mt-3 font-serif text-3xl font-bold text-navy-900">Other Ayrshire towns on the round</h2>
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {areas.filter((a) => a.slug !== area.slug).slice(0, 6).map((a) => <AreaCard area={a} />)}
       </div>
-      <p class="mt-6"><a class="text-amber-600 font-semibold hover:underline" href={`${BASE}/areas/`}>See all areas →</a></p>
+      <p class="mt-6"><a class="text-amber-600 font-semibold hover:underline" href={`${BASE}/areas/`}>See every town we cover →</a></p>
     </div>
   </section>
 

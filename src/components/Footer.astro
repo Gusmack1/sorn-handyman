@@ -26,7 +26,7 @@ const year = new Date().getFullYear();
         {services.slice(0,8).map((s) => (
           <li><a class="hover:text-amber-500" href={`${BASE}/services/${s.slug}/`}>{s.name}</a></li>
         ))}
-        <li><a class="hover:text-amber-500" href={`${BASE}/services/`}>See all →</a></li>
+        <li><a class="hover:text-amber-500" href={`${BASE}/services/`}>See all 14 trades →</a></li>
       </ul>
     </div>
 
@@ -36,7 +36,7 @@ const year = new Date().getFullYear();
         {areas.slice(0,8).map((a) => (
           <li><a class="hover:text-amber-500" href={`${BASE}/areas/${a.slug}/`}>Handyman {a.name}</a></li>
         ))}
-        <li><a class="hover:text-amber-500" href={`${BASE}/areas/`}>See all →</a></li>
+        <li><a class="hover:text-amber-500" href={`${BASE}/areas/`}>See every town we cover →</a></li>
       </ul>
     </div>
   </div>
@@ -47,7 +47,7 @@ const year = new Date().getFullYear();
       <div class="flex gap-4">
         <a href={business.socials.facebook} class="hover:text-amber-500" rel="noopener">Facebook</a>
         <a href={`${BASE}/contact/`} class="hover:text-amber-500">Contact</a>
-        <a href={`${BASE}/quote/`} class="hover:text-amber-500">Free quote</a>
+        <a href={`${BASE}/quote/`} class="hover:text-amber-500">Quote form</a>
       </div>
     </div>
   </div>

@@ -15,25 +15,25 @@ const description = 'Help your neighbours find us by leaving a Google review. Re
     <span class="eyebrow">Reviews</span>
     <h1 class="mt-3 font-serif text-5xl font-black text-navy-900">Honest, local, new.</h1>
     <p class="mt-4 text-lg text-navy-900/75">
-      We only started the Google Business Profile recently, so the review count is low but climbing fast. If we\u2019ve done a job for you — in Sorn, Mauchline, Cumnock or anywhere else — please spare thirty seconds to leave one. It helps your neighbours find us, and it keeps us honest.
+      We only set up the Google Business Profile a few weeks back, so the review count is low — and we’re not going to fake it. If we’ve done a job for you in Sorn, Mauchline, Cumnock, Galston or anywhere else on the patch, thirty seconds on Google helps the next neighbour find us and keeps us honest.
     </p>
 
     <div class="mt-8 card bg-navy-900 text-white">
-      <p class="font-serif text-2xl font-bold">Leave a Google review in 30 seconds</p>
-      <p class="mt-2 text-white/75">Tap the button, give us stars and a line. That\u2019s it.</p>
-      <a href={business.gbpUrl} rel="noopener" class="mt-4 inline-flex btn-primary">⭐ Leave a review</a>
+      <p class="font-serif text-2xl font-bold">Leave a Google review in thirty seconds</p>
+      <p class="mt-2 text-white/75">Tap the button, give us stars and a line about the job. That’s it.</p>
+      <a href={business.gbpUrl} rel="noopener" class="mt-4 inline-flex btn-primary">⭐ Leave us a Google review</a>
     </div>
 
     <div class="mt-10 grid gap-4 md:grid-cols-2">
       <TestimonialCard name="First review goes here" town="Ayrshire" stars={5} body="Your first real review will land on this page and replace the placeholder. Ask Fraser or Aidan for a review card at the end of the job." />
-      <TestimonialCard name="Second review goes here" town="East Ayrshire" stars={5} body="We read every review and reply to every one — including the awkward ones. That\u2019s the deal." />
+      <TestimonialCard name="Second review goes here" town="East Ayrshire" stars={5} body="We read every review and reply to every one — including the awkward ones. That’s the deal." />
     </div>
 
   </section>
 
   <FacebookFeed
-    title="Real work, posted real-time to our Facebook"
-    subtitle="Until the Google reviews roll in, here is the honest evidence — every completed job goes on our Facebook the day it is done. No stock photos, no embellishment."
+    title="Real work, posted the day it’s finished"
+    subtitle="Until the Google reviews roll in, here’s the honest evidence — every completed job goes up on our Facebook the same day. No stock photos, no borrowed before-and-afters."
   />
 
   <section class="container-x py-12 max-w-4xl">
@@ -41,7 +41,7 @@ const description = 'Help your neighbours find us by leaving a Google review. Re
     <section class="mt-14 prose-sorn">
       <h2>How we display reviews</h2>
       <p>
-        Google does not allow direct iframe embedding of the review list. On this page we display verified copy-paste reviews with the reviewer\u2019s first name + last initial, linked back to the Google profile. Once we hit 10+ reviews we\u2019ll add an automated widget (Elfsight or a light first-party fetch of the Places API daily). Until then every review here is manually mirrored and dated.
+        Google doesn’t let us iframe the review list straight in. So on this page every review is copy-pasted by hand — first name and last initial, with a link back to the Google profile so you can check. Once we pass ten reviews we’ll wire up an automated widget (Elfsight, or a light first-party pull of the Places API once a day). Until then, what you see here is dated, attributed and mirrored by us.
       </p>
     </section>
   </section>

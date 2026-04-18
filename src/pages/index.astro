@@ -30,10 +30,10 @@ const description = 'Father-and-son handyman team in Sorn, Mauchline, Cumnock, K
     <div class="flex items-end justify-between gap-6 flex-wrap">
       <div class="max-w-2xl">
         <span class="eyebrow">14 trades · one number</span>
-        <h2 class="mt-4 font-serif text-4xl font-bold text-navy-900">Everything that goes wrong in a house — we fix it.</h2>
-        <p class="mt-3 text-navy-900/70">From a sticking door to a full back-garden deck. If it\u2019s on the list, call. If it\u2019s not on the list, call anyway.</p>
+        <h2 class="mt-4 font-serif text-4xl font-bold text-navy-900">If it’s broken in the house, we’ve probably fixed it before.</h2>
+        <p class="mt-3 text-navy-900/70">Sticking bedroom door in a Sorn cottage, full back-garden deck in Mauchline — it’s the same phone number. If it’s on the list, ring us. If it isn’t, ring us anyway and we’ll tell you straight whether it’s ours.</p>
       </div>
-      <a href={`${BASE}/services/`} class="btn-secondary !py-2 !px-4 text-sm">All services →</a>
+      <a href={`${BASE}/services/`} class="btn-secondary !py-2 !px-4 text-sm">See all 14 trades →</a>
     </div>
     <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {services.map((s) => <ServiceCard service={s} />)}
@@ -46,10 +46,10 @@ const description = 'Father-and-son handyman team in Sorn, Mauchline, Cumnock, K
       <div class="flex items-end justify-between gap-6 flex-wrap">
         <div class="max-w-2xl">
           <span class="eyebrow">Where we work</span>
-          <h2 class="mt-4 font-serif text-4xl font-bold text-navy-900">11 East Ayrshire towns. No call-out fee in any of them.</h2>
-          <p class="mt-3 text-navy-900/70">If you\u2019re between towns, you\u2019re probably still in our patch — give us a ring.</p>
+          <h2 class="mt-4 font-serif text-4xl font-bold text-navy-900">Eleven Ayrshire towns — no call-out fee in any of them.</h2>
+          <p class="mt-3 text-navy-900/70">We’re in Mauchline, Cumnock and Catrine most working days and out to Ayr, Troon or Kilmarnock inside the hour. If you’re on a farm road between two of those, you’re still in our patch — give us a ring.</p>
         </div>
-        <a href={`${BASE}/areas/`} class="btn-secondary !py-2 !px-4 text-sm">All areas →</a>
+        <a href={`${BASE}/areas/`} class="btn-secondary !py-2 !px-4 text-sm">See every town we cover →</a>
       </div>
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {areas.map((a) => <AreaCard area={a} />)}
@@ -61,16 +61,16 @@ const description = 'Father-and-son handyman team in Sorn, Mauchline, Cumnock, K
 
   <FacebookFeed
     title="Recent jobs — straight from Facebook"
-    subtitle="Every photo here is a real job for a real Ayrshire customer, posted on the day we finished. Tap any card to see the original post on Facebook."
+    subtitle="Every photo is a real Ayrshire house, posted the day we finished — fences in Galston, gutters in Mauchline, a deck in Kilmarnock. Tap a card to see the original Facebook post."
   />
 
   <!-- Reviews strip (honest: no reviews yet) -->
   <section class="container-x py-16">
     <div class="max-w-2xl">
       <span class="eyebrow">What customers say</span>
-      <h2 class="mt-4 font-serif text-4xl font-bold text-navy-900">Fresh brand, real trade.</h2>
+      <h2 class="mt-4 font-serif text-4xl font-bold text-navy-900">New profile, old hands.</h2>
       <p class="mt-3 text-navy-900/70">
-        We only started the Google Business Profile recently — real reviews are on the way. In the meantime, ask around Sorn, Mauchline and Cumnock. Someone will know us.
+        We only set up the Google Business Profile a few weeks ago, so the review count is honestly low. Real ones are landing. In the meantime — ask in Sorn, Mauchline or Cumnock. Someone on the next street will have had us round.
       </p>
     </div>
     <div class="mt-8 grid gap-4 md:grid-cols-3">
@@ -95,7 +95,7 @@ const description = 'Father-and-son handyman team in Sorn, Mauchline, Cumnock, K
       />
     </div>
     <div class="mt-8 text-center">
-      <a href={business.gbpUrl} rel="noopener" class="btn-secondary">Leave a Google review →</a>
+      <a href={business.gbpUrl} rel="noopener" class="btn-secondary">Leave us a Google review →</a>
     </div>
   </section>
 
