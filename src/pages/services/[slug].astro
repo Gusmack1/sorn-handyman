@@ -66,7 +66,7 @@ const schemas = [
         <a href={`${BASE}/quote/`} class="btn-secondary" aria-label="Get a free written quote">Get a free quote</a>
       </div>
 
-      <h2 class="mt-12 font-serif text-3xl font-bold text-navy-900">What\u2019s included</h2>
+      <h2 class="mt-12 font-serif text-3xl font-bold text-navy-900">What’s included</h2>
       <ul class="mt-4 grid gap-2">
         {service.included.map((i) => (
           <li class="flex gap-3 text-navy-900/80"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-amber-500"></span>{i}</li>
@@ -75,7 +75,7 @@ const schemas = [
 
       {service.notIncluded && service.notIncluded.length > 0 && (
         <>
-          <h2 class="mt-10 font-serif text-3xl font-bold text-navy-900">What we don\u2019t do</h2>
+          <h2 class="mt-10 font-serif text-3xl font-bold text-navy-900">What we don’t do</h2>
           <ul class="mt-4 grid gap-2">
             {service.notIncluded.map((i) => (
               <li class="flex gap-3 text-navy-900/60"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-navy-900/20"></span>{i}</li>
