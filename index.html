@@ -159,6 +159,25 @@
     footer a { color: var(--accent); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
+    /* SITE NAV */
+    .site-nav {
+      background: #11111f;
+      padding: 0.6rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.9rem;
+      justify-content: center;
+      font-size: 0.92rem;
+    }
+    .site-nav a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .site-nav a:hover { color: var(--accent); }
+    .site-nav .group { display: inline-flex; gap: 0.9rem; align-items: center; }
+    .site-nav .label { color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.5px; }
+
     /* RESPONSIVE */
     @media (max-width: 600px) {
       .hero h1 { font-size: 1.8rem; }
@@ -235,6 +254,22 @@
   </script>
 </head>
 <body>
+
+  <!-- SITE NAV -->
+  <nav class="site-nav" aria-label="Primary">
+    <span class="group"><span class="label">Services</span>
+      <a href="/sorn-handyman/joinery/">Joinery</a>
+      <a href="/sorn-handyman/plumbing/">Plumbing</a>
+      <a href="/sorn-handyman/painting-decorating/">Painting &amp; Decorating</a>
+      <a href="/sorn-handyman/flat-pack-assembly/">Flat-pack Assembly</a>
+    </span>
+    <span class="group"><span class="label">Areas</span>
+      <a href="/sorn-handyman/mauchline/">Mauchline</a>
+      <a href="/sorn-handyman/cumnock/">Cumnock</a>
+      <a href="/sorn-handyman/kilmarnock/">Kilmarnock</a>
+      <a href="/sorn-handyman/auchinleck/">Auchinleck</a>
+    </span>
+  </nav>
 
   <!-- HERO -->
   <header class="hero">
