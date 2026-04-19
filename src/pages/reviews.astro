@@ -21,7 +21,10 @@ const description = 'Leave a Google review for Sorn Handyman Services. Our profi
     <div class="mt-8 card bg-navy-900 text-white">
       <p class="font-serif text-2xl font-bold">Leave a Google review in 30 seconds</p>
       <p class="mt-2 text-white/75">Tap the button, give us a star rating and a line about the job.</p>
-      <a href={business.gbpUrl} rel="noopener" class="mt-4 inline-flex btn-primary" aria-label="Leave a Google review for Sorn Handyman">Leave a Google review</a>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <a href={business.gbpUrl} rel="noopener" class="inline-flex btn-primary" aria-label="Leave a Google review for Sorn Handyman">Leave a Google review</a>
+        <a href={`${BASE}/reviews/leave-a-review/`} class="inline-flex btn-ghost-dark" aria-label="Open the review helper page with prompts and WhatsApp fallback">Open review helper</a>
+      </div>
     </div>
 
     <div class="mt-10 grid gap-4 md:grid-cols-2">
