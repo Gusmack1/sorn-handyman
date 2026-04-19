@@ -8,13 +8,18 @@ const year = new Date().getFullYear();
     <!-- Brand + Contact -->
     <div class="md:col-span-2">
       <div class="flex items-center gap-3 mb-5">
-        <img
-          src={`${BASE}/brand/sorn-logo.png`}
-          alt=""
-          width="56"
-          height="56"
-          class="h-14 w-14 rounded-full object-cover ring-1 ring-white/15 shadow-elev-2"
-        />
+        <picture>
+          <source type="image/webp" srcset={`${BASE}/brand/sorn-logo.webp`} />
+          <img
+            src={`${BASE}/brand/sorn-logo.png`}
+            alt=""
+            width="56"
+            height="56"
+            loading="lazy"
+            decoding="async"
+            class="h-14 w-14 rounded-full object-cover ring-1 ring-white/15 shadow-elev-2"
+          />
+        </picture>
         <div class="leading-tight">
           <span class="block font-display text-xl font-bold text-cream-50">Sorn Handyman Services</span>
           <span class="block text-xs uppercase tracking-[0.12em] text-cream-100/60 font-semibold">Father &amp; son · Ayrshire</span>

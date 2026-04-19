@@ -16,15 +16,18 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 <header class="sticky top-0 z-40 bg-cream-50 border-b border-navy-100 shadow-elev-1 transition-shadow" data-header>
   <div class="container-site flex items-center justify-between py-3 gap-4">
     <a href={`${BASE}/`} class="flex items-center gap-3 shrink-0 group" aria-label="Sorn Handyman Services — home">
-      <img
-        src={`${BASE}/brand/sorn-logo.png`}
-        alt=""
-        width="48"
-        height="48"
-        class="h-12 w-12 rounded-full object-cover ring-1 ring-navy-100 shadow-elev-1 transition-transform group-hover:scale-105"
-        loading="eager"
-        decoding="async"
-      />
+      <picture>
+        <source type="image/webp" srcset={`${BASE}/brand/sorn-logo.webp`} />
+        <img
+          src={`${BASE}/brand/sorn-logo.png`}
+          alt=""
+          width="48"
+          height="48"
+          class="h-12 w-12 rounded-full object-cover ring-1 ring-navy-100 shadow-elev-1 transition-transform group-hover:scale-105"
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
       <span class="hidden sm:flex flex-col leading-tight">
         <span class="font-display text-lg font-bold text-navy-900">Sorn Handyman</span>
         <span class="text-[11px] uppercase tracking-[0.12em] text-navy-600 font-semibold">Services · Ayrshire</span>
@@ -70,7 +73,10 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
   <div id="mobile-menu" hidden class="lg:hidden fixed inset-0 z-50 bg-navy-800 text-cream-50">
     <div class="flex items-center justify-between px-5 pt-4 pb-3 border-b border-white/10">
       <div class="flex items-center gap-3">
-        <img src={`${BASE}/brand/sorn-logo.png`} alt="" width="40" height="40" class="h-10 w-10 rounded-full ring-1 ring-white/20" />
+        <picture>
+          <source type="image/webp" srcset={`${BASE}/brand/sorn-logo.webp`} />
+          <img src={`${BASE}/brand/sorn-logo.png`} alt="" width="40" height="40" loading="lazy" decoding="async" class="h-10 w-10 rounded-full ring-1 ring-white/20" />
+        </picture>
         <span class="font-display text-lg font-semibold">Sorn Handyman</span>
       </div>
       <button id="menu-close" aria-label="Close menu" class="inline-flex items-center justify-center rounded-md p-2 hover:bg-white/10" style="min-width:44px;min-height:44px;">

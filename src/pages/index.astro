@@ -64,15 +64,18 @@ const featuredFaqs = faqs.slice(0, 6);
         </div>
       </div>
       <div class="relative">
-        <img
-          src={`${BASE}/brand/sorn-logo.png`}
-          alt="Sorn Handyman Services logo"
-          width="480"
-          height="480"
-          loading="lazy"
-          decoding="async"
-          class="mx-auto h-64 w-64 md:h-80 md:w-80 rounded-full object-cover bg-cream-50 ring-1 ring-navy-100 shadow-elev-3 motion-safe:animate-float"
-        />
+        <picture>
+          <source type="image/webp" srcset={`${BASE}/brand/sorn-logo.webp`} />
+          <img
+            src={`${BASE}/brand/sorn-logo.png`}
+            alt="Sorn Handyman Services logo"
+            width="480"
+            height="480"
+            loading="lazy"
+            decoding="async"
+            class="mx-auto h-64 w-64 md:h-80 md:w-80 rounded-full object-cover bg-cream-50 ring-1 ring-navy-100 shadow-elev-3 motion-safe:animate-float"
+          />
+        </picture>
         <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-navy-800 text-cream-50 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wide shadow-elev-2">
           Sorn · Ayrshire
         </div>

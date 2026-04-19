@@ -1,8 +1,9 @@
 /* Sorn Handyman — global.css
  * Design tokens implemented per docs/design-system.md.
- * Fonts: Bunny Fonts (GDPR-safer, no Google call).
+ * Fonts: Bunny Fonts (GDPR-safer, no Google call). Loaded via <link> in
+ * BaseLayout.astro (preload-then-apply), NOT via @import here — a CSS @import
+ * would be render-blocking and duplicate the preloaded request.
  */
-@import url('https://fonts.bunny.net/css?family=inter-tight:400,500,600,700|bricolage-grotesque:500,600,700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -227,6 +228,16 @@ details[data-faq][open] summary .faq-chev {
     transition-duration: 0ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ---------- content-visibility helper ----------
+ * Opt-in container for below-the-fold sections — browser skips layout/paint
+ * until near the viewport. contain-intrinsic-size reserves space so the
+ * scrollbar doesn't jump.
+ */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
 }
 
 /* ---------- Print ---------- */
