@@ -80,6 +80,9 @@ const relatedPosts = postsBySlugs(relatedPostSlugs).slice(0, 3);
         <a href={`${BASE}/quote/`} class="btn-secondary" aria-label="Get a free no-obligation quote">Get a free quote</a>
         <a href={`${BASE}/pricing/`} class="btn-ghost" aria-label="How we quote">How we quote</a>
       </div>
+      <p class="mt-4 text-sm text-navy-900/70">
+        <a href={`${BASE}/gallery/`} class="font-semibold text-amber-700 hover:underline">See real {service.name.toLowerCase()} job photos in our gallery →</a>
+      </p>
 
       <h2 class="mt-12 font-serif text-3xl font-bold text-navy-900">What’s included</h2>
       <ul class="mt-4 grid gap-2">
