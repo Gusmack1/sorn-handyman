@@ -7,8 +7,9 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "postbuild": "node scripts/indexnow.mjs && node scripts/validate-schema.mjs",
+    "postbuild": "node scripts/indexnow.mjs && node scripts/validate-schema.mjs && node scripts/validate-sitemap.mjs",
     "validate-schema": "node scripts/validate-schema.mjs",
+    "validate-sitemap": "node scripts/validate-sitemap.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
