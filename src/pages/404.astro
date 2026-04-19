@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { BASE } from '../data/business';
 
 const title = 'Page not found — Sorn Handyman Services';
-const description = 'That page does not exist. Head back to the home page, browse our services or pricing, or request a free no-obligation quote.';
+const description = 'That page does not exist. Head back to the home page, browse our services, or request a free no-obligation quote.';
 ---
 <BaseLayout title={title} description={description} canonicalPath="/404/" noindex>
   <section class="container-x py-24 text-center">
@@ -16,7 +16,6 @@ const description = 'That page does not exist. Head back to the home page, brows
     <div class="mt-10 flex flex-wrap justify-center gap-3">
       <a href={`${BASE}/`} class="btn-primary">Back to home</a>
       <a href={`${BASE}/services/`} class="btn-outline">Browse services</a>
-      <a href={`${BASE}/pricing/`} class="btn-outline">See pricing</a>
       <a href={`${BASE}/quote/`} class="btn-outline">Get a free quote</a>
     </div>
   </section>

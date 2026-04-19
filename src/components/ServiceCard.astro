@@ -46,8 +46,7 @@ const iconName = iconMap[service.slug] ?? 'tool';
     <h3 class="font-display text-h4 font-semibold text-navy-800 leading-snug">{service.name}</h3>
   </div>
   <p class="text-sm text-navy-500 leading-relaxed">{service.short}</p>
-  <div class="mt-auto flex items-center justify-between pt-2 text-sm font-medium">
-    {service.priceFrom && <span class="text-amber-700 font-semibold">From {service.priceFrom}</span>}
+  <div class="mt-auto flex items-center justify-end pt-2 text-sm font-medium">
     <span class="text-navy-500 group-hover:text-amber-700 transition-all group-hover:translate-x-0.5 flex items-center gap-1">
       Details
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>

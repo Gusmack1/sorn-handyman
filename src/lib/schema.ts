@@ -48,7 +48,6 @@ export function coreBusiness(url: string) {
     email: business.email,
     image: `${SITE}/og-image.svg`,
     logo: `${SITE}/icon-512.png`,
-    priceRange: business.priceRange,
     address: {
       '@type': 'PostalAddress',
       addressLocality: business.address.locality,
@@ -92,28 +91,12 @@ export function serviceSchema(slug: string, url: string) {
     provider: { '@id': `${SITE}/#business` },
     areaServed: areaServed(),
     category: 'Handyman',
-    offers: s.priceFrom
-      ? {
-          '@type': 'Offer',
-          priceCurrency: 'GBP',
-          price: s.priceFrom.replace(/[^0-9.]/g, ''),
-          priceSpecification: {
-            '@type': 'PriceSpecification',
-            priceCurrency: 'GBP',
-            minPrice: s.priceFrom.replace(/[^0-9.]/g, ''),
-            valueAddedTaxIncluded: true,
-            description: `Indicative starting price. Full price ranges for common jobs at ${SITE}/pricing/.`,
-          },
-          availability: 'https://schema.org/InStock',
-          url: `${SITE}/pricing/`,
-        }
-      : {
-          '@type': 'Offer',
-          priceCurrency: 'GBP',
-          availability: 'https://schema.org/InStock',
-          url: `${SITE}/pricing/`,
-          description: `See indicative price ranges at ${SITE}/pricing/.`,
-        },
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/InStock',
+      url: `${SITE}/quote/`,
+      description: `Every job quoted individually — call 07900 255876 or WhatsApp +44 7472 223323 for a FREE no-obligation quote.`,
+    },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: `${s.name} — what we do`,
@@ -134,7 +117,6 @@ export function areaSchema(slug: string, url: string) {
       description: `24/7 handyman services in ${a.name}${a.postcode ? ' ' + a.postcode : ''}.`,
       url,
       telephone: business.phoneE164,
-      priceRange: business.priceRange,
       image: `${SITE}/og-image.svg`,
       address: {
         '@type': 'PostalAddress',
