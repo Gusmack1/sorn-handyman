@@ -1,40 +1,152 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
-import BeforeAfter from '../components/BeforeAfter.astro';
 import CTABlock from '../components/CTABlock.astro';
-import { BASE } from '../data/business';
+import { BASE, business } from '../data/business';
+import { gallery, categories } from '../data/gallery';
 
-const title = 'Before & After Gallery | Sorn Handyman Services';
-const description = 'Real jobs, real photos. Drag the slider to see before and after — gutters, decking, fencing, power-washing across East Ayrshire.';
+const title = 'Real Job Photos Gallery | Sorn Handyman Services';
+const description =
+  'Real photos from real Ayrshire jobs — plumbing, electrical, roofing, decking, fencing, painting, tiling, kitchens and garden work. FREE no-obligation quote.';
 
-// Placeholder slots — replace src with real JPGs as they land.
-const jobs = [
-  { label: 'Gutter replacement — Mauchline', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Driveway power-wash — Cumnock', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Fence replacement — Galston', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Decking — Kilmarnock', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Kitchen fit — Ayr', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Slabbing — Catrine', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Flat-pack (IKEA PAX) — Troon', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-  { label: 'Painting & Decorating — Auchinleck', before: `${BASE}/img/placeholder-before.svg`, after: `${BASE}/img/placeholder-after.svg` },
-];
+// ImageGallery JSON-LD (20 items)
+const siteUrl = business.siteUrl;
+const imageGallery = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageGallery',
+  name: 'Sorn Handyman Services — Real Job Photos',
+  description,
+  url: `${siteUrl}/gallery/`,
+  about: {
+    '@type': 'LocalBusiness',
+    name: business.name,
+    telephone: business.phoneE164,
+    areaServed: 'Ayrshire, Scotland',
+  },
+  image: gallery.map((g) => ({
+    '@type': 'ImageObject',
+    contentUrl: `${siteUrl}/${g.webp1600}`,
+    thumbnailUrl: `${siteUrl}/${g.webp800}`,
+    caption: g.caption,
+    name: g.alt,
+    width: g.width,
+    height: g.height,
+  })),
+};
 ---
 <BaseLayout title={title} description={description} canonicalPath="/gallery/">
   <Breadcrumbs trail={[{ name: 'Home', href: `${BASE}/` }, { name: 'Gallery' }]} />
-  <section class="container-x py-12">
-    <span class="eyebrow">Before &amp; after</span>
-    <h1 class="mt-3 font-serif text-5xl font-black text-navy-900 max-w-3xl">Drag the slider. See the difference.</h1>
-    <p class="mt-4 text-lg text-navy-900/75 max-w-2xl">Real jobs from real East Ayrshire houses. Some are archive photos, some are last week’s.</p>
 
-    <div class="mt-10 grid gap-6 md:grid-cols-2">
-      {jobs.map((j) => (
-        <div>
-          <BeforeAfter before={j.before} after={j.after} label={j.label} />
-          <p class="mt-2 text-sm font-medium text-navy-900/70">{j.label}</p>
-        </div>
+  <section class="container-site py-12">
+    <span class="eyebrow">Real jobs · real photos</span>
+    <h1 class="mt-3 font-display font-bold text-brand-navy max-w-3xl" style="font-size: clamp(1.75rem, 2.6vw + 1rem, 2.75rem); letter-spacing: -0.015em;">
+      20 recent jobs from Fraser &amp; Aidan — across Ayrshire
+    </h1>
+    <p class="mt-4 text-lg text-navy-900/75 max-w-2xl">
+      Every photo below is a real job we've done for a customer — plumbing, electrical, roofing, decking, fencing, painting, tiling, kitchens and garden work. FREE no-obligation quote on every enquiry.
+    </p>
+
+    <!-- Category tabs (progressive enhancement; works without JS as plain headings) -->
+    <div
+      role="tablist"
+      aria-label="Filter gallery by category"
+      class="mt-8 flex flex-wrap gap-2"
+      data-gallery-tabs
+    >
+      {categories.map((c, i) => (
+        <button
+          type="button"
+          role="tab"
+          aria-selected={i === 0 ? 'true' : 'false'}
+          data-tab={c.id}
+          class:list={[
+            'px-4 py-2 rounded-full text-sm font-semibold transition-colors border',
+            i === 0
+              ? 'bg-brand-navy text-cream-50 border-brand-navy'
+              : 'bg-cream-50 text-navy-700 border-navy-100 hover:bg-navy-50',
+          ]}
+          style="min-height: 44px;"
+        >
+          {c.label}
+        </button>
       ))}
     </div>
+
+    <ul
+      class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+      data-gallery-grid
+    >
+      {gallery.map((g, idx) => (
+        <li
+          data-category={g.category}
+          class="group overflow-hidden rounded-2xl bg-cream-50 ring-1 ring-navy-100 shadow-elev-1 hover:shadow-elev-2 transition-shadow"
+        >
+          <figure>
+            <picture>
+              <source
+                type="image/webp"
+                srcset={`${BASE}/${g.webp800} 800w, ${BASE}/${g.webp1600} 1600w`}
+                sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+              />
+              <img
+                src={`${BASE}/${g.jpeg1600}`}
+                srcset={`${BASE}/${g.jpeg800} 800w, ${BASE}/${g.jpeg1600} 1600w`}
+                sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                alt={g.alt}
+                width={g.width}
+                height={g.height}
+                loading={idx < 3 ? 'eager' : 'lazy'}
+                decoding="async"
+                class="w-full h-auto block aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+            </picture>
+            <figcaption class="p-4">
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-xs uppercase tracking-[0.08em] font-semibold text-amber-700">{g.category}</span>
+                <span class="text-xs text-navy-500">{g.town} · {g.year}</span>
+              </div>
+              <p class="text-sm text-navy-800 leading-snug">{g.caption}</p>
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+
+    <p data-gallery-empty hidden class="mt-8 text-navy-600 italic">No jobs in this category yet — but we cover it. <a href={`${BASE}/quote/`} class="text-amber-700 font-semibold hover:underline">Ask for a FREE quote →</a></p>
   </section>
+
   <CTABlock heading="Got a job like one of these?" />
+
+  <script type="application/ld+json" set:html={JSON.stringify(imageGallery)} />
+
+  <script is:inline>
+    (function () {
+      var tabs = document.querySelectorAll('[data-gallery-tabs] [data-tab]');
+      var items = document.querySelectorAll('[data-gallery-grid] > li');
+      var empty = document.querySelector('[data-gallery-empty]');
+      if (!tabs.length || !items.length) return;
+      function apply(cat) {
+        var visible = 0;
+        items.forEach(function (li) {
+          var show = cat === 'all' || li.getAttribute('data-category') === cat;
+          li.hidden = !show;
+          if (show) visible++;
+        });
+        if (empty) empty.hidden = visible !== 0;
+      }
+      tabs.forEach(function (t) {
+        t.addEventListener('click', function () {
+          tabs.forEach(function (x) {
+            x.setAttribute('aria-selected', 'false');
+            x.classList.remove('bg-brand-navy', 'text-cream-50', 'border-brand-navy');
+            x.classList.add('bg-cream-50', 'text-navy-700', 'border-navy-100');
+          });
+          t.setAttribute('aria-selected', 'true');
+          t.classList.remove('bg-cream-50', 'text-navy-700', 'border-navy-100');
+          t.classList.add('bg-brand-navy', 'text-cream-50', 'border-brand-navy');
+          apply(t.getAttribute('data-tab'));
+        });
+      });
+    })();
+  </script>
 </BaseLayout>
