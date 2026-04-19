@@ -43,6 +43,7 @@ const articleSchema = {
   description={post.description}
   canonicalPath={`/blog/${post.slug}/`}
   ogImage={ogImage}
+  ogType="article"
   extraSchema={articleSchema}
 >
   <Breadcrumbs trail={[
