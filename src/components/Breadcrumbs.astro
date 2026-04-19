@@ -1,29 +1,35 @@
 ---
 import SchemaBlock from './SchemaBlock.astro';
 import { business } from '../data/business';
+// Accepts either `trail: {name, href}[]` (legacy) OR `items: {label, href}[]`.
+// Both shapes render identically and emit BreadcrumbList JSON-LD.
 export interface Props {
-  trail: { name: string; href?: string }[];
+  trail?: { name: string; href?: string }[];
+  items?: { label: string; href?: string }[];
 }
-const { trail } = Astro.props;
+const { trail, items: itemsProp } = Astro.props;
+const source = trail
+  ? trail.map((t) => ({ label: t.name, href: t.href }))
+  : (itemsProp || []);
 const siteUrl = business.siteUrl.replace(/\/$/, '');
-const items = trail.map((t, i) => ({
+const listItems = source.map((t, i) => ({
   '@type': 'ListItem',
   position: i + 1,
-  name: t.name,
+  name: t.label,
   ...(t.href ? { item: t.href.startsWith('http') ? t.href : `${siteUrl}${t.href}` } : {}),
 }));
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
-  itemListElement: items,
+  itemListElement: listItems,
 };
 ---
 <nav aria-label="Breadcrumb" class="container-site pt-6 text-sm text-navy-400">
   <ol class="flex flex-wrap items-center gap-x-1.5">
-    {trail.map((t, i) => (
+    {source.map((t, i) => (
       <li class="flex items-center gap-1.5">
-        {t.href ? <a href={t.href} class="hover:text-amber-700 transition-colors">{t.name}</a> : <span class="text-navy-700 font-medium">{t.name}</span>}
-        {i < trail.length - 1 && <span aria-hidden class="text-navy-200">›</span>}
+        {t.href ? <a href={t.href} class="hover:text-amber-700 transition-colors">{t.label}</a> : <span class="text-navy-700 font-medium">{t.label}</span>}
+        {i < source.length - 1 && <span aria-hidden class="text-navy-200">›</span>}
       </li>
     ))}
   </ol>
