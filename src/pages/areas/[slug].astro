@@ -7,6 +7,7 @@ import AreaCard from '../../components/AreaCard.astro';
 import TrustStrip from '../../components/TrustStrip.astro';
 import FAQ from '../../components/FAQ.astro';
 import { services, areas, BASE, business } from '../../data/business';
+import { areaLocalContent } from '../../data/area-content';
 import { areaSchema, faqSchema } from '../../lib/schema';
 import RelatedPosts from '../../components/RelatedPosts.astro';
 import { postsBySlugs, AREA_POSTS, AREA_POSTS_FALLBACK } from '../../data/posts';
@@ -40,6 +41,9 @@ const nineServices = NINE_SLUGS
 
 // Split extended copy into paragraphs for rendering
 const paragraphs = (area.extendedCopy || area.intro).split('\n\n');
+
+// Local long-tail content block (housing stock, typical jobs, travel, landmark).
+const localContent = areaLocalContent[area.slug];
 
 // Page-level FAQ
 const pageFaqs = [
@@ -99,6 +103,22 @@ const relatedPosts = postsBySlugs(relatedPostSlugs).slice(0, 3);
       <a href={`${BASE}/quote/`} class="btn-secondary" aria-label="Get a free written quote">Get a free quote</a>
     </div>
   </section>
+
+  {localContent && (
+    <section class="container-x pt-2 pb-6">
+      <div class="rounded-2xl border border-navy-900/10 bg-white/60 p-6 sm:p-8 max-w-3xl">
+        <span class="eyebrow">On the ground in {area.name}</span>
+        <div class="mt-3 grid gap-4 text-navy-900/85 leading-relaxed">
+          <p><strong class="text-navy-900">Housing stock.</strong> {localContent.housingNote}</p>
+          <p><strong class="text-navy-900">Jobs we see most.</strong> {localContent.jobsNote}</p>
+          <p>
+            <strong class="text-navy-900">From our base.</strong> {localContent.travelNote}
+            {' '}<span class="text-navy-900/70">{localContent.landmark}</span>
+          </p>
+        </div>
+      </div>
+    </section>
+  )}
 
   <section class="container-x pb-4">
     <div class="prose prose-navy max-w-3xl">
