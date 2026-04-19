@@ -6,9 +6,9 @@ import AreaCard from '../../components/AreaCard.astro';
 import TrustStrip from '../../components/TrustStrip.astro';
 import FAQ from '../../components/FAQ.astro';
 import SchemaBlock from '../../components/SchemaBlock.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
 import { services, areas, BASE, business } from '../../data/business';
 import { serviceSchema, faqSchema } from '../../lib/schema';
-import RelatedPosts from '../../components/RelatedPosts.astro';
 import { postsBySlugs, SERVICE_POSTS, SERVICE_POSTS_FALLBACK } from '../../data/posts';
 
 export function getStaticPaths() {
@@ -22,21 +22,31 @@ const canonicalUrl = `${business.siteUrl}${canonical}`;
 const title = `${service.name} — Sorn Handyman Services | East Ayrshire`;
 const description = `${service.short} Covering Sorn, Mauchline, Kilmarnock, Ayr, Troon, Irvine and the rest of East Ayrshire. Call Fraser on 07900 255876.`;
 
-// Page-level FAQ (service-specific, pulled from service description + universals)
+// Page-level FAQ (service-specific). Minimum 5 Qs per service.
+// Covers the themes customers actually ask on the phone:
+// call-out fee, speed, KA postcode coverage, weekends, materials, quoting.
 const pageFaqs = [
   {
-    q: `How quickly can you start a ${service.name.toLowerCase()} job?`,
+    q: `Do you charge a call-out fee for ${service.name.toLowerCase()}?`,
+    a: `No call-out fee for quotes anywhere in East Ayrshire. You only pay once we are on the tools. Out-of-hours emergencies between 10pm and 6am carry a £60 minimum.`,
+  },
+  {
+    q: `How quickly can you come out for ${service.name.toLowerCase()}?`,
     a: service.priceFrom
-      ? `Small ${service.name.toLowerCase()} jobs under two hours go in within 24 to 48 hours. Larger projects run one to two weeks from the written quote. Emergencies any hour.`
-      : `Small jobs within 24 to 48 hours. Larger projects one to two weeks from the written quote. Emergencies any hour.`,
+      ? `Small ${service.name.toLowerCase()} jobs under two hours go in within 24 to 48 hours. Larger projects run one to two weeks from the written quote. Emergencies, any hour.`
+      : `Small jobs within 24 to 48 hours. Larger projects, one to two weeks from the written quote. Emergencies, any hour.`,
   },
   {
-    q: `Do you cover my area for ${service.name.toLowerCase()}?`,
-    a: 'Standard coverage is Sorn, Mauchline, Cumnock, Catrine, Auchinleck, Muirkirk, Galston, Kilmarnock, Ayr, Troon and Irvine. We travel further by arrangement. Give Fraser a ring on 07900 255876.',
+    q: `Do you cover KA postcodes for ${service.name.toLowerCase()}?`,
+    a: 'Yes. Standard coverage is the full KA patch — KA1 Kilmarnock, KA3 Stewarton and Kilmaurs, KA4 Galston, KA5 Sorn, Mauchline, Catrine, KA7 Ayr, KA9 Prestwick, KA10 Troon, KA12 Irvine, KA18 Cumnock, Auchinleck, Muirkirk, KA19 Maybole. Further afield by arrangement.',
   },
   {
-    q: `Do I need to be home?`,
-    a: 'Not usually, once we have agreed the job. Many repeat customers leave a key or give us the gate code. We send photos on completion either way.',
+    q: `Do you work weekends?`,
+    a: 'Yes. We answer the phone 24/7 and book weekend slots the same way as weekdays. Saturday and Sunday bookings are no extra charge during normal hours. Out-of-hours (10pm–6am) carries the £60 minimum.',
+  },
+  {
+    q: `Do you supply the materials for ${service.name.toLowerCase()}?`,
+    a: `Yes — by default we supply everything in the written quote and you get one invoice. If you prefer to supply your own materials that is fine too. Tell us when you call and we will price labour only.`,
   },
   {
     q: `How do you quote for ${service.name.toLowerCase()}?`,
