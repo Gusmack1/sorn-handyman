@@ -24,17 +24,15 @@ const description = `${service.short} Covering Sorn, Mauchline, Kilmarnock, Ayr,
 
 // Page-level FAQ (service-specific). Minimum 5 Qs per service.
 // Covers the themes customers actually ask on the phone:
-// call-out fee, speed, KA postcode coverage, weekends, materials, quoting.
+// how we quote, speed, KA postcode coverage, weekends, materials.
 const pageFaqs = [
   {
-    q: `Do you charge a call-out fee for ${service.name.toLowerCase()}?`,
-    a: `No call-out fee for quotes anywhere in East Ayrshire. You only pay once we are on the tools. Out-of-hours emergencies between 10pm and 6am carry a £60 minimum.`,
+    q: `How do I get a quote for ${service.name.toLowerCase()}?`,
+    a: `Phone Fraser on 07900 255876 or WhatsApp a photo to Aidan on 07472 223323 — we provide a free no-obligation quote for every job. Every job is priced individually.`,
   },
   {
     q: `How quickly can you come out for ${service.name.toLowerCase()}?`,
-    a: service.priceFrom
-      ? `Small ${service.name.toLowerCase()} jobs under two hours go in within 24 to 48 hours. Larger projects run one to two weeks from the written quote. Emergencies, any hour.`
-      : `Small jobs within 24 to 48 hours. Larger projects, one to two weeks from the written quote. Emergencies, any hour.`,
+    a: `Small jobs, usually within a few days. Larger projects, a week or two. We guarantee a response to every enquiry.`,
   },
   {
     q: `Do you cover KA postcodes for ${service.name.toLowerCase()}?`,
@@ -42,15 +40,15 @@ const pageFaqs = [
   },
   {
     q: `Do you work weekends?`,
-    a: 'Yes. We answer the phone 24/7 and book weekend slots the same way as weekdays. Saturday and Sunday bookings are no extra charge during normal hours. Out-of-hours (10pm–6am) carries the £60 minimum.',
+    a: 'We answer the phone and book jobs across the week. Phone or WhatsApp to arrange a time that suits.',
   },
   {
     q: `Do you supply the materials for ${service.name.toLowerCase()}?`,
-    a: `Yes — by default we supply everything in the written quote and you get one invoice. If you prefer to supply your own materials that is fine too. Tell us when you call and we will price labour only.`,
+    a: `Yes — by default we supply everything in the quote and you get one invoice. If you prefer to supply your own materials that is fine too. Tell us when you call and we will price labour only.`,
   },
   {
-    q: `How do you quote for ${service.name.toLowerCase()}?`,
-    a: `${service.priceFrom ? `${service.name} starts from ${service.priceFrom}. ` : ''}Send a photo on WhatsApp to 07472 223323 and you will have a ballpark back within the hour. A site visit and written fixed-price quote follows for any job over £200.`,
+    q: `No job too small?`,
+    a: `Correct — no job too small. Phone 07900 255876 or WhatsApp 07472 223323 for a free no-obligation quote.`,
   },
 ];
 
@@ -79,8 +77,8 @@ const relatedPosts = postsBySlugs(relatedPostSlugs).slice(0, 3);
       <div class="mt-6 flex flex-wrap gap-3">
         <a href={`tel:${business.phoneE164}`} class="btn-primary" aria-label={`Call Fraser on ${business.phone}`}>Call Fraser {business.phone}</a>
         <a href={`https://wa.me/${business.whatsapp.replace('+','')}?text=Hi%2C%20I%20need%20a%20quote%20for%20${encodeURIComponent(service.name)}`} class="btn-secondary bg-[#25D366] !text-white hover:!bg-[#1fb858]" aria-label={`WhatsApp Aidan a photo of your ${service.name} job`}>WhatsApp Aidan a photo</a>
-        <a href={`${BASE}/quote/`} class="btn-secondary" aria-label="Get a free written quote">Get a free quote</a>
-        <a href={`${BASE}/pricing/`} class="btn-ghost" aria-label="See indicative prices for common jobs">See pricing</a>
+        <a href={`${BASE}/quote/`} class="btn-secondary" aria-label="Get a free no-obligation quote">Get a free quote</a>
+        <a href={`${BASE}/pricing/`} class="btn-ghost" aria-label="How we quote">How we quote</a>
       </div>
 
       <h2 class="mt-12 font-serif text-3xl font-bold text-navy-900">What’s included</h2>
@@ -101,13 +99,10 @@ const relatedPosts = postsBySlugs(relatedPostSlugs).slice(0, 3);
         </>
       )}
 
-      {service.priceFrom && (
-        <div class="mt-10 card bg-amber-500/10 border border-amber-500/30">
-          <p class="text-sm text-amber-700">Starting from</p>
-          <p class="mt-1 font-serif text-4xl font-black text-navy-900">{service.priceFrom}</p>
-          <p class="mt-2 text-sm text-navy-900/70">Written fixed-price quote on any job over £200. No call-out fee for quotes in East Ayrshire.</p>
-        </div>
-      )}
+      <div class="mt-10 card bg-amber-500/10 border border-amber-500/30">
+        <p class="font-serif text-xl font-bold text-navy-900">Free no-obligation quote</p>
+        <p class="mt-2 text-sm text-navy-900/70">Every job priced individually. Prices depend on parts, access and time — phone or WhatsApp for a free quote.</p>
+      </div>
     </div>
 
     <aside class="lg:col-span-2">
@@ -122,9 +117,9 @@ const relatedPosts = postsBySlugs(relatedPostSlugs).slice(0, 3);
         <h3 class="font-serif text-lg font-bold text-navy-900">How we quote</h3>
         <ol class="mt-2 grid gap-2 text-sm text-navy-900/80 list-decimal pl-5">
           <li>WhatsApp a photo to {business.whatsappDisplay}</li>
-          <li>Ballpark price back within the hour</li>
-          <li>Site visit and written fixed-price quote for any job over £200</li>
-          <li>Booked inside 48 hours. Emergencies, same day.</li>
+          <li>We guarantee a response to every enquiry</li>
+          <li>Free no-obligation quote — every job priced individually</li>
+          <li>Phone or WhatsApp to book</li>
         </ol>
       </div>
     </aside>

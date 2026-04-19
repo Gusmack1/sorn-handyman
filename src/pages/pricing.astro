@@ -2,105 +2,61 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CTABlock from '../components/CTABlock.astro';
-import { business, BASE } from '../data/business';
+import { business, BASE, services } from '../data/business';
 
 const title = 'Pricing — Sorn Handyman Services | Ayrshire';
-const description = 'Indicative prices for common handyman jobs in Ayrshire. No call-out fee in daytime. £60 minimum after 6pm and on Sundays. Quote always free.';
-
-const rows = [
-  { job: 'Tap replace (kitchen or bathroom)', range: '£45–£75', note: 'Parts on top if we supply.' },
-  { job: 'Toilet repair (flush, fill valve, seal)', range: '£55–£110', note: 'Full swap quoted separately.' },
-  { job: 'Radiator swap (like-for-like)', range: '£90–£160', note: 'Assumes existing valves usable.' },
-  { job: 'Flat-pack — small (bedside, small shelf unit)', range: '£40–£60', note: '30–45 minutes on site.' },
-  { job: 'Flat-pack — medium (chest of drawers, small wardrobe)', range: '£60–£110', note: '1–2 hours on site.' },
-  { job: 'Flat-pack — large (PAX, KALLAX run, 3-door wardrobe)', range: '£110–£220', note: 'Wall-fix included.' },
-  { job: 'Fence panel replace (6ft, like-for-like)', range: '£55–£90 per panel', note: 'Post repair extra if needed.' },
-  { job: 'Gutter clean — semi-detached', range: '£60–£90', note: 'Vac-from-ground, photo proof.' },
-  { job: 'Gutter clean — detached', range: '£90–£140', note: 'Vac-from-ground, photo proof.' },
-  { job: 'TV wall mount (up to 55")', range: '£70–£120', note: 'Bracket on top if we supply.' },
-  { job: 'Shelf run (3–4 shelves, one wall)', range: '£60–£110', note: 'Stud or masonry fix.' },
-  { job: 'Interior door hang (pre-finished)', range: '£75–£130', note: 'Hinges and latch included.' },
-  { job: 'Power-wash driveway (up to 40m²)', range: '£100–£180', note: 'Re-sand joints extra.' },
-];
+const description = 'Every job priced individually. Phone or WhatsApp for a free no-obligation quote — prices depend on parts, access and time on the day.';
 ---
 <BaseLayout title={title} description={description} canonicalPath="/pricing/">
   <Breadcrumbs trail={[{ name: 'Home', href: `${BASE}/` }, { name: 'Pricing' }]} />
 
   <section class="container-x py-12 max-w-4xl">
     <span class="eyebrow">Pricing · Ayrshire</span>
-    <h1 class="mt-3 font-serif text-5xl font-black text-navy-900">Honest prices, in writing, before we start.</h1>
+    <h1 class="mt-3 font-serif text-5xl font-black text-navy-900">Every job priced individually.</h1>
     <p class="mt-4 text-lg text-navy-900/80 leading-relaxed">
-      Every Ayrshire handyman we know hides their prices. We don't. Below are the ranges we charge most often for the jobs people ask about most often. They are indicative, not fixed quotes — price depends on parts, access and time on the day. A written quote is always free.
+      We don't publish set rates because no two jobs are the same — prices depend on parts, access and time on the day. Phone or WhatsApp for a free no-obligation quote. No job too small. We guarantee a response to every enquiry.
     </p>
 
     <div class="mt-10 card">
-      <h2 class="font-serif text-2xl font-bold text-navy-900">How we quote</h2>
+      <h2 class="font-serif text-2xl font-bold text-navy-900">How to get a quote</h2>
       <ol class="mt-4 grid gap-3 text-navy-900/80 list-decimal pl-5">
-        <li><strong>Phone</strong> — call Fraser on {business.phone}. Same-day reply, usually inside the hour.</li>
-        <li><strong>WhatsApp pictures</strong> — send photos to Aidan on {business.whatsappDisplay}. We come back with a ballpark on the same thread.</li>
-        <li><strong>Site visit</strong> — free, no call-out fee for any job we might visit. We visit in person for anything looking over £200.</li>
-        <li><strong>Written quote</strong> — every job over £200 gets a line-by-line written quote by email or WhatsApp before work starts. Fixed-price lock, no surprises.</li>
+        <li><strong>Phone</strong> — call Fraser on {business.phone}. We guarantee a response to every enquiry.</li>
+        <li><strong>WhatsApp pictures</strong> — send photos to Aidan on {business.whatsappDisplay}. We come back on the same thread.</li>
+        <li><strong>Free no-obligation quote</strong> — every job priced individually before we start.</li>
       </ol>
     </div>
 
-    <h2 class="mt-12 font-serif text-3xl font-bold text-navy-900">Indicative prices</h2>
-    <p class="mt-3 text-navy-900/75">Ranges, not fixed quotes. Price depends on parts, access and time — quote always free.</p>
+    <h2 class="mt-12 font-serif text-3xl font-bold text-navy-900">What we cover</h2>
+    <p class="mt-3 text-navy-900/75">A father-and-son team based in Sorn, covering East Ayrshire and into South and North Ayrshire.</p>
 
-    <div class="mt-6 overflow-x-auto rounded-xl border border-navy-900/10 bg-white shadow-elev-1">
-      <table class="w-full text-left text-sm">
-        <thead class="bg-navy-50 text-navy-900">
-          <tr>
-            <th scope="col" class="px-4 py-3 font-semibold">Job</th>
-            <th scope="col" class="px-4 py-3 font-semibold whitespace-nowrap">Typical range</th>
-            <th scope="col" class="px-4 py-3 font-semibold">Notes</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-navy-900/10">
-          {rows.map((r) => (
-            <tr>
-              <td class="px-4 py-3 text-navy-900">{r.job}</td>
-              <td class="px-4 py-3 font-semibold text-navy-900 whitespace-nowrap">{r.range}</td>
-              <td class="px-4 py-3 text-navy-900/70">{r.note}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-
-    <p class="mt-4 text-sm text-navy-900/60">
-      Prices correct as of 2026. Parts at cost where we supply. VAT not charged — we are below the threshold.
-    </p>
-
-    <div class="mt-10 grid gap-6 md:grid-cols-2">
-      <div class="card bg-amber-500/10 border border-amber-500/30">
-        <h3 class="font-serif text-xl font-bold text-navy-900">No daytime call-out fee</h3>
-        <p class="mt-2 text-navy-900/80">Anywhere in Ayrshire, 8am to 6pm Monday to Saturday — no call-out fee for quotes or for standard visits. You only pay once we are on the tools.</p>
-      </div>
-      <div class="card bg-navy-900 text-cream-50">
-        <h3 class="font-serif text-xl font-bold">Out-of-hours: £60 minimum</h3>
-        <p class="mt-2 text-cream-50/85">A £60 minimum surcharge applies after 6pm and on Sundays. We run 24/7 cover for emergencies — burst pipes, storm damage, anything actively damaging the house.</p>
-      </div>
+    <div class="mt-6 grid gap-3 sm:grid-cols-2">
+      {services.map((s) => (
+        <a href={`${BASE}/services/${s.slug}/`} class="card hover:shadow-elev-2 transition">
+          <p class="font-serif text-lg font-bold text-navy-900">{s.icon} {s.name}</p>
+          <p class="mt-1 text-sm text-navy-900/70">{s.short}</p>
+        </a>
+      ))}
     </div>
 
     <div class="mt-10 card">
       <h2 class="font-serif text-2xl font-bold text-navy-900">What changes the price</h2>
       <ul class="mt-3 grid gap-2 text-navy-900/80">
-        <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Parts.</strong> If we supply the tap, bracket, panel or board, parts go on at cost.</span></li>
-        <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Access.</strong> Tight closes, upper-floor flats and awkward back-garden gates add time.</span></li>
-        <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Condition.</strong> A seized valve or a rotted fence post adds a short-notice step to the job.</span></li>
-        <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Distance.</strong> Inside Ayrshire, no mileage. Outside, we agree a fuel figure up front.</span></li>
+        <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Parts.</strong> The tap, bracket, panel or board you need.</span></li>
+        <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Access.</strong> Tight closes, upper-floor flats and awkward back-garden gates.</span></li>
+        <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Condition.</strong> A seized valve or a rotted fence post adds work.</span></li>
+        <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-amber-500"></span><span><strong>Time on site.</strong> Every job is different. That's why we quote individually.</span></li>
       </ul>
     </div>
 
     <div class="mt-10 card bg-navy-900 text-cream-50">
-      <p class="text-cream-50/90 text-lg">Ready for a firm price?</p>
+      <p class="text-cream-50/90 text-lg">Ready for a quote?</p>
       <div class="mt-4 flex flex-wrap gap-3">
         <a href={`tel:${business.phoneE164}`} class="btn-primary" aria-label={`Call Fraser on ${business.phone}`}>Call Fraser {business.phone}</a>
-        <a href={`https://wa.me/${business.whatsapp.replace('+','')}?text=Hi%20Sorn%20Handyman%20%E2%80%94%20I%27d%20like%20a%20price%20for%20a%20job.`} class="btn-ghost btn-lg" target="_blank" rel="noopener" aria-label={`WhatsApp Aidan on ${business.whatsappDisplay}`}>WhatsApp Aidan {business.whatsappDisplay}</a>
-        <a href={`${BASE}/quote/`} class="btn-ghost btn-lg">Free written quote</a>
+        <a href={`https://wa.me/${business.whatsapp.replace('+','')}?text=Hi%20Sorn%20Handyman%20%E2%80%94%20I%27d%20like%20a%20quote%20for%20a%20job.`} class="btn-ghost btn-lg" target="_blank" rel="noopener" aria-label={`WhatsApp Aidan on ${business.whatsappDisplay}`}>WhatsApp Aidan {business.whatsappDisplay}</a>
+        <a href={`${BASE}/quote/`} class="btn-ghost btn-lg">Free no-obligation quote</a>
       </div>
     </div>
   </section>
 
-  <CTABlock heading="Get a price before we start." sub="Phone or WhatsApp. Same-day reply. Written quote on anything over £200." />
+  <CTABlock heading="Phone or WhatsApp for a free quote." sub="Every job priced individually. No job too small." />
 </BaseLayout>
