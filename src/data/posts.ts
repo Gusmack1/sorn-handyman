@@ -194,3 +194,66 @@ export const posts: Post[] = [
 export function postBySlug(slug: string): Post | undefined {
   return posts.find((p) => p.slug === slug);
 }
+
+// Resolve a list of slugs to Post objects, silently dropping any that don't exist.
+// Used by area/service/blog pages to render "Recent local work" / "Related posts" blocks.
+export function postsBySlugs(slugs: string[]): Post[] {
+  return slugs.map((s) => postBySlug(s)).filter((p): p is Post => Boolean(p));
+}
+
+// Area slug -> 2-3 topically relevant blog slugs.
+// Any area not listed here falls back to AREA_POSTS_FALLBACK below.
+export const AREA_POSTS: Record<string, string[]> = {
+  sorn: ['emergency-plumber-mauchline', 'handyman-ayrshire-landlords', 'storm-eowyn-fence-repairs-ayrshire'],
+  mauchline: ['emergency-plumber-mauchline', 'storm-eowyn-fence-repairs-ayrshire', 'handyman-ayrshire-landlords'],
+  cumnock: ['electric-shower-replacement-cumnock', 'handyman-ayrshire-landlords', 'storm-eowyn-fence-repairs-ayrshire'],
+  auchinleck: ['electric-shower-replacement-cumnock', 'storm-eowyn-fence-repairs-ayrshire', 'handyman-ayrshire-landlords'],
+  catrine: ['emergency-plumber-mauchline', 'storm-eowyn-fence-repairs-ayrshire', 'decking-cost-east-ayrshire-2026'],
+  muirkirk: ['storm-eowyn-fence-repairs-ayrshire', 'handyman-ayrshire-landlords', 'decking-cost-east-ayrshire-2026'],
+  galston: ['gutter-cleaning-cost-kilmarnock', 'storm-eowyn-fence-repairs-ayrshire', 'handyman-ayrshire-landlords'],
+  kilmarnock: ['gutter-cleaning-cost-kilmarnock', 'gutter-cleaning-ayr-kilmarnock-spring', 'handyman-ayrshire-landlords'],
+  ayr: ['24-7-emergency-handyman-ayr', 'flat-pack-assembly-ayr', 'gutter-cleaning-ayr-kilmarnock-spring'],
+  troon: ['hiring-handyman-troon-7-questions', 'airbnb-handyman-ka-postcodes', 'flat-pack-assembly-ayr'],
+  prestwick: ['airbnb-handyman-ka-postcodes', 'hiring-handyman-troon-7-questions', 'flat-pack-assembly-ayr'],
+  irvine: ['airbnb-handyman-ka-postcodes', 'handyman-ayrshire-landlords', 'gutter-cleaning-cost-kilmarnock'],
+  kilmaurs: ['gutter-cleaning-cost-kilmarnock', 'handyman-ayrshire-landlords', 'storm-eowyn-fence-repairs-ayrshire'],
+  stewarton: ['gutter-cleaning-cost-kilmarnock', 'handyman-ayrshire-landlords', 'storm-eowyn-fence-repairs-ayrshire'],
+  maybole: ['airbnb-handyman-ka-postcodes', 'storm-eowyn-fence-repairs-ayrshire', 'handyman-ayrshire-landlords'],
+};
+
+export const AREA_POSTS_FALLBACK = ['handyman-ayrshire-landlords', 'storm-eowyn-fence-repairs-ayrshire'];
+
+// Service slug -> 2-3 topically relevant blog slugs.
+export const SERVICE_POSTS: Record<string, string[]> = {
+  plumbing: ['emergency-plumber-mauchline', 'electric-shower-replacement-cumnock'],
+  fencing: ['storm-eowyn-fence-repairs-ayrshire'],
+  'fence-repair': ['storm-eowyn-fence-repairs-ayrshire'],
+  guttering: ['gutter-cleaning-cost-kilmarnock', 'gutter-cleaning-ayr-kilmarnock-spring'],
+  'gutter-cleaning': ['gutter-cleaning-cost-kilmarnock', 'gutter-cleaning-ayr-kilmarnock-spring'],
+  'deck-building': ['decking-cost-east-ayrshire-2026'],
+  'flat-pack-assembly': ['flat-pack-assembly-ayr'],
+  joinery: ['flat-pack-assembly-ayr', 'hiring-handyman-troon-7-questions'],
+  'painting-decorating': ['handyman-ayrshire-landlords', 'airbnb-handyman-ka-postcodes'],
+  roofing: ['storm-eowyn-fence-repairs-ayrshire', 'gutter-cleaning-cost-kilmarnock'],
+  'power-washing': ['decking-cost-east-ayrshire-2026', 'handyman-ayrshire-landlords'],
+  slabbing: ['decking-cost-east-ayrshire-2026', 'handyman-ayrshire-landlords'],
+  'property-maintenance': ['handyman-ayrshire-landlords', 'airbnb-handyman-ka-postcodes'],
+  'general-repairs': ['24-7-emergency-handyman-ayr', 'handyman-ayrshire-landlords'],
+};
+
+export const SERVICE_POSTS_FALLBACK = ['handyman-ayrshire-landlords', '24-7-emergency-handyman-ayr'];
+
+// Blog slug -> 3 related blog slugs (for the "Related posts" block on each post).
+export const RELATED_POSTS: Record<string, string[]> = {
+  '24-7-emergency-handyman-ayr': ['emergency-plumber-mauchline', 'electric-shower-replacement-cumnock', 'storm-eowyn-fence-repairs-ayrshire'],
+  'emergency-plumber-mauchline': ['24-7-emergency-handyman-ayr', 'electric-shower-replacement-cumnock', 'handyman-ayrshire-landlords'],
+  'electric-shower-replacement-cumnock': ['emergency-plumber-mauchline', '24-7-emergency-handyman-ayr', 'handyman-ayrshire-landlords'],
+  'gutter-cleaning-ayr-kilmarnock-spring': ['gutter-cleaning-cost-kilmarnock', 'storm-eowyn-fence-repairs-ayrshire', 'handyman-ayrshire-landlords'],
+  'gutter-cleaning-cost-kilmarnock': ['gutter-cleaning-ayr-kilmarnock-spring', 'storm-eowyn-fence-repairs-ayrshire', 'handyman-ayrshire-landlords'],
+  'storm-eowyn-fence-repairs-ayrshire': ['decking-cost-east-ayrshire-2026', 'handyman-ayrshire-landlords', '24-7-emergency-handyman-ayr'],
+  'decking-cost-east-ayrshire-2026': ['storm-eowyn-fence-repairs-ayrshire', 'handyman-ayrshire-landlords', 'flat-pack-assembly-ayr'],
+  'flat-pack-assembly-ayr': ['hiring-handyman-troon-7-questions', 'airbnb-handyman-ka-postcodes', 'handyman-ayrshire-landlords'],
+  'hiring-handyman-troon-7-questions': ['flat-pack-assembly-ayr', 'airbnb-handyman-ka-postcodes', '24-7-emergency-handyman-ayr'],
+  'handyman-ayrshire-landlords': ['airbnb-handyman-ka-postcodes', 'emergency-plumber-mauchline', 'storm-eowyn-fence-repairs-ayrshire'],
+  'airbnb-handyman-ka-postcodes': ['handyman-ayrshire-landlords', 'electric-shower-replacement-cumnock', 'flat-pack-assembly-ayr'],
+};
