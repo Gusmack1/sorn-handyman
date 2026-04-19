@@ -125,7 +125,7 @@ const feedSchema = {
   })),
 };
 ---
-<section class="bg-cream-100 border-y border-cream-200">
+<section class="bg-cream-100 border-y border-cream-200 cv-auto">
   <div class="container-site py-16 md:py-24">
     <div class="flex items-end justify-between gap-6 flex-wrap">
       <div class="max-w-2xl">
@@ -149,7 +149,10 @@ const feedSchema = {
         <li class="surface-card flex flex-col h-full">
           <!-- Header: logo + name + verified + date -->
           <div class="flex items-center gap-2.5 mb-3">
-            <img src={`${BASE}/brand/sorn-logo.png`} alt="" width="32" height="32" class="h-8 w-8 rounded-full object-cover ring-1 ring-navy-100" />
+            <picture>
+              <source type="image/webp" srcset={`${BASE}/brand/sorn-logo.webp`} />
+              <img src={`${BASE}/brand/sorn-logo.png`} alt="" width="32" height="32" loading="lazy" decoding="async" class="h-8 w-8 rounded-full object-cover ring-1 ring-navy-100" />
+            </picture>
             <div class="flex-1 min-w-0 leading-tight">
               <p class="flex items-center gap-1 text-[13px] font-semibold text-navy-800 truncate">
                 Sorn Handyman Services
@@ -186,20 +189,6 @@ const feedSchema = {
             >Read more</a>
           </p>
 
-          <script type="application/ld+json" set:html={JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'SocialMediaPosting',
-            headline: `${p.service} — ${p.area}`,
-            articleBody: p.body,
-            datePublished: p.date,
-            author: {
-              '@type': 'Organization',
-              name: 'Sorn Handyman Services',
-              url: PAGE_URL,
-            },
-            sharedContent: { '@type': 'WebPage', url: permalink(p) },
-            url: permalink(p),
-          })} />
         </li>
       ))}
     </ul>

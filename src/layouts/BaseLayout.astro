@@ -65,9 +65,22 @@ const core = coreBusiness(canonical);
     <link rel="icon" type="image/png" href={`${BASE}/brand/icon-source.png`} />
     <link rel="manifest" href={`${BASE}/manifest.webmanifest`} />
 
-    <!-- Font preload (Bunny Fonts, GDPR-safe) -->
+    <!-- Fonts (Bunny Fonts, GDPR-safe). Preload-then-apply pattern avoids
+         render-blocking without leaving an unused preload. -->
     <link rel="preconnect" href="https://fonts.bunny.net" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.bunny.net/css?family=inter-tight:400,500,600,700|bricolage-grotesque:500,600,700&display=swap" />
+    <link rel="dns-prefetch" href="https://fonts.bunny.net" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.bunny.net/css?family=inter-tight:400,500,600,700|bricolage-grotesque:500,600,700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.bunny.net/css?family=inter-tight:400,500,600,700|bricolage-grotesque:500,600,700&display=swap"
+      />
+    </noscript>
 
     <!-- Critical CSS to kill CLS on hero -->
     <style>
