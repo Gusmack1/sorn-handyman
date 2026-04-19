@@ -80,6 +80,7 @@ const relatedPosts = postsBySlugs(relatedPostSlugs).slice(0, 3);
         <a href={`tel:${business.phoneE164}`} class="btn-primary" aria-label={`Call Fraser on ${business.phone}`}>Call Fraser {business.phone}</a>
         <a href={`https://wa.me/${business.whatsapp.replace('+','')}?text=Hi%2C%20I%20need%20a%20quote%20for%20${encodeURIComponent(service.name)}`} class="btn-secondary bg-[#25D366] !text-white hover:!bg-[#1fb858]" aria-label={`WhatsApp Aidan a photo of your ${service.name} job`}>WhatsApp Aidan a photo</a>
         <a href={`${BASE}/quote/`} class="btn-secondary" aria-label="Get a free written quote">Get a free quote</a>
+        <a href={`${BASE}/pricing/`} class="btn-ghost" aria-label="See indicative prices for common jobs">See pricing</a>
       </div>
 
       <h2 class="mt-12 font-serif text-3xl font-bold text-navy-900">What’s included</h2>

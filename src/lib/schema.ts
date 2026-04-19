@@ -101,11 +101,19 @@ export function serviceSchema(slug: string, url: string) {
             '@type': 'PriceSpecification',
             priceCurrency: 'GBP',
             minPrice: s.priceFrom.replace(/[^0-9.]/g, ''),
+            valueAddedTaxIncluded: true,
+            description: `Indicative starting price. Full price ranges for common jobs at ${SITE}/pricing/.`,
           },
           availability: 'https://schema.org/InStock',
-          url,
+          url: `${SITE}/pricing/`,
         }
-      : undefined,
+      : {
+          '@type': 'Offer',
+          priceCurrency: 'GBP',
+          availability: 'https://schema.org/InStock',
+          url: `${SITE}/pricing/`,
+          description: `See indicative price ranges at ${SITE}/pricing/.`,
+        },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: `${s.name} — what we do`,
