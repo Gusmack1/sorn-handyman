@@ -88,19 +88,19 @@ a {
   }
 
   .btn-primary {
-    @apply btn bg-amber-600 text-white hover:bg-amber-700 active:bg-amber-800 shadow-elev-1;
+    @apply btn bg-amber-600 text-white hover:bg-amber-700 active:bg-amber-800 shadow-elev-1 focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2;
   }
 
   .btn-secondary {
-    @apply btn bg-navy-700 text-white hover:bg-navy-800 active:bg-navy-900 shadow-elev-1;
+    @apply btn bg-navy-700 text-white hover:bg-navy-800 active:bg-navy-900 shadow-elev-1 focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2;
   }
 
   .btn-outline {
-    @apply btn bg-transparent text-navy-700 border border-navy-700 hover:bg-navy-50 active:bg-navy-100;
+    @apply btn bg-transparent text-navy-700 border border-navy-700 hover:bg-navy-50 active:bg-navy-100 focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2;
   }
 
-  .btn-ghost-dark {
-    @apply btn bg-white/10 text-cream-50 hover:bg-white/20 border border-white/25 backdrop-blur-sm;
+  .btn-ghost, .btn-ghost-dark {
+    @apply btn bg-white/10 text-cream-50 hover:bg-white/20 border border-white/25 backdrop-blur-sm focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2;
   }
 
   .btn-lg { @apply text-lg px-6 py-3.5; min-height: 48px; }

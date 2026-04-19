@@ -30,6 +30,7 @@ const description = 'Handyman work across Ayrshire from our base in Sorn. Eleven
       <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="btn-secondary bg-[#25D366] !text-white hover:!bg-[#1fb858]" aria-label="WhatsApp Aidan">WhatsApp Aidan</a>
     </div>
 
+    <h2 class="sr-only">All areas</h2>
     <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {areas.map((a) => <AreaCard area={a} />)}
     </div>
