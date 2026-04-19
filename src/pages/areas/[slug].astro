@@ -8,6 +8,8 @@ import TrustStrip from '../../components/TrustStrip.astro';
 import FAQ from '../../components/FAQ.astro';
 import { services, areas, BASE, business } from '../../data/business';
 import { areaSchema, faqSchema } from '../../lib/schema';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import { postsBySlugs, AREA_POSTS, AREA_POSTS_FALLBACK } from '../../data/posts';
 
 export function getStaticPaths() {
   return areas.map((a) => ({ params: { slug: a.slug }, props: { area: a } }));
@@ -63,6 +65,10 @@ const schemas = [
   ...(areaSchema(area.slug, canonicalUrl) || []),
   faqSchema(pageFaqs),
 ];
+
+// Topically relevant blog posts for this area (2-3).
+const relatedPostSlugs = AREA_POSTS[area.slug] ?? AREA_POSTS_FALLBACK;
+const relatedPosts = postsBySlugs(relatedPostSlugs).slice(0, 3);
 ---
 <BaseLayout title={title} description={description} canonicalPath={canonical} extraSchema={schemas}>
   <Breadcrumbs trail={[
@@ -140,6 +146,13 @@ const schemas = [
       </div>
     </div>
   </section>
+
+  <RelatedPosts
+    posts={relatedPosts}
+    eyebrow={`Recent local work in ${area.name}`}
+    heading={`Recent local work near ${area.name}`}
+    variant="plain"
+  />
 
   <section class="bg-navy-50/60 border-y border-navy-900/5">
     <div class="container-x py-16">
