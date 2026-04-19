@@ -3,54 +3,53 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import TrustStrip from '../components/TrustStrip.astro';
 import CTABlock from '../components/CTABlock.astro';
-import { BASE } from '../data/business';
+import { business, BASE } from '../data/business';
 
 const title = 'About Sorn Handyman Services | Fraser and Aidan, East Ayrshire';
-const description = 'Fraser and Aidan run Sorn Handyman Services from the village of Sorn in East Ayrshire. Joinery, plumbing, painting, flat-pack, gutters, fencing and general repairs.';
+const description = 'Fraser and Aidan — time-served tradesmen, father-and-son team based in Sorn (KA5), covering all of East Ayrshire. Call us any time for a free no-obligation quote.';
 ---
 <BaseLayout title={title} description={description} canonicalPath="/about/">
   <Breadcrumbs trail={[{ name: 'Home', href: `${BASE}/` }, { name: 'About' }]} />
+
   <article class="container-x py-12 max-w-3xl prose-sorn">
-    <span class="eyebrow">Who we are</span>
-    <h1 class="mt-3 font-serif text-5xl font-black text-navy-900">One van. One phone number.</h1>
+    <span class="eyebrow">About us</span>
+    <h1 class="mt-3 font-serif text-5xl font-black text-navy-900">About Sorn Handyman Services</h1>
 
     <p class="mt-6 text-lg">
-      Sorn Handyman Services is Fraser and Aidan, a father-and-son team based in the village of Sorn, East Ayrshire. We cover the Irvine and Ayr valleys from Kilmarnock to Troon and the towns in between, seven days a week.
+      Fraser and Aidan are time-served tradesmen and a father-and-son team based in the village of Sorn (KA5), covering all of East Ayrshire. Between us we handle joinery, plumbing, painting, flat-pack, gutters, fencing, decking and the general repairs that sit in between. One van, one phone, two pairs of hands — and no job too small.
     </p>
 
-    <h2>Fraser</h2>
+    <h2>Who we are</h2>
     <p>
-      Fraser leads on joinery. He hangs doors, frames stud walls, fits kitchens and takes on the tiling, rendering, slating, slabbing and decking that sit alongside. If it needs a saw or a spirit level, the job goes to Fraser.
+      Fraser leads on the joinery side of the business. He hangs doors, frames stud walls, fits kitchens and takes on the tiling, slabbing and decking work that sits alongside. If the job needs a saw or a spirit level, it goes to Fraser.
+    </p>
+    <p>
+      Aidan runs the water side, the flat-pack builds and the paperwork. Quotes, invoices, WhatsApp photos and the late-night tap calls all come through him. Between us we cover the full handyman list most households need through the year.
     </p>
 
-    <h2>Aidan</h2>
+    <h2>How we work</h2>
     <p>
-      Aidan handles the water side of the business, the flat-pack builds and the paperwork. Quotes, invoices, WhatsApp replies and the late-night tap calls come through him.
+      Send Aidan a photo on WhatsApp and you will get a ballpark price back the same day. For anything that needs eyes on, we book a short site visit and write you a fixed-price quote — free and no-obligation. No call-out fee; we only charge once we are on the tools. You will always speak to Fraser or Aidan, never a call centre, and the van that turns up is the same one you spoke to on the phone. We tidy up when we finish and we tell you straight if a job is outside what we do.
     </p>
 
-    <h2>Always on the phone</h2>
+    <h2>Where we cover</h2>
     <p>
-      We answer every call, day or night. A burst pipe at 11pm is not a Monday job. A broken window on Christmas Eve is not a January job. The number on the van is a real phone, and one of us has it on us.
-    </p>
-    <p>
-      If the job can wait until morning, we book you in and go back to sleep. If it cannot, we are in the van. Either way, you get a real voice and a clear answer in under a minute.
+      Sorn sits in KA5, which makes us central for East Ayrshire and a short run to the coast. We regularly cover KA1 Kilmarnock, KA3 Stewarton and Kilmaurs, KA4 Galston, KA5 Sorn, Mauchline and Catrine, KA7 Ayr, KA9 Prestwick, KA10 Troon, KA12 Irvine, KA18 Cumnock, Auchinleck and Muirkirk, and KA19 Maybole. If your postcode is not on that list, give us a ring — if we can help, we will; if we cannot, we will point you at someone who can.
     </p>
 
-    <h2>How we quote</h2>
-    <ul>
-      <li>Send a photo on WhatsApp for a <strong>ballpark price within the hour</strong>.</li>
-      <li>Site visit and <strong>written fixed-price quote</strong> for any job over £200.</li>
-      <li>No call-out fee. We charge once we are on the tools.</li>
-    </ul>
+    <h2>How to get in touch</h2>
+    <p>
+      We answer the phone 24/7. A burst pipe at 11pm is not a Monday job, and a broken window on a bank holiday is not a next-week job. Whichever of us is closer takes the call.
+    </p>
 
-    <h2>Local</h2>
-    <p>
-      We live in Sorn. Most of our customers are within a 10-mile drive. You are hiring two people who walk the same high street you do.
-    </p>
-    <p>
-      For a job, call Fraser on <a href="tel:+447900255876">07900 255876</a> or WhatsApp Aidan on <a href="https://wa.me/447472223323">07472 223323</a>. Whoever is closer will be there first.
-    </p>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href={`tel:${business.phoneE164}`} class="btn-primary">Call Fraser · {business.phone}</a>
+      <a href={`https://wa.me/${business.whatsapp.replace('+','')}`} class="btn-outline" target="_blank" rel="noopener">WhatsApp Aidan · {business.whatsappDisplay}</a>
+      <a href={`${BASE}/quote/`} class="btn-outline">Get a free quote</a>
+      <a href={`${BASE}/pricing/`} class="btn-outline">See pricing</a>
+    </div>
   </article>
+
   <TrustStrip />
-  <CTABlock heading="Need a job done? One call to Fraser or Aidan." />
+  <CTABlock heading="Need a hand with a job? One call to Fraser or Aidan." />
 </BaseLayout>
