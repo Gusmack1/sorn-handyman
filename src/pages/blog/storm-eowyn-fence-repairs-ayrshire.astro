@@ -3,9 +3,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CTABlock from '../../components/CTABlock.astro';
 import { business, BASE } from '../../data/business';
-import { postBySlug } from '../../data/posts';
+import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
+import RelatedPosts from '../../components/RelatedPosts.astro';
 
 const post = postBySlug('storm-eowyn-fence-repairs-ayrshire')!;
+const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
 const siteUrl = business.siteUrl.replace(/\/$/, '');
 const url = `${siteUrl}/blog/${post.slug}/`;
 const ogImage = `${siteUrl}${post.ogImage}`;
@@ -252,6 +254,8 @@ const articleSchema = {
       </div>
     </div>
   </article>
+
+  <RelatedPosts posts={relatedPosts} eyebrow="Keep reading" heading="Related posts" variant="tinted" />
 
   <CTABlock
     heading="Fence down after a storm? We'll get you back on the list."

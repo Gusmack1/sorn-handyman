@@ -8,6 +8,8 @@ import FAQ from '../../components/FAQ.astro';
 import SchemaBlock from '../../components/SchemaBlock.astro';
 import { services, areas, BASE, business } from '../../data/business';
 import { serviceSchema, faqSchema } from '../../lib/schema';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import { postsBySlugs, SERVICE_POSTS, SERVICE_POSTS_FALLBACK } from '../../data/posts';
 
 export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
@@ -46,6 +48,10 @@ const schemas = [
   serviceSchema(service.slug, canonicalUrl),
   faqSchema(pageFaqs),
 ].filter(Boolean);
+
+// Topically relevant blog posts for this service (2-3).
+const relatedPostSlugs = SERVICE_POSTS[service.slug] ?? SERVICE_POSTS_FALLBACK;
+const relatedPosts = postsBySlugs(relatedPostSlugs).slice(0, 3);
 ---
 <BaseLayout title={title} description={description} canonicalPath={canonical} extraSchema={schemas}>
   <Breadcrumbs trail={[
@@ -112,6 +118,13 @@ const schemas = [
       </div>
     </aside>
   </section>
+
+  <RelatedPosts
+    posts={relatedPosts}
+    eyebrow={`Read more on ${service.name.toLowerCase()}`}
+    heading={`More on ${service.name.toLowerCase()} from our blog`}
+    variant="plain"
+  />
 
   <!-- Related areas -->
   <section class="bg-navy-50/60 border-y border-navy-900/5">
