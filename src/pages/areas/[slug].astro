@@ -21,7 +21,7 @@ const canonical = `/areas/${area.slug}/`;
 const canonicalUrl = `${business.siteUrl}${canonical}`;
 
 const title = `Handyman in ${area.name} | Sorn Handyman Services`;
-const description = `Handyman in ${area.name}${area.postcode ? ' (' + area.postcode + ')' : ''}. Joinery, plumbing, painting, flat-pack, gutters, fencing. Free quotes, no call-out fee. Call Fraser on ${business.phone}.`;
+const description = `Handyman in ${area.name}${area.postcode ? ' (' + area.postcode + ')' : ''}. Joinery, plumbing, painting, flat-pack, gutters, fencing. Free no-obligation quote. Call Fraser on ${business.phone}.`;
 
 // Pick 9 core services to card-link on every area page (per site spec)
 const NINE_SLUGS = [
@@ -56,12 +56,12 @@ const pageFaqs = [
     a: `Yes. Fraser or Aidan picks up every call, day or night. For non-urgent jobs in ${area.name} we book you the next open slot. For burst pipes and other emergencies we are in the van.`,
   },
   {
-    q: `Do you charge a call-out fee in ${area.name}?`,
-    a: `No. Written quotes are free and there is no minimum job size during normal hours. Out-of-hours call-outs between 10pm and 6am carry a £60 minimum.`,
+    q: `How do I get a quote in ${area.name}?`,
+    a: `Phone Fraser on ${business.phone} or WhatsApp Aidan on ${business.whatsappDisplay}. Every job is priced individually — we provide a free no-obligation quote.`,
   },
   {
     q: `How do I get a quote?`,
-    a: `Call Fraser on ${business.phone} or WhatsApp Aidan on ${business.whatsappDisplay}. Send a couple of photos and you will have a ballpark price before we drive over.`,
+    a: `Call Fraser on ${business.phone} or WhatsApp Aidan on ${business.whatsappDisplay}. Send a couple of photos for a free no-obligation quote.`,
   },
 ];
 

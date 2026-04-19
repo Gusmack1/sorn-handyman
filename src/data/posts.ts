@@ -71,9 +71,9 @@ export const posts: Post[] = [
   },
   {
     slug: 'emergency-plumber-mauchline',
-    title: 'Emergency Plumber Mauchline — What £60 Out-of-Hours Covers',
+    title: 'Emergency Plumber Mauchline — Out-of-Hours Cover',
     description:
-      'What the £60 out-of-hours minimum gets you in Mauchline — burst pipes, stopcock failures, frozen joints — how fast we are from Sorn, and how to shut the water off yourself before we arrive.',
+      'What our out-of-hours plumbing call-out covers in Mauchline — burst pipes, stopcock failures, frozen joints — how fast we are from Sorn, and how to shut the water off yourself before we arrive.',
     date: '2026-04-19',
     dateDisplay: '19 April 2026',
     author: AUTHOR,
@@ -103,7 +103,7 @@ export const posts: Post[] = [
     slug: 'gutter-cleaning-cost-kilmarnock',
     title: 'How Much Does Gutter Cleaning Cost in Kilmarnock?',
     description:
-      'Straight prices for gutter cleaning across Kilmarnock — 3-bed semi around £80, 4-bed detached around £110, bungalow around £60 — what drives the price up, and the warning signs you are overdue.',
+      'What goes into a gutter cleaning price in Kilmarnock — house size, access, downpipes, moss — what drives the price up, and the warning signs you are overdue. Every job priced individually.',
     date: '2026-04-19',
     dateDisplay: '19 April 2026',
     author: AUTHOR,
@@ -118,7 +118,7 @@ export const posts: Post[] = [
     slug: 'decking-cost-east-ayrshire-2026',
     title: 'Decking Cost Per m² in East Ayrshire (2026)',
     description:
-      'Honest 2026 pricing for decking in East Ayrshire — pressure-treated softwood £110–£160/m², composite £180–£260/m², what’s included in the fit, what isn’t, and the permission line at 30cm.',
+      'What you actually get for your money on a deck in East Ayrshire — pressure-treated softwood vs composite, what is included in the fit, what is not, and the permission line at 30cm. Every job priced individually.',
     date: '2026-04-19',
     dateDisplay: '19 April 2026',
     author: AUTHOR,
@@ -178,7 +178,7 @@ export const posts: Post[] = [
     slug: 'electric-shower-replacement-cumnock',
     title: 'Electric Shower Replacement Cumnock — When to Repair, When to Replace',
     description:
-      'Signs your electric shower is done, the brands we fit (Mira, Triton, Bristan), all-in unit + fit price bands £180–£420, when it is the pump vs the unit, and how we coordinate a Part-P electrician if the circuit needs it.',
+      'Signs your electric shower is done, the brands we fit (Mira, Triton, Bristan), when it is the pump vs the unit, and how we coordinate a Part-P electrician if the circuit needs it. Every job priced individually.',
     date: '2026-04-19',
     dateDisplay: '19 April 2026',
     author: AUTHOR,
@@ -193,7 +193,7 @@ export const posts: Post[] = [
     slug: 'kitchen-tap-replacement-ayrshire',
     title: 'Kitchen Tap Replacement in Ayrshire — What It Costs and How Long It Takes',
     description:
-      'Honest price bands for a kitchen tap swap across Ayrshire — £85 to £160 all-in — how long a straight swap actually takes, when a cheap Screwfix tap is fine and when to spend, plus the isolator-valve check that saves you from a wet kitchen.',
+      'How long a kitchen tap swap actually takes in Ayrshire, when a cheap Screwfix tap is fine and when to spend, plus the isolator-valve check that saves you from a wet kitchen. Every job priced individually.',
     date: '2026-04-19',
     dateDisplay: '19 April 2026',
     author: AUTHOR,
@@ -223,7 +223,7 @@ export const posts: Post[] = [
     slug: 'gutter-cleaning-kilmarnock-ayr-autumn-2026-checklist',
     title: 'Gutter Cleaning in Kilmarnock and Ayr — Autumn 2026 Checklist',
     description:
-      'Your autumn 2026 gutter checklist for Kilmarnock, Ayr and the KA postcodes — what to look for after the first big leaf-drop, honest price bands £60 to £120, and the five warning signs that mean book this week.',
+      'Your autumn 2026 gutter checklist for Kilmarnock, Ayr and the KA postcodes — what to look for after the first big leaf-drop and the five warning signs that mean book this week. Every job priced individually.',
     date: '2026-04-19',
     dateDisplay: '19 April 2026',
     author: AUTHOR,
