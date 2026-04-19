@@ -5,6 +5,10 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Brand tokens (logo-aligned)
+        brand: {
+          navy: '#0f1e3d', // matches Sorn horizontal logo wordmark
+        },
         // Primary — Navy (house + hammer)
         navy: {
           50: '#EEF2F6',
