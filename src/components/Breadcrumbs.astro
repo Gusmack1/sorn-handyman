@@ -1,6 +1,6 @@
 ---
 import SchemaBlock from './SchemaBlock.astro';
-import { business } from '../data/business';
+import { business, BASE } from '../data/business';
 // Accepts either `trail: {name, href}[]` (legacy) OR `items: {label, href}[]`.
 // Both shapes render identically and emit BreadcrumbList JSON-LD.
 export interface Props {
@@ -11,12 +11,27 @@ const { trail, items: itemsProp } = Astro.props;
 const source = trail
   ? trail.map((t) => ({ label: t.name, href: t.href }))
   : (itemsProp || []);
+// `business.siteUrl` already includes the Astro `base` (e.g. `/sorn-handyman`).
+// Callers pass href with BASE baked in (e.g. `/sorn-handyman/services/`) so that
+// visible <a href> links work under the GitHub Pages base path. For the JSON-LD
+// absolute URL we must avoid double-prefixing — strip the BASE from the href
+// before joining with siteUrl, otherwise we emit `/sorn-handyman/sorn-handyman/…`.
 const siteUrl = business.siteUrl.replace(/\/$/, '');
+const baseNorm = (BASE || '').replace(/\/$/, '');
+function toAbsolute(href: string): string {
+  if (href.startsWith('http')) return href;
+  let path = href;
+  if (baseNorm && (path === baseNorm || path.startsWith(`${baseNorm}/`))) {
+    path = path.slice(baseNorm.length) || '/';
+  }
+  if (!path.startsWith('/')) path = `/${path}`;
+  return `${siteUrl}${path}`;
+}
 const listItems = source.map((t, i) => ({
   '@type': 'ListItem',
   position: i + 1,
   name: t.label,
-  ...(t.href ? { item: t.href.startsWith('http') ? t.href : `${siteUrl}${t.href}` } : {}),
+  ...(t.href ? { item: toAbsolute(t.href) } : {}),
 }));
 const schema = {
   '@context': 'https://schema.org',
