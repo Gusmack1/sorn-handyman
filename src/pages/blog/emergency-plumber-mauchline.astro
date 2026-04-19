@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import { business, BASE } from '../../data/business';
+import { postBySlug } from '../../data/posts';
+
+const post = postBySlug('emergency-plumber-mauchline')!;
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+const url = `${siteUrl}/blog/${post.slug}/`;
+const ogImage = `${siteUrl}${post.ogImage}`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: post.title,
+  description: post.description,
+  inLanguage: 'en-GB',
+  datePublished: post.date,
+  dateModified: post.date,
+  author: {
+    '@type': 'Person',
+    name: post.author,
+    worksFor: { '@id': `${siteUrl}/#business` },
+  },
+  publisher: { '@id': `${siteUrl}/#business` },
+  image: [ogImage],
+  mainEntityOfPage: url,
+  articleSection: 'Emergency plumbing',
+  keywords: [post.keyword, '24 hour plumber Ayrshire', 'burst pipe Mauchline', 'emergency plumber KA5', 'out of hours plumber Ayrshire'],
+  wordCount: post.wordCount,
+  about: { '@type': 'Place', name: 'Mauchline, Scotland' },
+};
+---
+<BaseLayout
+  title={`${post.title} | Sorn Handyman Services`}
+  description={post.description}
+  canonicalPath={`/blog/${post.slug}/`}
+  ogImage={ogImage}
+  extraSchema={articleSchema}
+>
+  <Breadcrumbs trail={[
+    { name: 'Home', href: `${BASE}/` },
+    { name: 'Blog', href: `${BASE}/blog/` },
+    { name: post.title },
+  ]} />
+
+  <article class="container-x py-10 lg:py-14 max-w-3xl">
+    <header>
+      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
+        <span>{post.area}</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <span class="text-navy-900/60">{post.readMinutes} min read</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
+      </div>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
+        {post.title}
+      </h1>
+      <p class="mt-5 text-lg text-navy-900/75">
+        What the £60 out-of-hours minimum actually buys you when a pipe lets go
+        at 2am in Mauchline — what we do, how fast we get there from Sorn, and
+        what you can do in the sixty seconds before we pick up.
+      </p>
+    </header>
+
+    <div class="prose-sorn mt-8 text-lg">
+      <p>
+        Mauchline sits four miles west of our base in
+        <a href={`${BASE}/areas/sorn/`}>Sorn</a>. When a flexi hose lets go in a
+        kitchen on Loudoun Street at 2am, that is a ten-minute drive for me —
+        not an hour and a half from some on-call rota in Glasgow. That matters
+        when your floor is taking on seven litres a minute.
+      </p>
+      <p>
+        This is the honest version of what our
+        <a href={`${BASE}/services/plumbing/`}>24-hour plumbing call-out</a>
+        costs in <a href={`${BASE}/areas/mauchline/`}>Mauchline</a>, what the
+        £60 minimum between 10pm and 6am actually covers, and the three jobs we
+        will not do in the dark no matter what you offer us.
+      </p>
+
+      <h2>First thing: shut the water off yourself</h2>
+      <p>
+        Before you ring anyone, find your stopcock and turn it off. One turn
+        clockwise. In most Mauchline houses it lives in one of these places:
+      </p>
+      <ul>
+        <li>Under the kitchen sink, behind the waste trap.</li>
+        <li>In the cupboard next to the front door, low down.</li>
+        <li>In the garage, on the wall where the mains comes in.</li>
+        <li>Outside, under a small round metal cover near the boundary — but
+        that one needs a stopcock key and is the water-board side, not yours.</li>
+      </ul>
+      <p>
+        The second the mains is off, the emergency is over. The damage stops
+        getting worse, the clock stops on your flooring, and we can take our
+        time doing the job right instead of fighting pressure. If the
+        stopcock is seized, ring us — we can talk you through isolating the
+        specific line under the sink or behind the boiler over the phone.
+      </p>
+
+      <h2>What the £60 out-of-hours minimum covers</h2>
+      <p>
+        Between 10pm and 6am, our call-out minimum is £60. That is not a
+        call-out fee on top of the job — it is the <em>floor</em> on what we
+        charge for being out of bed. If the fix is five minutes, it is £60. If
+        the fix is an hour, you are paying roughly the same £60 because the
+        first hour of labour comes inside it.
+      </p>
+      <p>Included in the £60 minimum:</p>
+      <ul>
+        <li>Arrival on site from Sorn — usually inside 25 minutes to any KA5 Mauchline address.</li>
+        <li>Finding and isolating the leak (stopcock, local isolator, or drain-down if needed).</li>
+        <li>A temporary make-safe: cap, compression joint, or new flexi where we can carry one in the van.</li>
+        <li>Wet-vac of standing water on tile, laminate or vinyl floors — up to about ten litres.</li>
+        <li>Photos of the problem and the fix, sent to you by WhatsApp before we leave.</li>
+        <li>An honest answer on whether the fix is permanent or whether you need us back in daylight.</li>
+      </ul>
+      <p>
+        Parts at cost are on top, but most out-of-hours parts are small — a
+        flexi hose, a compression olive, a tap washer, a service valve. Call
+        it £10 to £40 for parts on a typical 2am burst.
+      </p>
+
+      <h2>The three emergencies we handle most in Mauchline</h2>
+
+      <h3>1. Burst flexi hoses under sinks</h3>
+      <p>
+        This is the number one call. Braided flexi hoses under kitchen and
+        bathroom sinks last about ten years. After that they split at the
+        crimp and spray mains-pressure water across the inside of your unit.
+        The dead giveaway is a fine mist and the sound of running water when
+        no tap is on. Shut the stopcock, stick a towel down, ring us. Swap
+        takes under twenty minutes once we are there.
+      </p>
+
+      <h3>2. Stopcock failures</h3>
+      <p>
+        Older Mauchline properties — especially the stone terraces around the
+        Cross and Loudoun Street — sometimes have brass stopcocks that have
+        not been turned for twenty years. When you actually need them, they
+        seize or snap. We carry universal replacements and will swap the
+        stopcock live where we can, or drain-down and swap if we cannot.
+        After, you get a working stopcock you can actually use next time.
+      </p>
+
+      <h3>3. Frozen and burst pipes in January</h3>
+      <p>
+        In a cold January snap, unheated lofts and outhouses around Mauchline
+        freeze — usually the last two metres of copper feeding an outside tap
+        or a cold storage tank. The pipe bursts when it <em>thaws</em>, not
+        when it freezes, which is why the call tends to come in on the first
+        milder morning. We isolate, cut out the split section and sweat in a
+        new length. Lag everything afterwards so it does not come back.
+      </p>
+
+      <h2>What we will not do in the dark</h2>
+      <p>
+        Three jobs we do not touch at 3am, no matter what:
+      </p>
+      <ul>
+        <li>
+          <strong>Full bathroom or kitchen fits.</strong> A tap swap is fine.
+          A new bathroom suite is a daytime job with a skip and a written
+          quote — ring us in the morning.
+        </li>
+        <li>
+          <strong>Gas.</strong> We are not Gas Safe registered. If the problem
+          is a boiler, a gas leak or a radiator that is leaking the hot side,
+          we will isolate the water and give you the number of a Gas Safe
+          engineer we trust locally.
+        </li>
+        <li>
+          <strong>Mains-side pipework.</strong> If the leak is on the street
+          side of your meter or before your stopcock, that is Scottish Water.
+          Their 24-hour line is 0800 0778 778. Ring them first.
+        </li>
+      </ul>
+
+      <h2>Response time from Sorn</h2>
+      <p>
+        From the van in Sorn to a Mauchline address, expect 20 to 30 minutes
+        at 3am — the A76 is empty and the lights are with you. In daylight
+        traffic add ten minutes. Cumnock, Catrine and Auchinleck are similar.
+        For <a href={`${BASE}/areas/kilmarnock/`}>Kilmarnock</a> and
+        <a href={`${BASE}/areas/ayr/`}>Ayr</a> add another fifteen minutes in
+        the dark, more in the morning school run.
+      </p>
+
+      <h2>FAQ</h2>
+
+      <h3>Is the £60 a call-out fee on top of the job?</h3>
+      <p>
+        No. It is the minimum total. The first hour of labour comes inside
+        it. Parts are extra but usually small.
+      </p>
+
+      <h3>Do you charge more on a Sunday or a bank holiday?</h3>
+      <p>
+        Daytime Sunday and bank holidays are normal daytime rates — no
+        call-out fee in Mauchline, Cumnock, Kilmarnock or the rest of East
+        Ayrshire. Only the 10pm–6am window triggers the £60 minimum.
+      </p>
+
+      <h3>What if I cannot find my stopcock?</h3>
+      <p>
+        Ring us and stay on the line. We will talk you through the likely
+        spots for your type of house. If we cannot find it over the phone
+        we will get straight in the van and find it on arrival.
+      </p>
+
+      <h3>Do you take card payment at 3am?</h3>
+      <p>
+        Yes. We send a Stripe link by text once the job is done. Bank
+        transfer is also fine. No cash surcharge, no card surcharge.
+      </p>
+
+      <h3>Will you come out for a dripping tap at midnight?</h3>
+      <p>
+        Honestly, no — and you do not want us to. A dripping tap is not an
+        emergency. Ring us at 8am and we will book you in same-day at
+        daytime rates. You will save £40.
+      </p>
+
+      <p>
+        Save the number before you need it. If you are already standing in
+        water, scroll down and tap the button.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
+        <p class="text-sm text-navy-900/60">Written by</p>
+        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
+        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
+      </div>
+    </div>
+  </article>
+
+  <CTABlock
+    heading="Burst pipe in Mauchline right now? Ring Fraser."
+    sub="Shut the stopcock, then call. One of us is awake and in the van inside half an hour — or WhatsApp Aidan a photo and we’ll talk you through it."
+    location="Mauchline"
+  />
+</BaseLayout>

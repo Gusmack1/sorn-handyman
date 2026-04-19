@@ -1,0 +1,278 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import { business, BASE } from '../../data/business';
+import { postBySlug } from '../../data/posts';
+
+const post = postBySlug('handyman-ayrshire-landlords')!;
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+const url = `${siteUrl}/blog/${post.slug}/`;
+const ogImage = `${siteUrl}${post.ogImage}`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: post.title,
+  description: post.description,
+  inLanguage: 'en-GB',
+  datePublished: post.date,
+  dateModified: post.date,
+  author: {
+    '@type': 'Person',
+    name: post.author,
+    worksFor: { '@id': `${siteUrl}/#business` },
+  },
+  publisher: { '@id': `${siteUrl}/#business` },
+  image: [ogImage],
+  mainEntityOfPage: url,
+  articleSection: 'Landlord & property maintenance',
+  keywords: [post.keyword, 'tenant turnover Kilmarnock', 'property maintenance KA postcodes', 'end of tenancy handyman', 'landlord contractor Ayrshire'],
+  wordCount: post.wordCount,
+  about: [{ '@type': 'Place', name: 'Ayrshire, Scotland' }],
+};
+---
+<BaseLayout
+  title={`${post.title} | Sorn Handyman Services`}
+  description={post.description}
+  canonicalPath={`/blog/${post.slug}/`}
+  ogImage={ogImage}
+  extraSchema={articleSchema}
+>
+  <Breadcrumbs trail={[
+    { name: 'Home', href: `${BASE}/` },
+    { name: 'Blog', href: `${BASE}/blog/` },
+    { name: post.title },
+  ]} />
+
+  <article class="container-x py-10 lg:py-14 max-w-3xl">
+    <header>
+      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
+        <span>{post.area}</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <span class="text-navy-900/60">{post.readMinutes} min read</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
+      </div>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
+        {post.title}
+      </h1>
+      <p class="mt-5 text-lg text-navy-900/75">
+        If you let property in the KA postcodes, you already know half the job
+        is maintenance on a deadline. This is the plain-English version of
+        what we do for Ayrshire landlords — make-good packages, tenant-damage
+        fixes, same-day response between tenancies, and the invoicing terms
+        that actually work for portfolios.
+      </p>
+    </header>
+
+    <div class="prose-sorn mt-8 text-lg">
+      <p>
+        About a third of our weekly work across
+        <a href={`${BASE}/areas/`}>East Ayrshire</a> is for landlords and
+        letting agents. Some of them we have been working with for five years;
+        some of them are a one-flat accidental landlord who just needs the
+        keys back in a week. The jobs are the same — the paperwork is what
+        changes.
+      </p>
+      <p>
+        This post is the stuff letting agents and portfolio landlords ring
+        to ask about anyway, written down in one place.
+      </p>
+
+      <h2>The end-of-tenancy make-good package</h2>
+      <p>
+        When a tenant moves out and the checkout report lands, you usually
+        have a narrow window — often a week, sometimes less — to get the
+        flat re-rentable. We do a <strong>standard make-good package</strong>
+        for one-bed and two-bed rentals across Ayrshire that covers the
+        fixes that show up on 90% of checkout reports:
+      </p>
+      <ul>
+        <li>Skirting boards re-fixed and touched up with satin white.</li>
+        <li>Internal doors eased, hinges re-screwed, latches lubricated.</li>
+        <li>
+          Magnolia or white emulsion touch-up on scuffs, drilled holes filled
+          and sanded flush.
+        </li>
+        <li>Bathroom silicone strip-out and re-bead, bath reseal.</li>
+        <li>Kitchen unit doors re-aligned, broken soft-close hinges swapped.</li>
+        <li>Lightbulbs and smoke-alarm batteries checked.</li>
+        <li>Gutter and downpipe check on the exterior.</li>
+      </ul>
+      <p>
+        Typical cost for a one-bed flat make-good with light redecoration
+        is £280 to £480, and two-beds £380 to £650 depending on what the
+        checkout report throws up. We give you a fixed-price quote off the
+        report before we start — no "we found another thing" invoices at
+        the end.
+      </p>
+      <p>
+        For the full scope list on bigger properties, our
+        <a href={`${BASE}/services/property-maintenance/`}>property
+        maintenance page</a> has the package version. Most landlords
+        combine a make-good with a full
+        <a href={`${BASE}/services/painting-decorating/`}>repaint</a>
+        every third or fourth tenancy, which is when it is cheapest to
+        get the whole flat back to a photographable standard.
+      </p>
+
+      <h2>Tenant-damage fixes we do every week</h2>
+      <p>
+        Honest answer: the same dozen jobs, over and over, across
+        <a href={`${BASE}/areas/kilmarnock/`}>Kilmarnock</a>,
+        <a href={`${BASE}/areas/cumnock/`}>Cumnock</a>,
+        <a href={`${BASE}/areas/mauchline/`}>Mauchline</a> and
+        <a href={`${BASE}/areas/auchinleck/`}>Auchinleck</a>. If you see
+        any of these on a checkout report, know that the fix is fast and
+        boring:
+      </p>
+      <ul>
+        <li>
+          <strong>Damaged skirting at corners</strong> — usually a hoover or
+          a door wedge. Cut, splice, paint. £40 to £80 per run.
+        </li>
+        <li>
+          <strong>Internal door holes</strong> — door handle in the plaster,
+          or a kick-through on a bathroom door. Lining-paper patch or full
+          door swap. £35 patch, £95 full swap fitted.
+        </li>
+        <li>
+          <strong>Bathroom sealant gone black</strong> — strip out, clean
+          down, re-bead with anti-mould. £40 to £70 per suite.
+        </li>
+        <li>
+          <strong>Kitchen unit drawers off runners</strong> — re-hang or
+          replace the soft-close mechanism. £25 to £45 per unit.
+        </li>
+        <li>
+          <strong>Toilet seat hinges snapped</strong> — £20 plus seat.
+        </li>
+        <li>
+          <strong>Paint scuffs, nail holes, picture-hook damage</strong> —
+          filled, sanded, touched up. Part of the make-good package.
+        </li>
+        <li>
+          <strong>Loose or broken blinds and curtain poles</strong> — re-fixed
+          or swapped. £25 per window.
+        </li>
+        <li>
+          <strong>Missing smoke-alarm covers / pulled-out wiring</strong> —
+          we replace like-for-like on mains-linked alarms and leave the
+          cert. For new circuit work we bring in a Part-P electrician —
+          see the note at the end.
+        </li>
+      </ul>
+
+      <h2>Same-day response for rent-ready deadlines</h2>
+      <p>
+        A tenant is moving in on Saturday and the checkout was Tuesday. This
+        is the landlord panic call and we get a lot of them. If you ring us
+        first thing Wednesday morning with a photo list, we can almost always
+        get the flat done by Friday evening — and if the list is short we
+        can do it the same day.
+      </p>
+      <p>
+        How we make that work:
+      </p>
+      <ul>
+        <li>
+          You send a WhatsApp with the checkout PDF or a photo list.
+          Fraser or Aidan reads it the same day.
+        </li>
+        <li>
+          We give a fixed price within two hours — we are not adding VAT,
+          there is no VAT on our invoices because we are under the threshold.
+        </li>
+        <li>
+          We book into the next free slot — usually same or next day for
+          anything under four hours in Kilmarnock, Cumnock, Mauchline,
+          Auchinleck, Sorn and Catrine.
+        </li>
+        <li>
+          We photograph the completed work and send the final invoice with
+          before/after shots so your letting agent can sign off without a
+          re-inspection.
+        </li>
+      </ul>
+
+      <h2>Invoicing terms for portfolio landlords</h2>
+      <p>
+        We bill differently depending on scale:
+      </p>
+      <ul>
+        <li>
+          <strong>One or two flats:</strong> invoice on completion, payable
+          by bank transfer or card link inside 7 days.
+        </li>
+        <li>
+          <strong>Three to ten flats:</strong> monthly consolidated invoice,
+          30-day payment terms, line-by-line by property.
+        </li>
+        <li>
+          <strong>Letting agents and property-management companies:</strong>
+          we accept your purchase-order workflow and invoice to the accounts
+          email you nominate. We do not charge for quotes and there is no
+          call-out fee in
+          <a href={`${BASE}/areas/`}>our East Ayrshire patch</a>.
+        </li>
+      </ul>
+      <p>
+        Everything goes through Stripe or bank transfer. No cash. Receipts
+        are VAT-style even though we are not VAT-registered — so your
+        accountant has a clean paper trail for each property.
+      </p>
+
+      <h2>The one thing we do not do: notifiable electrical work</h2>
+      <p>
+        We are not Part-P registered electricians. We swap like-for-like
+        sockets, light fittings, cooker isolators and smoke alarms, but new
+        circuits, consumer-unit work and anything notifiable in Scotland we
+        bring in a local registered contractor for. We have a couple we
+        trust and we will coordinate the visit so you still only deal with
+        one of us.
+      </p>
+
+      <h2>FAQ</h2>
+      <h3>Do you work with letting agents or only direct landlords?</h3>
+      <p>
+        Both. We have agents in Kilmarnock and Ayr who give us their whole
+        turnover pipeline, and individual landlords with one to five
+        properties each.
+      </p>
+      <h3>Do you do out-of-hours callouts for tenants?</h3>
+      <p>
+        Yes — a burst pipe, a broken lock, a flooding drain. We answer at
+        any hour. There is a £60 minimum between 10pm and 6am. Send the
+        tenant our WhatsApp number if it helps.
+      </p>
+      <h3>Can you hold a key for a property?</h3>
+      <p>
+        We do for some regular customers. Keys are labelled with postcode
+        only (never the full address) and kept in a lockbox at the yard.
+        Ask us if you want this set up.
+      </p>
+      <h3>Do you cover Ayr and Troon too?</h3>
+      <p>
+        Yes. We cover <a href={`${BASE}/areas/ayr/`}>Ayr</a>,
+        <a href={`${BASE}/areas/troon/`}>Troon</a>,
+        <a href={`${BASE}/areas/prestwick/`}>Prestwick</a>,
+        <a href={`${BASE}/areas/irvine/`}>Irvine</a> and the rest of the KA
+        postcodes as standard.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
+        <p class="text-sm text-navy-900/60">Written by</p>
+        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
+        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
+      </div>
+    </div>
+  </article>
+
+  <CTABlock
+    heading="Turnover this week? Let's get it done."
+    sub="Send the checkout report on WhatsApp. We'll read it, price it, and book you in — usually same or next day across the KA postcodes."
+    location="Ayrshire"
+  />
+</BaseLayout>

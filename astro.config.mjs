@@ -4,8 +4,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://gusmack1.github.io',
-  base: '/sorn-handyman',
+  site: 'https://sornhandyman.co.uk',
+  base: '/',
   trailingSlash: 'ignore',
   integrations: [tailwind(), sitemap()],
   build: {

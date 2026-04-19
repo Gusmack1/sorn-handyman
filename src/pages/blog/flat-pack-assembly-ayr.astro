@@ -1,0 +1,248 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import { business, BASE } from '../../data/business';
+import { postBySlug } from '../../data/posts';
+
+const post = postBySlug('flat-pack-assembly-ayr')!;
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+const url = `${siteUrl}/blog/${post.slug}/`;
+const ogImage = `${siteUrl}${post.ogImage}`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: post.title,
+  description: post.description,
+  inLanguage: 'en-GB',
+  datePublished: post.date,
+  dateModified: post.date,
+  author: {
+    '@type': 'Person',
+    name: post.author,
+    worksFor: { '@id': `${siteUrl}/#business` },
+  },
+  publisher: { '@id': `${siteUrl}/#business` },
+  image: [ogImage],
+  mainEntityOfPage: url,
+  articleSection: 'Flat-pack assembly',
+  keywords: [post.keyword, 'flat pack assembly Ayrshire', 'PAX wardrobe Ayr', 'IKEA assembly Ayr', 'furniture assembly KA7'],
+  wordCount: post.wordCount,
+  about: { '@type': 'Place', name: 'Ayr, Scotland' },
+};
+---
+<BaseLayout
+  title={`${post.title} | Sorn Handyman Services`}
+  description={post.description}
+  canonicalPath={`/blog/${post.slug}/`}
+  ogImage={ogImage}
+  extraSchema={articleSchema}
+>
+  <Breadcrumbs trail={[
+    { name: 'Home', href: `${BASE}/` },
+    { name: 'Blog', href: `${BASE}/blog/` },
+    { name: post.title },
+  ]} />
+
+  <article class="container-x py-10 lg:py-14 max-w-3xl">
+    <header>
+      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
+        <span>{post.area}</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <span class="text-navy-900/60">{post.readMinutes} min read</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
+      </div>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
+        {post.title}
+      </h1>
+      <p class="mt-5 text-lg text-navy-900/75">
+        A 200cm double PAX takes a competent pair of hands two to three hours.
+        Here is the honest version of flat-pack pricing in Ayr, what we bring
+        that IKEA’s own service does not, and why an uneven floor is the
+        difference between a job and a mess.
+      </p>
+    </header>
+
+    <div class="prose-sorn mt-8 text-lg">
+      <p>
+        <a href={`${BASE}/services/flat-pack-assembly/`}>Flat-pack assembly</a>
+        looks like cheap work on paper. Two hundred pounds for something you
+        could build yourself with an Allen key and an afternoon. In practice
+        a PAX build is a three-hour job with a proper drill, a good level,
+        two adults and wall fixings that are nowhere in the IKEA bag. Half
+        our calls in <a href={`${BASE}/areas/ayr/`}>Ayr</a> for flat-pack are
+        rescues from customers who have started and given up at the drawer
+        runners.
+      </p>
+      <p>
+        This is what it actually costs, what actually takes the time, and why
+        a handyman who builds ten wardrobes a month is a different animal
+        from IKEA’s own subcontracted assembly service.
+      </p>
+
+      <h2>How long a PAX really takes</h2>
+      <p>
+        A standard IKEA PAX — two 100cm frames, 200cm tall, with one
+        fitted interior (say four shelves, one clothes rail, two drawers
+        and a pair of sliding mirror doors) — takes me about two and a
+        half hours from a sealed flat-pack to standing and wall-anchored
+        in the bedroom. Single-handed it is closer to three hours because
+        the frames are awkward to tip upright on your own.
+      </p>
+      <p>A rough breakdown of the time:</p>
+      <ul>
+        <li>Unpacking and checking parts against the manifest — 10 minutes.</li>
+        <li>Both frames built flat on the floor — 45 minutes.</li>
+        <li>Interior fit-out (shelves, drawers, rail) — 30 minutes.</li>
+        <li>Frames tipped upright and joined — 15 minutes.</li>
+        <li>Wall-anchoring into the correct fixing for your wall — 15 minutes.</li>
+        <li>Sliding doors hung and levelled — 25 minutes. This is where most DIY builds die.</li>
+        <li>Packaging flattened and out of the house — 10 minutes.</li>
+      </ul>
+      <p>
+        Double the scale — a 250cm triple PAX with the platinum-glass sliding
+        doors, three drawer banks and ten shelves — and you are looking at a
+        full day for one person, or half a day for two.
+      </p>
+
+      <h2>Honest price bands for flat-pack in Ayr</h2>
+      <p>
+        We price by item type, not by the hour. Hourly quotes punish the
+        customer for the moments where we stop to do it right. Typical Ayr
+        prices:
+      </p>
+      <ul>
+        <li><strong>£40</strong> — small items. MALM bedside, LACK table, KALLAX 2×2, IKEA office chair. Usually under an hour on site.</li>
+        <li><strong>£60–£80</strong> — mid-size. MALM 6-drawer chest, PLATSA single frame, desk with cable management, Argos sofa.</li>
+        <li><strong>£80–£120</strong> — standard double PAX, KALLAX 4×4, B&Q fitted-wardrobe kit, larger sideboards. Includes wall-anchoring.</li>
+        <li><strong>£120–£180</strong> — triple PAX with sliding doors, HEMNES double bed with storage, Wayfair L-shape desk units.</li>
+        <li><strong>£180+</strong> — full room fit-outs, multiple items in one visit. Bundled.</li>
+      </ul>
+      <p>
+        We do not charge a call-out fee anywhere in Ayr, Prestwick, Troon or
+        the rest of our <a href={`${BASE}/areas/`}>East Ayrshire patch</a>.
+        The price quoted is the price paid. Written on WhatsApp before we
+        arrive so there is no on-day surprise.
+      </p>
+
+      <h2>What we bring that IKEA’s own service doesn’t</h2>
+      <p>
+        IKEA’s in-house assembly (subcontracted through TaskRabbit in most of
+        Scotland) is fine at building the thing as per the instructions.
+        What it does not include — and what actually makes or breaks the
+        finished job:
+      </p>
+      <ul>
+        <li>
+          <strong>Proper wall fixings for your wall.</strong> The screws in
+          the IKEA bag are for timber stud. Most Ayr bedrooms are on plaster
+          over lath, dot-and-dab plasterboard, or solid masonry. Each one
+          needs a different fixing — plasterboard anchors, metal plugs,
+          proper masonry plugs with the right drill bit. We carry all of
+          them.
+        </li>
+        <li>
+          <strong>A proper stud detector.</strong> TaskRabbit pros have the
+          kit; some do not. We always find the studs before we drill, and
+          we anchor into stud where we can.
+        </li>
+        <li>
+          <strong>Shim packs for uneven floors.</strong> Half of Ayr has an
+          older sandstone house with a floor that drops 12mm across a
+          wardrobe footprint. Without shims, the sliding doors will not
+          track. With shims, they do. We carry them.
+        </li>
+        <li>
+          <strong>A second brain for the instructions.</strong> Most damage
+          on a PAX build happens on page four where the hinge arm and the
+          buffer get swapped. A handyman who has built ten wardrobes does
+          not make that mistake.
+        </li>
+        <li>
+          <strong>Disposal.</strong> We flatten and take every scrap of
+          packaging away. IKEA’s assembly does not.
+        </li>
+      </ul>
+
+      <h2>The two things that ruin most DIY builds</h2>
+
+      <h3>1. Wall fixings into dot-and-dab</h3>
+      <p>
+        A lot of Ayr new-builds and 1990s houses have plasterboard bonded
+        onto masonry with plaster dabs — the “dot-and-dab” wall. If you drive
+        a plain plug into that you hit a void an inch deep and the plug is
+        doing nothing. Pull the PAX forward and the whole thing rips the
+        fixing out. Dot-and-dab needs a deep-set fixing through to the
+        masonry behind. We test every fixing point before we commit.
+      </p>
+
+      <h3>2. Uneven floors and sliding doors</h3>
+      <p>
+        PAX sliding doors will not run if the top and bottom tracks are even
+        5mm out of level over 2m. Older Ayr houses — especially seafront
+        and Alloway cottages — almost never have a level floor. You have to
+        shim the frames before you fit the doors. If you fit the doors first
+        and try to shim after, they will catch on the buffer and bounce
+        back every time.
+      </p>
+
+      <h2>FAQ</h2>
+
+      <h3>Do you build all flat-pack, not just IKEA?</h3>
+      <p>
+        Yes. Wayfair, B&Q, Argos, Dunelm, Oak Furnitureland, Made.com legacy
+        stock, JYSK, VonHaus — if it comes in a box, we build it. IKEA is
+        just the most common because they sell the most.
+      </p>
+
+      <h3>Can I get a same-week slot?</h3>
+      <p>
+        For Ayr, almost always. Small single-item jobs same-day or next-day
+        is normal. Triple-PAX full-room fits we usually slot in inside a
+        week.
+      </p>
+
+      <h3>What if I am missing a part from the box?</h3>
+      <p>
+        Honestly, it happens more than IKEA admit. We carry a stock of
+        common cam-locks, wooden dowels and screws. For genuinely unique
+        parts we will reschedule and give you the IKEA phone number that
+        actually gets a person — saves you an afternoon.
+      </p>
+
+      <h3>Do you dispose of the old furniture?</h3>
+      <p>
+        Yes, for a small add-on. A single-item disposal (old wardrobe out,
+        new one in) is usually £30 extra on top of the build price. We
+        pay the tip fee.
+      </p>
+
+      <h3>Where exactly do you cover?</h3>
+      <p>
+        The whole of KA7 and KA9 — Ayr town centre, seafront, Alloway,
+        Prestwick, Monkton — plus across to Troon. Further afield is fine
+        too; see <a href={`${BASE}/areas/`}>our full coverage map</a>.
+      </p>
+
+      <p>
+        Send Aidan a photo of the flat-pack box and your room. We will come
+        back with a firm price and a slot within the hour.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
+        <p class="text-sm text-navy-900/60">Written by</p>
+        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
+        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
+      </div>
+    </div>
+  </article>
+
+  <CTABlock
+    heading="PAX in a heap on the bedroom floor? We’ll sort it."
+    sub="WhatsApp Aidan a photo of the box and the room — firm price back to you inside an hour, built same week across Ayr."
+    location="Ayr"
+  />
+</BaseLayout>

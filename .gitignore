@@ -10,3 +10,5 @@ dist/
 # misc
 .DS_Store
 *.log
+# IndexNow key (kept out of repo for reference only — public copy lives in public/<key>.txt)
+.indexnow-key

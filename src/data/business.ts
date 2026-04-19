@@ -1,7 +1,7 @@
 // Single source of truth for NAP, hours, services, areas.
 // Change here → propagates everywhere (home, about, service/area pages, schema, footer).
 
-export const BASE = '/sorn-handyman';
+export const BASE = '';
 
 export const business = {
   name: 'Sorn Handyman Services',
@@ -49,7 +49,7 @@ export const business = {
   // Falsy / missing key → contact + quote forms fall back gracefully to tel: + WhatsApp CTAs.
   // TODO: verify Sorn business email with Aidan [UNVERIFIED-EMAIL]. Interim fallback uses phone/WhatsApp.
   web3formsKey: (import.meta.env.PUBLIC_WEB3FORMS_KEY as string | undefined) ?? '',
-  siteUrl: 'https://gusmack1.github.io/sorn-handyman',
+  siteUrl: 'https://sornhandyman.co.uk',
 };
 
 export type Service = {
