@@ -6,8 +6,8 @@ import { readdir, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
-const KEY = '4690968c9b675bdee408fbc5fa145109';
-const HOST = 'sornhandyman.co.uk';
+const KEY = 'e8c3698bee1584285cc29290ab82b469';
+const HOST = 'gusmack1.github.io';
 const ENDPOINT = 'https://api.indexnow.org/indexnow';
 const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 
