@@ -5,12 +5,14 @@ import CTABlock from '../../components/CTABlock.astro';
 import { business, BASE } from '../../data/business';
 import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
 import RelatedPosts from '../../components/RelatedPosts.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
 
 const post = postBySlug('hiring-handyman-troon-7-questions')!;
 const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
 const siteUrl = business.siteUrl.replace(/\/$/, '');
 const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${post.ogImage}`;
+const ogImage = `${siteUrl}${BASE}/gallery/kilmarnock-acoustic-slat-wall-panelling-tv-mount-05-1600w.jpg`;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -67,6 +69,8 @@ const articleSchema = {
         of keys, these seven questions will save you a lot of grief.
       </p>
     </header>
+    <BlogHero slug="kilmarnock-acoustic-slat-wall-panelling-tv-mount-05" />
+
 
     <div class="prose-sorn mt-8 text-lg cv-auto">
       <p>
@@ -98,6 +102,10 @@ const articleSchema = {
         roof onto a neighbour's car in Troon is the day insurance saves
         everybody a serious headache.
       </p>
+
+            <div class="not-prose my-8">
+        <BlogFigure slug="mauchline-spring-garden-tidy-07" />
+      </div>
 
       <h2>2. "What's your trade background?"</h2>
       <p>

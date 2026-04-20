@@ -5,12 +5,14 @@ import CTABlock from '../../components/CTABlock.astro';
 import { business, BASE } from '../../data/business';
 import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
 import RelatedPosts from '../../components/RelatedPosts.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
 
 const post = postBySlug('24-7-emergency-handyman-ayr')!;
 const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
 const siteUrl = business.siteUrl.replace(/\/$/, '');
 const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${post.ogImage}`;
+const ogImage = `${siteUrl}${BASE}/gallery/galston-cold-water-feed-pipe-repair-08-1600w.jpg`;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -66,6 +68,8 @@ const articleSchema = {
         genuinely needs us in the van before breakfast — and what can wait.
       </p>
     </header>
+    <BlogHero slug="galston-cold-water-feed-pipe-repair-08" />
+
 
     <div class="prose-sorn mt-8 text-lg cv-auto">
       <p>
@@ -186,6 +190,10 @@ const articleSchema = {
         rag-and-wipe build-ups that come out with proper equipment inside
         an hour.
       </p>
+
+            <div class="not-prose my-8">
+        <BlogFigure slug="sorn-led-exterior-floodlight-06" />
+      </div>
 
       <h2>What <em>isn't</em> an emergency?</h2>
       <p>

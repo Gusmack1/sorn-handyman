@@ -5,12 +5,14 @@ import CTABlock from '../../components/CTABlock.astro';
 import { business, BASE } from '../../data/business';
 import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
 import RelatedPosts from '../../components/RelatedPosts.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
 
 const post = postBySlug('flat-pack-assembly-ayr')!;
 const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
 const siteUrl = business.siteUrl.replace(/\/$/, '');
 const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${post.ogImage}`;
+const ogImage = `${siteUrl}${BASE}/gallery/kilmarnock-acoustic-slat-wall-panelling-tv-mount-05-1600w.jpg`;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -68,6 +70,8 @@ const articleSchema = {
         difference between a job and a mess.
       </p>
     </header>
+    <BlogHero slug="kilmarnock-acoustic-slat-wall-panelling-tv-mount-05" />
+
 
     <div class="prose-sorn mt-8 text-lg cv-auto">
       <p>
@@ -110,6 +114,10 @@ const articleSchema = {
         doors, three drawer banks and ten shelves — and you are looking at a
         full day for one person, or half a day for two.
       </p>
+
+            <div class="not-prose my-8">
+        <BlogFigure slug="sorn-internal-door-trim-refit-03" />
+      </div>
 
       <h2>How we price flat-pack in Ayr</h2>
       <p>

@@ -5,12 +5,14 @@ import CTABlock from '../../components/CTABlock.astro';
 import { business, BASE } from '../../data/business';
 import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
 import RelatedPosts from '../../components/RelatedPosts.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
 
 const post = postBySlug('electric-shower-replacement-cumnock')!;
 const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
 const siteUrl = business.siteUrl.replace(/\/$/, '');
 const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${post.ogImage}`;
+const ogImage = `${siteUrl}${BASE}/gallery/ayrshire-led-bathroom-downlights-16-1600w.jpg`;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -68,6 +70,8 @@ const articleSchema = {
         repairing or time to put a new unit on the wall.
       </p>
     </header>
+    <BlogHero slug="ayrshire-led-bathroom-downlights-16" />
+
 
     <div class="prose-sorn mt-8 text-lg cv-auto">
       <p>
@@ -122,6 +126,10 @@ const articleSchema = {
           that floods a flat below.
         </li>
       </ul>
+
+            <div class="not-prose my-8">
+        <BlogFigure slug="kilmarnock-bathroom-suite-plumbing-02" />
+      </div>
 
       <h2>Pump vs unit — how to tell</h2>
       <p>
