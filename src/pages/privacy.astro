@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { business } from '../data/business';
+const title = 'Privacy Policy';
+const description = 'How Sorn Handyman Services handles your information when you get in touch for a quote.';
+---
+<BaseLayout title={title} description={description}>
+  <section class="py-16 md:py-20 px-4">
+    <div class="mx-auto max-w-3xl">
+      <p class="eyebrow">Legal</p>
+      <h1 class="mt-3 font-display text-4xl md:text-5xl font-black text-navy-900">Privacy Policy</h1>
+      <p class="mt-3 text-navy-500">Last updated: 20 April 2026</p>
+
+      <div class="prose mt-8 max-w-none text-navy-700 leading-relaxed">
+        <h2 class="font-display text-2xl font-bold text-navy-900 mt-8">Who we are</h2>
+        <p>{business.name}, a domestic trade business based in Sorn, East Ayrshire, Scotland. You can reach us on {business.phone} or WhatsApp {business.whatsappDisplay}.</p>
+
+        <h2 class="font-display text-2xl font-bold text-navy-900 mt-8">What we collect</h2>
+        <p>When you submit the contact or quote form we receive: the name, email address, phone number, postcode and job description you provide. That's it. No cookies are set by us for tracking, and we do not sell or share your data.</p>
+
+        <h2 class="font-display text-2xl font-bold text-navy-900 mt-8">How we use it</h2>
+        <p>Solely to reply to your enquiry and quote the work. Emails are delivered via Web3Forms to our business inbox. We keep enquiry emails for up to 24 months so we can refer back to prior jobs, then delete.</p>
+
+        <h2 class="font-display text-2xl font-bold text-navy-900 mt-8">Third parties</h2>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>Web3Forms</strong> — processes form submissions. See <a class="text-amber-800 underline" href="https://web3forms.com/privacy" rel="noopener" target="_blank">their policy</a>.</li>
+          <li><strong>Google Maps</strong> — embedded on the contact page (only when you click to load it). See <a class="text-amber-800 underline" href="https://policies.google.com/privacy" rel="noopener" target="_blank">Google's policy</a>.</li>
+          <li><strong>GitHub Pages</strong> — hosts the site. See <a class="text-amber-800 underline" href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener" target="_blank">GitHub's policy</a>.</li>
+        </ul>
+
+        <h2 class="font-display text-2xl font-bold text-navy-900 mt-8">Your rights (UK GDPR)</h2>
+        <p>You can ask us to access, correct or delete any data we hold about you. Email us and we'll action it within 30 days.</p>
+
+        <h2 class="font-display text-2xl font-bold text-navy-900 mt-8">Cookies</h2>
+        <p>We do not set analytics, advertising or tracking cookies. The only browser storage used is a one-time dismissal flag for any on-site banners, stored locally on your device.</p>
+
+        <h2 class="font-display text-2xl font-bold text-navy-900 mt-8">Changes</h2>
+        <p>If this policy changes, the updated date above will reflect it. Material changes will be noted on the home page for 30 days.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
