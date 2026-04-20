@@ -21,7 +21,7 @@ export type Post = {
 
 export const AUTHOR = 'Fraser & Aidan at Sorn Handyman Services';
 export const AUTHOR_BIO =
-  'Time-served tradesmen based in Sorn, East Ayrshire. Father and son team. Covering all Ayrshire.';
+  'Time-served tradesmen based in Sorn, East Ayrshire. Covering all Ayrshire.';
 
 export const posts: Post[] = [
   {
