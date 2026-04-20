@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import { business, BASE } from '../../data/business';
+import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
+
+const post = postBySlug('sleeper-raised-bed-landscaping-ayrshire')!;
+const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+const url = `${siteUrl}/blog/${post.slug}/`;
+const ogImage = `${siteUrl}${BASE}/gallery/ayrshire-raised-sleeper-bed-landscaping-19-1600w.jpg`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: post.title,
+  description: post.description,
+  inLanguage: 'en-GB',
+  datePublished: post.date,
+  dateModified: post.date,
+  author: { '@type': 'Person', name: post.author, worksFor: { '@id': `${siteUrl}/#business` } },
+  publisher: { '@id': `${siteUrl}/#business` },
+  image: [ogImage],
+  mainEntityOfPage: url,
+  keywords: [post.keyword],
+  wordCount: post.wordCount,
+};
+---
+<BaseLayout
+  title={`${post.title} | Sorn Handyman Services`}
+  description={post.description}
+  canonicalPath={`/blog/${post.slug}/`}
+  ogImage={ogImage}
+  ogType="article"
+  extraSchema={articleSchema}
+>
+  <Breadcrumbs trail={[
+    { name: 'Home', href: `${BASE}/` },
+    { name: 'Blog', href: `${BASE}/blog/` },
+    { name: post.title },
+  ]} />
+
+  <article class="container-x py-10 lg:py-14 max-w-3xl">
+    <header>
+      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
+        <span>{post.area}</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <span class="text-navy-900/60">{post.readMinutes} min read</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
+      </div>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
+        {post.title}
+      </h1>
+      <p class="mt-5 text-lg text-navy-900/75">
+        A garden refurb in Ayrshire — a new sleeper raised bed built into the
+        corner, fresh topsoil in, and a young Rowan tree planted at the heart
+        of it. Supply and install throughout.
+      </p>
+    </header>
+
+    <BlogHero slug="ayrshire-raised-sleeper-bed-landscaping-19" />
+
+    <div class="prose-sorn mt-8 text-lg cv-auto">
+      <h2>What the job involved</h2>
+      <p>
+        The bed was set out on the ground first so the customer could see
+        the shape before a single sleeper was cut. Once the footprint was
+        right, sleepers were cut to length, drilled and pinned together with
+        long timber screws, courses staggered so every joint had full timber
+        behind it.
+      </p>
+      <p>
+        The bed was back-filled with a layer of drainage and then fresh
+        topsoil, the Rowan was planted centrally with room for its roots to
+        spread, and the surrounding ground was dressed off. A tidy corner
+        that will fill out over the next couple of seasons.
+      </p>
+
+      <BlogFigure slug="ayrshire-raised-sleeper-bed-landscaping-19" />
+
+      <h2>Things to think about before you start</h2>
+      <p>
+        Sleepers are heavy and long. Check access from the van to the garden
+        before you commit to a bed in the far corner — narrow gates, tight
+        steps and soft lawns all change the day on site. If the sleepers
+        have to go over a fence, factor that in.
+      </p>
+      <p>
+        Pick the tree with the spot in mind, not the other way round. A Rowan
+        stays neat and handles Ayrshire weather well, which is why it turns
+        up so often in small gardens. Bigger species can outgrow a raised
+        bed inside a few years, and the roots end up the problem you were
+        trying to avoid.
+      </p>
+
+      <p>
+        If you are in Ayrshire and need something similar, Fraser will come
+        and look for free. Call <strong>07900 255876</strong> or WhatsApp
+        <strong>+44 7472 223323</strong>. FREE no-obligation quote, every job
+        priced individually.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
+        <p class="text-sm text-navy-900/60">Written by</p>
+        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
+        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
+      </div>
+    </div>
+  </article>
+
+  {relatedPosts.length > 0 && (
+    <RelatedPosts posts={relatedPosts} eyebrow="Keep reading" heading="Related posts" variant="tinted" />
+  )}
+
+  <CTABlock
+    heading="Corner of the garden begging for a lift?"
+    sub="A raised bed and the right planting can transform a plot. Fraser will come and walk it."
+    location="Ayrshire"
+  />
+</BaseLayout>

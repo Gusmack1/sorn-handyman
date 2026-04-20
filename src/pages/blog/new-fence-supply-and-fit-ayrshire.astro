@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import { business, BASE } from '../../data/business';
+import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
+
+const post = postBySlug('new-fence-supply-and-fit-ayrshire')!;
+const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+const url = `${siteUrl}/blog/${post.slug}/`;
+const ogImage = `${siteUrl}${BASE}/gallery/ayrshire-fence-build-new-11-1600w.jpg`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: post.title,
+  description: post.description,
+  inLanguage: 'en-GB',
+  datePublished: post.date,
+  dateModified: post.date,
+  author: { '@type': 'Person', name: post.author, worksFor: { '@id': `${siteUrl}/#business` } },
+  publisher: { '@id': `${siteUrl}/#business` },
+  image: [ogImage],
+  mainEntityOfPage: url,
+  keywords: [post.keyword],
+  wordCount: post.wordCount,
+};
+---
+<BaseLayout
+  title={`${post.title} | Sorn Handyman Services`}
+  description={post.description}
+  canonicalPath={`/blog/${post.slug}/`}
+  ogImage={ogImage}
+  ogType="article"
+  extraSchema={articleSchema}
+>
+  <Breadcrumbs trail={[
+    { name: 'Home', href: `${BASE}/` },
+    { name: 'Blog', href: `${BASE}/blog/` },
+    { name: post.title },
+  ]} />
+
+  <article class="container-x py-10 lg:py-14 max-w-3xl">
+    <header>
+      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
+        <span>{post.area}</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <span class="text-navy-900/60">{post.readMinutes} min read</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
+      </div>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
+        {post.title}
+      </h1>
+      <p class="mt-5 text-lg text-navy-900/75">
+        A new fence line in Ayrshire — all materials supplied and fitted.
+        Posts dug, concrete in, panels run square along the boundary. A
+        straightforward job done properly.
+      </p>
+    </header>
+
+    <BlogHero slug="ayrshire-fence-build-new-11" />
+
+    <div class="prose-sorn mt-8 text-lg cv-auto">
+      <h2>What the job involved</h2>
+      <p>
+        We lifted the old line first and cleared the ground back to a clean
+        run. Post holes went in on centres that matched the new panel width,
+        each one deep enough to hold against a gust, and we set the posts in
+        fresh concrete with a spirit level on both faces.
+      </p>
+      <p>
+        Gravel boards went in first to keep panel bottoms out of standing
+        water. Panels were then slid into the post channels with caps on top
+        and finials fitted where the customer wanted them. Straight line,
+        solid base, tidy finish.
+      </p>
+
+      <BlogFigure slug="ayrshire-fence-build-new-11" />
+
+      <h2>Things to think about before you start</h2>
+      <p>
+        The boundary line is not always where people think it is. If you share
+        a fence with a neighbour, a quick conversation before the work starts
+        saves a lot of grief — especially if one side wants to move the line
+        by even a few inches. Title plans and T-marks tell you who owns what.
+      </p>
+      <p>
+        Ground conditions matter more than panel choice. Soft clay, sloping
+        lawns and old roots all make post-setting slower. Nothing hard, but
+        the cost and the day on site will reflect what is actually under the
+        turf, not what it looks like from the path.
+      </p>
+
+      <p>
+        If you are in Ayrshire and need something similar, Fraser will come
+        and look for free. Call <strong>07900 255876</strong> or WhatsApp
+        <strong>+44 7472 223323</strong>. FREE no-obligation quote, every job
+        priced individually.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
+        <p class="text-sm text-navy-900/60">Written by</p>
+        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
+        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
+      </div>
+    </div>
+  </article>
+
+  {relatedPosts.length > 0 && (
+    <RelatedPosts posts={relatedPosts} eyebrow="Keep reading" heading="Related posts" variant="tinted" />
+  )}
+
+  <CTABlock
+    heading="Need a new fence this season?"
+    sub="Measure the run in metres and send a photo over WhatsApp — we will come and look."
+    location="Ayrshire"
+  />
+</BaseLayout>

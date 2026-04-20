@@ -1,221 +1,31 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import CTABlock from '../../components/CTABlock.astro';
-import { business, BASE } from '../../data/business';
-import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
-import RelatedPosts from '../../components/RelatedPosts.astro';
-import BlogHero from '../../components/BlogHero.astro';
-import BlogFigure from '../../components/BlogFigure.astro';
+import { BASE } from '../../data/business';
 
-const post = postBySlug('kitchen-tap-replacement-ayrshire')!;
-const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
-const siteUrl = business.siteUrl.replace(/\/$/, '');
-const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${BASE}/gallery/ayrshire-kitchen-refit-belfast-sink-granite-15-1600w.jpg`;
-
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  '@id': `${url}#article`,
-  headline: post.title,
-  description: post.description,
-  inLanguage: 'en-GB',
-  datePublished: post.date,
-  dateModified: post.date,
-  author: {
-    '@type': 'Person',
-    name: post.author,
-    worksFor: { '@id': `${siteUrl}/#business` },
-  },
-  publisher: { '@id': `${siteUrl}/#business` },
-  image: [ogImage],
-  mainEntityOfPage: url,
-  articleSection: 'Plumbing',
-  keywords: [post.keyword, 'kitchen tap fitter ayrshire', 'monobloc mixer tap kilmarnock', 'tap swap cost ayr', 'leaking kitchen tap KA5'],
-  wordCount: post.wordCount,
-  about: { '@type': 'Place', name: 'Ayrshire, Scotland' },
-};
+const title = 'Post retired — Sorn Handyman Services';
+const description = 'This post has been retired. See our live job diary or recent work.';
+// Canonical points at /blog/ so search engines consolidate ranking signal to the diary.
+const canonicalPath = '/blog/';
 ---
 <BaseLayout
-  title={`${post.title} | Sorn Handyman Services`}
-  description={post.description}
-  canonicalPath={`/blog/${post.slug}/`}
-  ogImage={ogImage}
-  extraSchema={articleSchema}
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  noindex
 >
   <Breadcrumbs trail={[
     { name: 'Home', href: `${BASE}/` },
     { name: 'Blog', href: `${BASE}/blog/` },
-    { name: post.title },
+    { name: 'Post retired' },
   ]} />
-
-  <article class="container-x py-10 lg:py-14 max-w-3xl">
-    <header>
-      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
-        <span>{post.area}</span>
-        <span aria-hidden class="text-navy-900/20">·</span>
-        <span class="text-navy-900/60">{post.readMinutes} min read</span>
-        <span aria-hidden class="text-navy-900/20">·</span>
-        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
-      </div>
-      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
-        {post.title}
-      </h1>
-      <p class="mt-5 text-lg text-navy-900/75">
-        A straight kitchen tap swap in Ayrshire usually takes about an hour on
-        site. Here is what pushes the price up, what a cheap B&Q tap gets you
-        in three years, and the isolator-valve check we do before anything
-        else. Every tap job is priced individually — phone or WhatsApp for a
-        free no-obligation quote.
-      </p>
-    </header>
-    <BlogHero slug="ayrshire-kitchen-refit-belfast-sink-granite-15" />
-
-
-    <div class="prose-sorn mt-8 text-lg cv-auto">
-      <p>
-        A dripping kitchen tap is the job folk put off the longest and ring us
-        about the most. Left alone, a slow drip wastes roughly 5,500 litres a
-        year, stains a ceramic sink, and — if the flexi hose underneath lets
-        go — floods a kitchen in about three minutes. The fix is usually a
-        straight-swap. This is the honest version of what a
-        <a href={`${BASE}/services/plumbing/`}>kitchen tap replacement</a>
-        actually costs, how long it takes, and the two checks that stop the
-        cheap job turning into a wet one.
-      </p>
-
-      <h2>How we quote in Ayrshire</h2>
-      <p>
-        We provide a free no-obligation quote for every job, and we price each
-        tap swap individually. The price depends on the tap you want, the
-        condition of the isolator valves, whether it's a straight swap or a
-        two-hole-to-single conversion, and whether new flexis or isolators are
-        needed. WhatsApp a photo of your tap and the under-sink cupboard to
-        <a href={`${BASE}/areas/kilmarnock/`}>Kilmarnock</a>,
-        <a href={`${BASE}/areas/ayr/`}>Ayr</a>, Troon or anywhere else in the
-        KA postcodes — phone 07900 255876 or WhatsApp 07472 223323.
-      </p>
-
-            <div class="not-prose my-8">
-        <BlogFigure slug="ayrshire-bath-reseal-04" />
-      </div>
-
-      <h2>How long a straight swap actually takes</h2>
-      <p>
-        On site, a clean straight-swap with working isolators is about 45
-        minutes. Allow an hour with a chat and a test. A rough breakdown:
-      </p>
-      <ul>
-        <li>Shut off isolators under the sink, confirm dead — 3 minutes.</li>
-        <li>Disconnect old flexis, remove backnut, lift old tap out — 10 minutes.</li>
-        <li>Clean the sink deck, fit new seal, drop new tap in, tighten backnut — 15 minutes.</li>
-        <li>Connect new flexis, check for cross-thread, re-pressure — 10 minutes.</li>
-        <li>Turn water back on, bleed air out of cartridge, test hot and cold — 5 minutes.</li>
-        <li>Silicone bead round the base where the deck is not flat — 5 minutes.</li>
-      </ul>
-      <p>
-        Where it doubles in time: if your isolator valves are seized, if the
-        backnut is rusted solid under a stainless sink, or if the old tap was
-        a two-hole layout that needs the spare hole blanking. None of those
-        are deal-breakers, they just add half an hour and one or two extra
-        parts.
-      </p>
-
-      <h2>The isolator-valve check — before anything else</h2>
-      <p>
-        The first thing we do under the sink is turn both isolator valves off
-        and check they actually stop the water. Half the older
-        <a href={`${BASE}/areas/mauchline/`}>Mauchline</a> and
-        <a href={`${BASE}/areas/cumnock/`}>Cumnock</a> kitchens have
-        isolators that have not been touched in fifteen years — the slotted
-        stem turns, but the gate inside has corroded open. If we did not
-        check, we would undo the flexi and get a face full of mains water.
-      </p>
-      <p>
-        If the isolators are seized, we replace them while we are in there —
-        a small job, about ten minutes per side. Worth doing. The next
-        time you need a tap, a dishwasher or a new flexi, you will not be
-        ringing the stopcock the minute the job starts.
-      </p>
-
-      <h2>Cheap tap vs mid-range — what you actually get</h2>
-      <p>
-        A budget Screwfix own-brand mixer will work fine on day one. The
-        plastic cartridge inside is rated for around three years of domestic
-        use. After that, the handle gets stiff, the spray aerator blocks with
-        Ayrshire’s hard water, and the base pivot starts to weep. It is not
-        a disaster — a cartridge swap is a small job — but you will likely be
-        back at it by year four.
-      </p>
-      <p>
-        A mid-range mixer (Bristan, Grohe Start, Hansgrohe Focus) gets you a
-        brass body, a ceramic-disc cartridge rated for 500,000 cycles, and a
-        spray aerator that unscrews for a vinegar soak. Most of them carry a
-        5-year guarantee. For a kitchen you actually use, that is the better
-        spend.
-      </p>
-
-      <h2>FAQ</h2>
-
-      <h3>Can I buy my own tap or do you supply?</h3>
-      <p>
-        Either works. Supply your own and we fit it for the labour rate.
-        We can also source a mid-range mixer for a small mark-up on trade
-        price and deliver it with us on the day. Your call.
-      </p>
-
-      <h3>Do I need to turn the mains off?</h3>
-      <p>
-        Only if the isolator valves are missing or seized. Ninety per cent
-        of the time we work off the under-sink isolators and the rest of
-        your house has water the whole job through.
-      </p>
-
-      <h3>What about hard-water build-up?</h3>
-      <p>
-        Ayrshire water is moderately hard. On a mid-range tap, run a
-        white-vinegar soak through the aerator twice a year and it will
-        outlast the ten-year mark. Cheap aerators are riveted on and have
-        to be replaced when they block.
-      </p>
-
-      <h3>Do you cover out-of-hours?</h3>
-      <p>
-        Yes. We run 24/7 call-out across the KA postcodes for burst pipes,
-        split flexis and leaking taps — see the
-        <a href={`${BASE}/blog/24-7-emergency-handyman-ayr/`}>24/7 emergency
-        page</a> for what the out-of-hours minimum covers. Small plumbing
-        jobs also sit inside our wider
-        <a href={`${BASE}/services/property-maintenance/`}>property
-        maintenance</a> round for landlords and Airbnb hosts.
-      </p>
-
-      <h3>Where exactly do you cover?</h3>
-      <p>
-        All of KA1 Kilmarnock, KA5 Sorn and Mauchline, KA7 Ayr, KA12 Irvine
-        and the rest of the KA postcodes. See
-        <a href={`${BASE}/areas/`}>the full coverage map</a>.
-      </p>
-
-      <p>
-        If the drip under your kitchen tap is getting louder, book it this
-        week. A small job now saves a much bigger floor bill later.
-      </p>
-
-      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
-        <p class="text-sm text-navy-900/60">Written by</p>
-        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
-        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
-      </div>
-    </div>
-  </article>
-
-  <RelatedPosts posts={relatedPosts} eyebrow="Keep reading" heading="Related posts" variant="tinted" />
-
-  <CTABlock
-    heading="Dripping tap? We'll swap it this week."
-    sub="WhatsApp Fraser a photo of the tap and the under-sink cupboard — firm price back inside the hour across Ayrshire."
-    location="Ayrshire"
-  />
+  <section class="container-x py-16 max-w-2xl">
+    <h1 class="font-serif text-4xl font-black text-navy-900">Post retired</h1>
+    <p class="mt-4 text-lg text-navy-900/80">
+      This post has been retired. See our live job diary at
+      <a class="font-semibold text-amber-700 hover:underline" href={`${BASE}/blog/`}>/blog/</a>
+      or recent work at
+      <a class="font-semibold text-amber-700 hover:underline" href={`${BASE}/gallery/`}>/gallery/</a>.
+    </p>
+  </section>
 </BaseLayout>

@@ -1,224 +1,31 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import CTABlock from '../../components/CTABlock.astro';
-import { business, BASE } from '../../data/business';
-import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
-import RelatedPosts from '../../components/RelatedPosts.astro';
-import BlogHero from '../../components/BlogHero.astro';
-import BlogFigure from '../../components/BlogFigure.astro';
+import { BASE } from '../../data/business';
 
-const post = postBySlug('hiring-handyman-troon-7-questions')!;
-const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
-const siteUrl = business.siteUrl.replace(/\/$/, '');
-const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${BASE}/gallery/kilmarnock-acoustic-slat-wall-panelling-tv-mount-05-1600w.jpg`;
-
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  '@id': `${url}#article`,
-  headline: post.title,
-  description: post.description,
-  inLanguage: 'en-GB',
-  datePublished: post.date,
-  dateModified: post.date,
-  author: {
-    '@type': 'Person',
-    name: post.author,
-    worksFor: { '@id': `${siteUrl}/#business` },
-  },
-  publisher: { '@id': `${siteUrl}/#business` },
-  image: [ogImage],
-  mainEntityOfPage: url,
-  articleSection: 'Hiring a handyman',
-  keywords: [post.keyword, 'hiring handyman troon', 'insured handyman ayrshire', 'holiday home handyman troon', 'handyman quote troon'],
-  wordCount: post.wordCount,
-  about: { '@type': 'Place', name: 'Troon, Scotland' },
-};
+const title = 'Post retired — Sorn Handyman Services';
+const description = 'This post has been retired. See our live job diary or recent work.';
+// Canonical points at /blog/ so search engines consolidate ranking signal to the diary.
+const canonicalPath = '/blog/';
 ---
 <BaseLayout
-  title={`${post.title} | Sorn Handyman Services`}
-  description={post.description}
-  canonicalPath={`/blog/${post.slug}/`}
-  ogImage={ogImage}
-  ogType="article"
-  extraSchema={articleSchema}
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  noindex
 >
   <Breadcrumbs trail={[
     { name: 'Home', href: `${BASE}/` },
     { name: 'Blog', href: `${BASE}/blog/` },
-    { name: post.title },
+    { name: 'Post retired' },
   ]} />
-
-  <article class="container-x py-10 lg:py-14 max-w-3xl">
-    <header>
-      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
-        <span>{post.area}</span>
-        <span aria-hidden class="text-navy-900/20">·</span>
-        <span class="text-navy-900/60">{post.readMinutes} min read</span>
-        <span aria-hidden class="text-navy-900/20">·</span>
-        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
-      </div>
-      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
-        {post.title}
-      </h1>
-      <p class="mt-5 text-lg text-navy-900/75">
-        Troon has a lot of second homes, holiday lets and owners who want the
-        job done properly the first time. If you are handing a tradesman a set
-        of keys, these seven questions will save you a lot of grief.
-      </p>
-    </header>
-    <BlogHero slug="kilmarnock-acoustic-slat-wall-panelling-tv-mount-05" />
-
-
-    <div class="prose-sorn mt-8 text-lg cv-auto">
-      <p>
-        <a href={`${BASE}/areas/troon/`}>Troon</a> has a specific problem when
-        it comes to trades: a lot of the houses belong to people who don't
-        live there every day. Second homes. Family inheritances. Holiday lets.
-        Retirement properties bought by folk who still work in Glasgow. That
-        makes it a great patch for an honest handyman — and a nightmare if
-        you pick the wrong one, because you might not set foot in the place
-        for three weeks after the job's "finished".
-      </p>
-      <p>
-        I cover Troon from our base in Sorn and I've been in a lot of houses
-        where the last handyman cut corners because nobody was going to check.
-        So here are the seven questions I'd ask any tradesman in Troon before
-        I booked — including me. If a handyman can't give you a straight
-        answer to all of them, keep looking.
-      </p>
-
-      <h2>1. "Are you insured, and can you send me the certificate?"</h2>
-      <p>
-        Not "are you insured". Ask for the certificate. Any handyman worth
-        ringing will be able to send a PDF of their cover. If they promise
-        to send it and then don't, that's your answer. Book someone else.
-      </p>
-      <p>
-        Insurance matters most when nothing has gone wrong for years, because
-        that's exactly when you stop checking. The day a tile comes off a
-        roof onto a neighbour's car in Troon is the day insurance saves
-        everybody a serious headache.
-      </p>
-
-            <div class="not-prose my-8">
-        <BlogFigure slug="mauchline-spring-garden-tidy-07" />
-      </div>
-
-      <h2>2. "What's your trade background?"</h2>
-      <p>
-        "Handyman" is not a regulated word in the UK. Anyone can print the
-        card. Ask what they actually trained in.
-      </p>
-      <p>
-        A real answer sounds like <em>"I'm a time-served joiner"</em> or
-        <em>"I did a plumbing apprenticeship and I've been at it full-time
-        since"</em>. A vague answer — <em>"I've been doing this a few years"</em>
-        — means you're paying for on-the-job learning. Fine for a flat-pack
-        wardrobe. Not fine for a bathroom refit in a holiday let.
-      </p>
-
-      <h2>3. "Can I have a written quote?"</h2>
-      <p>
-        Verbal quotes vanish. Written quotes don't. Ask for the quote by
-        email or WhatsApp — something you can refer back to.
-      </p>
-      <p>
-        We provide a free no-obligation quote for every job. Every job is
-        priced individually — the price depends on parts, access and time
-        on the day.
-      </p>
-
-      <h2>4. "How do you quote?"</h2>
-      <p>
-        Phone or WhatsApp a photo and we come back with a free quote. We
-        guarantee a response to every enquiry and there is no obligation to
-        book. We cover <a href={`${BASE}/areas/troon/`}>Troon</a>,
-        <a href={`${BASE}/areas/ayr/`}>Ayr</a> and the rest of
-        <a href={`${BASE}/areas/`}>our East Ayrshire patch</a>.
-      </p>
-
-      <h2>5. "Who actually does the work — you or someone you send?"</h2>
-      <p>
-        This is the question that catches out a lot of bigger handyman firms.
-        The person answering the phone and giving you the quote might not be
-        the person showing up with the drill. That's fine if the handyman you
-        speak to is upfront about it — and a red flag if they dodge the
-        question.
-      </p>
-      <p>
-        For us the answer is simple: it's me (Aidan) or my dad Fraser, every
-        time. Two of us, same van, no subcontractors. If you want a specific
-        one of us because one trade suits the job better, say so — Fraser's
-        the joiner, I'm the plumber. We don't mind.
-      </p>
-
-      <h2>6. "What's the warranty on the work?"</h2>
-      <p>
-        Materials usually carry a manufacturer warranty — that's not the
-        question. Ask about the <em>labour</em>. A proper tradesman will
-        stand behind their own workmanship for at least 12 months. If a
-        joint we soldered leaks in six months, we come back and fix it for
-        free. If a bit of joinery we fitted has warped, same.
-      </p>
-      <p>
-        Ask for this in writing too. "Yeah aye, we'll sort it" isn't a
-        warranty. "12 months on all workmanship, no quibble" in the quote
-        document, is.
-      </p>
-
-      <h2>7. "Can I see a local job and speak to the customer?"</h2>
-      <p>
-        This is the strongest filter of the lot, and most folk don't ask
-        because they're embarrassed to. Don't be. Any handyman who's been
-        working in Troon more than six months has done jobs for people who'd
-        happily vouch. We'll give you two or three names and numbers on
-        request — obviously only customers who've said they're happy to
-        chat.
-      </p>
-      <p>
-        Even better, ask to see a job in the area that's still standing 18
-        months on. A deck. A bathroom. A fence. The photo from the day of
-        completion is easy. The one from 18 months later is the real test.
-      </p>
-
-      <h2>The short version, if you're in a rush</h2>
-      <p>
-        You want a tradesman in Troon who: carries insurance and will prove
-        it, gives you a written quote, tells you straight who's turning up,
-        stands behind their own labour for a year, and can point you at a
-        real local customer.
-      </p>
-      <p>
-        If you find three who tick all seven, pick the one you <em>like</em>.
-        Trades work is a relationship — especially for a second home. The one
-        who answers the phone straight, gives you a straight quote and doesn't
-        waffle is the one to book.
-      </p>
-      <p>
-        If you want to try us,
-        <a href={`tel:${business.phoneE164}`}>call {business.phone}</a>,
-        <a href={`https://wa.me/${business.whatsapp.replace('+','')}`}>WhatsApp a photo</a>, or
-        <a href={`${BASE}/quote/`}>send a quote request here</a>. We answer
-        every message, day, night or weekend. No call centre, no gatekeepers.
-        Me or Fraser, every time.
-      </p>
-
-      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
-        <p class="text-sm text-navy-900/60">Written by</p>
-        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
-        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
-      </div>
-    </div>
-  </article>
-
-  <RelatedPosts posts={relatedPosts} eyebrow="Keep reading" heading="Related posts" variant="tinted" />
-
-  <CTABlock
-    heading="Looking for a straight-talking handyman in Troon?"
-    sub="Tell us what needs doing — photo on WhatsApp if it's easier. We'll answer every question above before you book."
-    location="Troon"
-  />
+  <section class="container-x py-16 max-w-2xl">
+    <h1 class="font-serif text-4xl font-black text-navy-900">Post retired</h1>
+    <p class="mt-4 text-lg text-navy-900/80">
+      This post has been retired. See our live job diary at
+      <a class="font-semibold text-amber-700 hover:underline" href={`${BASE}/blog/`}>/blog/</a>
+      or recent work at
+      <a class="font-semibold text-amber-700 hover:underline" href={`${BASE}/gallery/`}>/gallery/</a>.
+    </p>
+  </section>
 </BaseLayout>

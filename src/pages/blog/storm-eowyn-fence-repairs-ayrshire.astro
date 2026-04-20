@@ -1,276 +1,31 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import CTABlock from '../../components/CTABlock.astro';
-import { business, BASE } from '../../data/business';
-import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
-import RelatedPosts from '../../components/RelatedPosts.astro';
-import BlogHero from '../../components/BlogHero.astro';
-import BlogFigure from '../../components/BlogFigure.astro';
+import { BASE } from '../../data/business';
 
-const post = postBySlug('storm-eowyn-fence-repairs-ayrshire')!;
-const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
-const siteUrl = business.siteUrl.replace(/\/$/, '');
-const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${BASE}/gallery/ayrshire-fence-post-replacement-20-1600w.jpg`;
-
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  '@id': `${url}#article`,
-  headline: post.title,
-  description: post.description,
-  inLanguage: 'en-GB',
-  datePublished: post.date,
-  dateModified: post.date,
-  author: {
-    '@type': 'Person',
-    name: post.author,
-    worksFor: { '@id': `${siteUrl}/#business` },
-  },
-  publisher: { '@id': `${siteUrl}/#business` },
-  image: [ogImage],
-  mainEntityOfPage: url,
-  articleSection: 'Storm damage & fencing',
-  keywords: [post.keyword, 'storm Éowyn Ayrshire', 'fence replacement Cumnock', 'emergency fencing Kilmarnock', 'storm damage insurance fence'],
-  wordCount: post.wordCount,
-  about: [
-    { '@type': 'Place', name: 'East Ayrshire, Scotland' },
-    { '@type': 'Event', name: 'Storm Éowyn' },
-  ],
-};
+const title = 'Post retired — Sorn Handyman Services';
+const description = 'This post has been retired. See our live job diary or recent work.';
+// Canonical points at /blog/ so search engines consolidate ranking signal to the diary.
+const canonicalPath = '/blog/';
 ---
 <BaseLayout
-  title={`${post.title} | Sorn Handyman Services`}
-  description={post.description}
-  canonicalPath={`/blog/${post.slug}/`}
-  ogImage={ogImage}
-  ogType="article"
-  extraSchema={articleSchema}
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  noindex
 >
   <Breadcrumbs trail={[
     { name: 'Home', href: `${BASE}/` },
     { name: 'Blog', href: `${BASE}/blog/` },
-    { name: post.title },
+    { name: 'Post retired' },
   ]} />
-
-  <article class="container-x py-10 lg:py-14 max-w-3xl">
-    <header>
-      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
-        <span>{post.area}</span>
-        <span aria-hidden class="text-navy-900/20">·</span>
-        <span class="text-navy-900/60">{post.readMinutes} min read</span>
-        <span aria-hidden class="text-navy-900/20">·</span>
-        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
-      </div>
-      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
-        {post.title}
-      </h1>
-      <p class="mt-5 text-lg text-navy-900/75">
-        Storm Éowyn put a red weather warning over the whole of central Scotland
-        on 24 January 2025. We spent the three weeks that followed doing almost
-        nothing but fencing. Here is what we saw across East Ayrshire, what
-        the repair actually costs, and what your home insurance will (and will
-        not) pay for.
-      </p>
-    </header>
-    <BlogHero slug="ayrshire-fence-post-replacement-20" />
-
-
-    <div class="prose-sorn mt-8 text-lg cv-auto">
-      <p>
-        Friday 24 January 2025 was the strongest named storm to hit Scotland
-        in a decade. Gusts through the central belt peaked at over 100mph and
-        the Met Office red warning covered every postcode we work in — Ayrshire,
-        Renfrewshire, Lanarkshire. By Saturday morning our WhatsApp was a
-        wall of photos. Most of them were fences on the ground.
-      </p>
-      <p>
-        We wrote down what we saw that weekend and in the three weeks that
-        followed because it was the busiest fencing stretch we have ever had.
-        If you are still staring at a flat line of panels and thinking "is it
-        worth fixing or should I replace the lot?", this is the honest version
-        of what we tell people on the phone.
-      </p>
-
-      <h2>What Storm Éowyn did to East Ayrshire fences</h2>
-      <p>
-        The damage pattern was consistent from Mauchline down to
-        <a href={`${BASE}/areas/cumnock/`}>Cumnock</a> and east towards
-        Muirkirk. Closeboard and feather-edge panels on exposed back gardens
-        were the first to go. Concrete posts mostly held. Timber 75×75 posts
-        snapped clean at ground level — that is where rot usually sits, hidden
-        inside the post-mix collar. The wind found the weak ones and the weak
-        ones gave.
-      </p>
-      <p>
-        The three patterns we logged most often:
-      </p>
-      <ul>
-        <li>
-          <strong>Full lines down.</strong> Three or more consecutive panels
-          flat, usually with one or two snapped posts. Typical on gardens
-          facing south-west across an open field.
-        </li>
-        <li>
-          <strong>Single-panel failures.</strong> One panel blown through
-          or out of its channel, posts intact. Very common on closeboard where
-          the panel was 10+ years old and the feather-edge boards had
-          cupped.
-        </li>
-        <li>
-          <strong>Gate and gravel-board damage.</strong> Gates torn off hinges,
-          gravel boards split. A lot of this in
-          <a href={`${BASE}/areas/kilmarnock/`}>Kilmarnock</a> back courts
-          where gates had been sistered one too many times already.
-        </li>
-      </ul>
-
-            <div class="not-prose my-8">
-        <BlogFigure slug="ayrshire-fence-build-new-11" />
-      </div>
-
-      <h2>Make-safe now vs full replace later</h2>
-      <p>
-        Not every fence needs replacing the week after a storm. If your line
-        is down but the posts are sound, a <strong>make-safe</strong> is the
-        right first call — we re-fix whatever panels we can rescue, prop
-        anything that is leaning, and book the permanent repair in for a
-        dry week when the ground is workable. That keeps the dog in and the
-        garden private while you wait on insurance or a quieter weekend.
-      </p>
-      <p>
-        Common make-safe and
-        <a href={`${BASE}/services/fence-repair/`}>fence repair</a> jobs we
-        run in standard domestic gardens across the KA postcodes:
-      </p>
-      <ul>
-        <li>Re-fix one panel, sister a leaning post.</li>
-        <li>Replace one snapped post and re-hang panels.</li>
-        <li>Gate re-hang with new hinges and drop-bolt.</li>
-        <li>
-          Temporary prop-and-strap for a whole line so it holds until the
-          permanent fit.
-        </li>
-      </ul>
-      <p>
-        Full <a href={`${BASE}/services/fencing/`}>fence replacement</a> with
-        new posts in fast-set and new 6ft closeboard panels is priced per
-        panel including the post and gravel board, assuming we can reuse the
-        existing line. Every job priced individually — phone or WhatsApp
-        for a free no-obligation quote. We set posts in Postfix, use
-        100×100 pressure-treated, concrete gravel boards where the ground is
-        damp, and do not skimp on arris rails.
-      </p>
-
-      <h2>What home insurance usually covers — and what it does not</h2>
-      <p>
-        Most UK buildings-insurance policies <em>do</em> cover storm damage to
-        fencing, but there are three lines of small print that catch people
-        out almost every time. We are not insurance advisors — ring your own
-        insurer before you start — but here is the pattern we see every week
-        on customer claims.
-      </p>
-      <p>
-        <strong>What usually gets paid:</strong>
-      </p>
-      <ul>
-        <li>Direct wind damage to the fence on a named-storm day.</li>
-        <li>Damage to gates, gate posts and gate hinges.</li>
-        <li>
-          Replacement on a like-for-like basis (so closeboard stays
-          closeboard, not an upgrade to composite).
-        </li>
-      </ul>
-      <p>
-        <strong>What usually does not get paid:</strong>
-      </p>
-      <ul>
-        <li>
-          Fences that were already rotten — insurers call this
-          "gradual deterioration" and it is the most common decline reason.
-        </li>
-        <li>
-          Gardens where the damage is cosmetic (cupped boards, loose caps)
-          but the fence is still standing.
-        </li>
-        <li>
-          Upgrades — if you want to go from timber to composite, you pay the
-          difference.
-        </li>
-        <li>
-          The excess — which often exceeds the cost of a single-panel
-          repair anyway.
-        </li>
-      </ul>
-      <p>
-        Practical advice: <strong>photograph everything</strong> before you
-        touch it. Wide shot of the whole line, close-up of each snapped post
-        showing the break, and a shot of the panel in situ on the ground.
-        Insurers want evidence the damage happened on the storm date, not
-        three weeks earlier. We send itemised invoices with date, address,
-        a plain-English scope of works and a split between labour and
-        materials — that is what the claims team wants to see.
-      </p>
-
-      <h2>How fast can you get us out?</h2>
-      <p>
-        In the middle of a named-storm aftermath, our diary usually stretches
-        to two to three weeks for a full replacement across
-        <a href={`${BASE}/areas/`}>the East Ayrshire patch</a>. Make-safe
-        visits — where we prop the line, re-fix what we can and get your
-        garden dog-proof — we normally do inside 48 hours even in storm
-        week, because we keep a separate "emergency" slot running.
-      </p>
-      <p>
-        The fastest way to get on the list is to WhatsApp
-        <a href={`https://wa.me/${business.whatsapp.replace('+','')}`}>a few
-        photos</a> to Aidan with the postcode and how long the fence line
-        is. We send a ballpark back the same day and a firm quote by email
-        once we have walked it.
-      </p>
-
-      <h2>FAQ</h2>
-      <h3>Was Storm Éowyn an insurance-recognised named storm?</h3>
-      <p>
-        Yes — it was named by the Met Office and carried a red warning across
-        central Scotland on 24 January 2025, which is what UK insurers
-        typically look for when assessing storm cover.
-      </p>
-      <h3>My neighbour's fence fell into my garden. Whose insurance pays?</h3>
-      <p>
-        The fence owner's policy, normally. Check the deeds or title plan for
-        the T-mark — the side of the boundary the fence belongs to. We can
-        repair either side regardless of who is paying.
-      </p>
-      <h3>Do you do emergency fencing outside daylight hours?</h3>
-      <p>
-        For a make-safe where the damage is a hazard — yes, any hour.
-        Out-of-hours work (10pm–6am) is priced individually — phone or
-        WhatsApp for a free no-obligation quote before we set off. For
-        full replacements we book in daylight when we can see what we are
-        doing.
-      </p>
-      <h3>Will you fit composite or metal fencing?</h3>
-      <p>
-        We fit timber closeboard, feather-edge, overlap and hit-and-miss as
-        standard. Composite fence panels and steel railings we will quote on
-        request — they take longer to source.
-      </p>
-
-      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
-        <p class="text-sm text-navy-900/60">Written by</p>
-        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
-        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
-      </div>
-    </div>
-  </article>
-
-  <RelatedPosts posts={relatedPosts} eyebrow="Keep reading" heading="Related posts" variant="tinted" />
-
-  <CTABlock
-    heading="Fence down after a storm? We'll get you back on the list."
-    sub="WhatsApp Aidan a wide photo and the postcode. We'll come back the same day with a make-safe slot and a ballpark for the full repair."
-    location="Ayrshire"
-  />
+  <section class="container-x py-16 max-w-2xl">
+    <h1 class="font-serif text-4xl font-black text-navy-900">Post retired</h1>
+    <p class="mt-4 text-lg text-navy-900/80">
+      This post has been retired. See our live job diary at
+      <a class="font-semibold text-amber-700 hover:underline" href={`${BASE}/blog/`}>/blog/</a>
+      or recent work at
+      <a class="font-semibold text-amber-700 hover:underline" href={`${BASE}/gallery/`}>/gallery/</a>.
+    </p>
+  </section>
 </BaseLayout>

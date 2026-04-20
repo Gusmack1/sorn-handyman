@@ -1,259 +1,31 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import CTABlock from '../../components/CTABlock.astro';
-import { business, BASE } from '../../data/business';
-import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
-import RelatedPosts from '../../components/RelatedPosts.astro';
-import BlogHero from '../../components/BlogHero.astro';
-import BlogFigure from '../../components/BlogFigure.astro';
+import { BASE } from '../../data/business';
 
-const post = postBySlug('flat-pack-assembly-east-ayrshire')!;
-const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
-const siteUrl = business.siteUrl.replace(/\/$/, '');
-const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${BASE}/gallery/sorn-internal-door-trim-refit-03-1600w.jpg`;
-
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  '@id': `${url}#article`,
-  headline: post.title,
-  description: post.description,
-  inLanguage: 'en-GB',
-  datePublished: post.date,
-  dateModified: post.date,
-  author: {
-    '@type': 'Person',
-    name: post.author,
-    worksFor: { '@id': `${siteUrl}/#business` },
-  },
-  publisher: { '@id': `${siteUrl}/#business` },
-  image: [ogImage],
-  mainEntityOfPage: url,
-  articleSection: 'Flat-pack assembly',
-  keywords: [post.keyword, 'IKEA assembly Kilmarnock', 'Argos flat pack Cumnock', 'Wayfair assembly KA5', 'flat pack fitter East Ayrshire'],
-  wordCount: post.wordCount,
-  about: { '@type': 'Place', name: 'East Ayrshire, Scotland' },
-};
+const title = 'Post retired — Sorn Handyman Services';
+const description = 'This post has been retired. See our live job diary or recent work.';
+// Canonical points at /blog/ so search engines consolidate ranking signal to the diary.
+const canonicalPath = '/blog/';
 ---
 <BaseLayout
-  title={`${post.title} | Sorn Handyman Services`}
-  description={post.description}
-  canonicalPath={`/blog/${post.slug}/`}
-  ogImage={ogImage}
-  extraSchema={articleSchema}
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  noindex
 >
   <Breadcrumbs trail={[
     { name: 'Home', href: `${BASE}/` },
     { name: 'Blog', href: `${BASE}/blog/` },
-    { name: post.title },
+    { name: 'Post retired' },
   ]} />
-
-  <article class="container-x py-10 lg:py-14 max-w-3xl">
-    <header>
-      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
-        <span>{post.area}</span>
-        <span aria-hidden class="text-navy-900/20">·</span>
-        <span class="text-navy-900/60">{post.readMinutes} min read</span>
-        <span aria-hidden class="text-navy-900/20">·</span>
-        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
-      </div>
-      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
-        {post.title}
-      </h1>
-      <p class="mt-5 text-lg text-navy-900/75">
-        What actually turns up in East Ayrshire kitchens and bedrooms in 2026
-        — IKEA PAX and BILLY, Argos bunk beds, Wayfair L-desks, Dunelm
-        sideboards — the brands that go together clean, the ones that fight
-        you, and honest price bands by item.
-      </p>
-    </header>
-    <BlogHero slug="sorn-internal-door-trim-refit-03" />
-
-
-    <div class="prose-sorn mt-8 text-lg cv-auto">
-      <p>
-        Every week we open boxes across
-        <a href={`${BASE}/areas/cumnock/`}>Cumnock</a>,
-        <a href={`${BASE}/areas/mauchline/`}>Mauchline</a>,
-        <a href={`${BASE}/areas/galston/`}>Galston</a> and the rest of the
-        KA5, KA17 and KA18 patch. Different brands, different tricks. This
-        is the honest version of what we see most on the
-        <a href={`${BASE}/services/flat-pack-assembly/`}>flat-pack assembly</a>
-        round in East Ayrshire, how long each one takes, and what it costs
-        to have someone sensible put it together rather than fight it
-        yourself on a Saturday.
-      </p>
-
-      <h2>What we see most — by brand</h2>
-
-      <h3>IKEA — still 60% of everything we build</h3>
-      <p>
-        PAX wardrobes, BILLY bookcases, KALLAX cubes, MALM chests, HEMNES
-        beds and the full range of kids’ furniture. IKEA is well-engineered
-        flat-pack: dowels are consistent, cam-locks seat clean, and the
-        instructions are genuinely good. A competent handyman builds IKEA
-        roughly 20% faster than the brand’s own estimate because we know
-        which steps overlap. The common mistake on a DIY PAX is covered in
-        the dedicated <a href={`${BASE}/blog/flat-pack-assembly-ayr/`}>Ayr
-        PAX guide</a>.
-      </p>
-
-      <h3>Argos — bunk beds and the occasional wardrobe</h3>
-      <p>
-        Argos flat-pack lands hardest around school holidays when East
-        Ayrshire parents buy a new bunk for the second child. The
-        single-over-single bunk is about 90 minutes to build properly,
-        with every bolt checked to torque and the ladder bracket hit at
-        the right angle. Argos timber is softer than IKEA — over-tightening
-        splits the end grain — so torque matters. We see more partially
-        built, giving-up calls on Argos bunks than on any other single
-        item.
-      </p>
-
-      <h3>Wayfair — L-shaped desks and flat-pack sofas</h3>
-      <p>
-        Wayfair stock varies wildly because it is a marketplace. The big
-        L-desks and gaming-station setups are usually two hours and turn
-        out fine. The Wayfair flat-pack sofas are where it gets ugly —
-        some are clever, some have feet that thread into MDF and strip on
-        the first tighten. If you send us the product name before you
-        buy, we will tell you honestly whether it is worth the money
-        or whether the neighbouring Dunelm item will be stronger.
-      </p>
-
-      <h3>Dunelm and B&Q — wardrobes, TV units, dressers</h3>
-      <p>
-        Dunelm’s own-brand flat-pack is underrated. The timber is thicker
-        than Wayfair and the hinges are proper soft-close. B&Q fitted-
-        wardrobe kits are fine but install time doubles because they are
-        built against the wall with scribe pieces. Price that in if you
-        are comparing.
-      </p>
-
-      <h3>Oak Furnitureland and Next — rare but worth noting</h3>
-      <p>
-        Both sell semi-assembled hardwood. Turn up, bolt a top to a base,
-        fit drawer runners, done. Forty-five-minute jobs — priced
-        individually. If you want the shortest assembly time for the money,
-        these are
-        the brands. For built-in runs and alcove shelving we move into
-        <a href={`${BASE}/services/joinery/`}>proper joinery</a> work
-        instead — different skill, different price band.
-      </p>
-
-            <div class="not-prose my-8">
-        <BlogFigure slug="kilmarnock-acoustic-slat-wall-panelling-tv-mount-05" />
-      </div>
-
-      <h2>How we price flat-pack across East Ayrshire</h2>
-      <p>
-        Every job priced individually — phone or WhatsApp for a free
-        no-obligation quote. We price by item type and number of items in
-        the visit, not by the hour. The same approach we use in
-        <a href={`${BASE}/areas/ayr/`}>Ayr</a> runs across KA5, KA17, KA18,
-        KA1 and KA3. Typical items we build:
-      </p>
-      <ul>
-        <li>Small items — IKEA LACK, MALM bedside, KALLAX 2×2, Argos single desk, Oak Furnitureland semi-assembled.</li>
-        <li>Mid-size — IKEA MALM 6-drawer, Dunelm TV unit, Argos single-over-single bunk, Wayfair office desk.</li>
-        <li>Large — Double PAX with standard doors, B&Q fitted-wardrobe single unit, double bunk, sideboard with dowelled back panel.</li>
-        <li>Full room — Triple PAX with sliding doors, Wayfair L-desk with hutch, HEMNES double bed with all drawers, large dresser.</li>
-        <li>Multi-item visits — usually a kids' bedroom or an office fit-out in one afternoon. Bundled, better value per item than separate visits.</li>
-      </ul>
-      <p>
-        Every job quoted individually — call 07900 255876 or WhatsApp +44 7472 223323 for a FREE no-obligation quote.
-      </p>
-
-      <h2>Two items that cost more than you expect</h2>
-
-      <h3>Wardrobes with sliding mirror doors</h3>
-      <p>
-        Any sliding-door wardrobe — IKEA PAX, B&Q sliders, Sharps-style
-        copies — needs the frame perfectly level before the doors go on.
-        Older houses in
-        <a href={`${BASE}/areas/auchinleck/`}>Auchinleck</a>,
-        <a href={`${BASE}/areas/catrine/`}>Catrine</a> and rural KA5
-        often drop 10mm across the footprint. That is an extra 20 minutes
-        of shimming and a small parts add-on for plastic shims. It is the
-        difference between
-        sliding doors that glide and sliding doors that bounce.
-      </p>
-
-      <h3>Bunk beds with torque-sensitive bolts</h3>
-      <p>
-        The bolts holding a bunk ladder to the frame are the single most
-        important fastening in any child’s bedroom. Over-tighten and you
-        crack the timber. Under-tighten and the ladder wobbles in a week.
-        We use a torque driver on those, not a battery impact. That’s
-        five minutes of extra care that matters.
-      </p>
-
-      <h2>What we bring that a DIY attempt doesn’t</h2>
-      <ul>
-        <li><strong>A proper stud finder.</strong> We anchor into stud where possible, never into plasterboard alone.</li>
-        <li><strong>Shim packs.</strong> Older East Ayrshire floors dip. Shims are cheap insurance.</li>
-        <li><strong>The full fixing kit.</strong> Dot-and-dab anchors, timber screws, masonry plugs, metal plasterboard butterflies — all in the van.</li>
-        <li><strong>A torque driver.</strong> Particleboard has one torque. Solid wood has another. Getting it right matters.</li>
-        <li><strong>Disposal.</strong> Every scrap of packaging out of the house. We pay the tip fee.</li>
-      </ul>
-
-      <h2>FAQ</h2>
-
-      <h3>Can you quote before I buy the flat-pack?</h3>
-      <p>
-        Yes, and we recommend it. Send the product link on WhatsApp and
-        we will tell you the assembly band and flag any known pitfalls
-        for that SKU. Quicker than building it and finding out.
-      </p>
-
-      <h3>Do you cover all of East Ayrshire?</h3>
-      <p>
-        Yes — KA1 Kilmarnock, KA5 Sorn and Mauchline, KA17 Galston and
-        Newmilns, KA18 Cumnock and Auchinleck, KA4 Muirkirk, plus the
-        South Ayrshire side (KA7 Ayr, KA9 Prestwick, KA10 Troon, KA12
-        Irvine). Nothing is too remote.
-      </p>
-
-      <h3>Same-day slots for a single item?</h3>
-      <p>
-        Usually, yes. For a single flat-pack in East Ayrshire we can
-        often come the same afternoon if you ring before 11am.
-      </p>
-
-      <h3>Do you build outdoor flat-pack too — sheds and gazebos?</h3>
-      <p>
-        Yes. Sheds, metal gazebos, outdoor playhouses, trampolines. Pricing
-        is by item — send a photo of the box.
-      </p>
-
-      <h3>What if I already started and it is in a heap?</h3>
-      <p>
-        Rescue jobs are the same price as a fresh build. We will unpick
-        the worst, straighten what is salvageable, and tell you honestly
-        if a panel is split and needs re-ordered.
-      </p>
-
-      <p>
-        Box on the living-room floor and second thoughts kicking in? Send
-        us a photo. Firm price back inside an hour, built the same week
-        across East Ayrshire.
-      </p>
-
-      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
-        <p class="text-sm text-navy-900/60">Written by</p>
-        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
-        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
-      </div>
-    </div>
-  </article>
-
-  <RelatedPosts posts={relatedPosts} eyebrow="Keep reading" heading="Related posts" variant="tinted" />
-
-  <CTABlock
-    heading="Flat-pack in a heap? We build, we don't guess."
-    sub="WhatsApp a photo of the box — firm price back inside an hour, built this week across East Ayrshire."
-    location="East Ayrshire"
-  />
+  <section class="container-x py-16 max-w-2xl">
+    <h1 class="font-serif text-4xl font-black text-navy-900">Post retired</h1>
+    <p class="mt-4 text-lg text-navy-900/80">
+      This post has been retired. See our live job diary at
+      <a class="font-semibold text-amber-700 hover:underline" href={`${BASE}/blog/`}>/blog/</a>
+      or recent work at
+      <a class="font-semibold text-amber-700 hover:underline" href={`${BASE}/gallery/`}>/gallery/</a>.
+    </p>
+  </section>
 </BaseLayout>

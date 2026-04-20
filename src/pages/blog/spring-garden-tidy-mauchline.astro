@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import { business, BASE } from '../../data/business';
+import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
+
+const post = postBySlug('spring-garden-tidy-mauchline')!;
+const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+const url = `${siteUrl}/blog/${post.slug}/`;
+const ogImage = `${siteUrl}${BASE}/gallery/mauchline-spring-garden-tidy-07-1600w.jpg`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: post.title,
+  description: post.description,
+  inLanguage: 'en-GB',
+  datePublished: post.date,
+  dateModified: post.date,
+  author: { '@type': 'Person', name: post.author, worksFor: { '@id': `${siteUrl}/#business` } },
+  publisher: { '@id': `${siteUrl}/#business` },
+  image: [ogImage],
+  mainEntityOfPage: url,
+  keywords: [post.keyword],
+  wordCount: post.wordCount,
+};
+---
+<BaseLayout
+  title={`${post.title} | Sorn Handyman Services`}
+  description={post.description}
+  canonicalPath={`/blog/${post.slug}/`}
+  ogImage={ogImage}
+  ogType="article"
+  extraSchema={articleSchema}
+>
+  <Breadcrumbs trail={[
+    { name: 'Home', href: `${BASE}/` },
+    { name: 'Blog', href: `${BASE}/blog/` },
+    { name: post.title },
+  ]} />
+
+  <article class="container-x py-10 lg:py-14 max-w-3xl">
+    <header>
+      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
+        <span>{post.area}</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <span class="text-navy-900/60">{post.readMinutes} min read</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
+      </div>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
+        {post.title}
+      </h1>
+      <p class="mt-5 text-lg text-navy-900/75">
+        A spring garden tidy-up in Mauchline for a new customer. Nothing
+        fancy — a simple lift ready for the warmer months: cut back, clear
+        out, edges tidied and the whole plot brought back into shape.
+      </p>
+    </header>
+
+    <BlogHero slug="mauchline-spring-garden-tidy-07" />
+
+    <div class="prose-sorn mt-8 text-lg cv-auto">
+      <h2>What the job involved</h2>
+      <p>
+        Overgrown beds came back first — old stems cut down, leaf litter
+        cleared, and the ground opened up so light and air could get at what
+        was left. Lawn edges were re-cut to put a clean line back between
+        grass and border.
+      </p>
+      <p>
+        Paths and paved areas were swept, the bin area sorted out, and the
+        green waste bagged and taken away. The customer came out to a garden
+        that looked twice the size it had done that morning.
+      </p>
+
+      <BlogFigure slug="mauchline-spring-garden-tidy-07" />
+
+      <h2>Things to think about before you start</h2>
+      <p>
+        A spring tidy is best done once the worst of the frost is behind you
+        but before everything puts on real growth — roughly March through to
+        early May across Ayrshire. Earlier than that and you are cutting into
+        buds that will come back on their own; later and you are fighting the
+        grass every weekend.
+      </p>
+      <p>
+        Decide in advance what happens to the green waste. Council uplifts,
+        skip hire or a trailer load to the tip all work, but each has a
+        different cost and day on site. Agreeing that up front means no
+        surprises when the trailer is full and the beds are not yet done.
+      </p>
+
+      <p>
+        If you are in Mauchline and need something similar, Fraser will come
+        and look for free. Call <strong>07900 255876</strong> or WhatsApp
+        <strong>+44 7472 223323</strong>. FREE no-obligation quote, every job
+        priced individually.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
+        <p class="text-sm text-navy-900/60">Written by</p>
+        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
+        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
+      </div>
+    </div>
+  </article>
+
+  {relatedPosts.length > 0 && (
+    <RelatedPosts posts={relatedPosts} eyebrow="Keep reading" heading="Related posts" variant="tinted" />
+  )}
+
+  <CTABlock
+    heading="Garden getting away from you?"
+    sub="A short tidy makes a big difference — Fraser will come and walk it with you."
+    location="Mauchline"
+  />
+</BaseLayout>

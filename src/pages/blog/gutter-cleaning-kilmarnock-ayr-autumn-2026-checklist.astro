@@ -1,271 +1,31 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import CTABlock from '../../components/CTABlock.astro';
-import { business, BASE } from '../../data/business';
-import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
-import RelatedPosts from '../../components/RelatedPosts.astro';
-import BlogHero from '../../components/BlogHero.astro';
-import BlogFigure from '../../components/BlogFigure.astro';
+import { BASE } from '../../data/business';
 
-const post = postBySlug('gutter-cleaning-kilmarnock-ayr-autumn-2026-checklist')!;
-const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
-const siteUrl = business.siteUrl.replace(/\/$/, '');
-const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${BASE}/gallery/ayrshire-fascia-board-repair-17-1600w.jpg`;
-
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  '@id': `${url}#article`,
-  headline: post.title,
-  description: post.description,
-  inLanguage: 'en-GB',
-  datePublished: post.date,
-  dateModified: post.date,
-  author: {
-    '@type': 'Person',
-    name: post.author,
-    worksFor: { '@id': `${siteUrl}/#business` },
-  },
-  publisher: { '@id': `${siteUrl}/#business` },
-  image: [ogImage],
-  mainEntityOfPage: url,
-  articleSection: 'Gutter cleaning',
-  keywords: [post.keyword, 'autumn gutter clean kilmarnock', 'gutter vacuum ayr', 'blocked gutters KA1', 'gutter checklist 2026'],
-  wordCount: post.wordCount,
-  about: [{ '@type': 'Place', name: 'Kilmarnock, Scotland' }, { '@type': 'Place', name: 'Ayr, Scotland' }],
-};
+const title = 'Post retired — Sorn Handyman Services';
+const description = 'This post has been retired. See our live job diary or recent work.';
+// Canonical points at /blog/ so search engines consolidate ranking signal to the diary.
+const canonicalPath = '/blog/';
 ---
 <BaseLayout
-  title={`${post.title} | Sorn Handyman Services`}
-  description={post.description}
-  canonicalPath={`/blog/${post.slug}/`}
-  ogImage={ogImage}
-  extraSchema={articleSchema}
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  noindex
 >
   <Breadcrumbs trail={[
     { name: 'Home', href: `${BASE}/` },
     { name: 'Blog', href: `${BASE}/blog/` },
-    { name: post.title },
+    { name: 'Post retired' },
   ]} />
-
-  <article class="container-x py-10 lg:py-14 max-w-3xl">
-    <header>
-      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
-        <span>{post.area}</span>
-        <span aria-hidden class="text-navy-900/20">·</span>
-        <span class="text-navy-900/60">{post.readMinutes} min read</span>
-        <span aria-hidden class="text-navy-900/20">·</span>
-        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
-      </div>
-      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
-        {post.title}
-      </h1>
-      <p class="mt-5 text-lg text-navy-900/75">
-        A short autumn gutter checklist for Kilmarnock, Ayr and the KA
-        postcodes heading into winter 2026–27. What to look for the week
-        after the first big leaf-drop, when to leave it alone, and the
-        five signs that mean book this week, not next month.
-      </p>
-    </header>
-    <BlogHero slug="ayrshire-fascia-board-repair-17" />
-
-
-    <div class="prose-sorn mt-8 text-lg cv-auto">
-      <p>
-        We still believe spring is the better window for a main clean —
-        the long reasoning is in the
-        <a href={`${BASE}/blog/gutter-cleaning-ayr-kilmarnock-spring/`}>Ayr
-        and Kilmarnock spring post</a>. That said, autumn 2026 across the
-        west of Scotland has been wet and windy, trees dropped early in
-        Kilmarnock and Ayr, and plenty of folk need a quick
-        <a href={`${BASE}/services/gutter-cleaning/`}>gutter clean</a>
-        before the first proper storm of November lands.
-      </p>
-      <p>
-        This is a practical checklist — walk round the outside of your
-        house, five minutes, and you will know whether to book or leave
-        it. Full price bands and service details sit on the
-        <a href={`${BASE}/services/guttering/`}>guttering service page</a>
-        and in the
-        <a href={`${BASE}/blog/gutter-cleaning-cost-kilmarnock/`}>Kilmarnock
-        cost post</a>.
-      </p>
-
-      <h2>The 6-point autumn walk-around</h2>
-
-      <h3>1. Look straight up at the eaves</h3>
-      <p>
-        Stand on the lawn, ten feet back from the wall. Look at the front
-        edge of the gutter. If you see leaves hanging over the lip, a
-        dark line of moss along the front, or seedling plants rooted in
-        the run, you are overdue. That is not cosmetic — it is a dam.
-        Next heavy rain, water overshoots the front edge and hits the
-        render.
-      </p>
-
-      <h3>2. Check the downpipes in rain</h3>
-      <p>
-        On the next wet day, look at each downpipe. If water is running
-        strongly through them, the gutters are flowing. If one downpipe
-        is dry while the others run, or if water is overflowing from the
-        hopper at the top, that run is blocked. That one needs clearing
-        before the next storm.
-      </p>
-
-      <h3>3. Damp streaks on the wall</h3>
-      <p>
-        Dark streaks down the render directly under a joint or hopper
-        mean the joint has been weeping quietly for weeks. Common on
-        1960s and 1970s cast-iron hoppers in
-        <a href={`${BASE}/areas/kilmarnock/`}>Kilmarnock</a> and the
-        older Alloway and Prestwick housing in
-        <a href={`${BASE}/areas/ayr/`}>Ayr</a>. Left alone, the render
-        cracks and water starts tracking behind it.
-      </p>
-
-      <h3>4. The inside of an upstairs corner</h3>
-      <p>
-        Go upstairs and check the corner of the ceiling in the bedroom
-        nearest the eaves. A brown tide mark, soft plaster, or a musty
-        smell says water is backing up at the gutter and soaking the
-        wall top through the eaves. That is a whole-house problem if
-        you leave it to February.
-      </p>
-
-      <h3>5. Moss carpet on the tiles near the gutter</h3>
-      <p>
-        A thick moss carpet on the slates nearest the gutter is not a
-        gutter problem on its own. But on every rainfall it peels off
-        in strings and ends up in the gutter. If you see a heavy moss
-        mat at the eaves course, the gutter below is probably full.
-      </p>
-
-      <h3>6. Birds nesting in the hopper</h3>
-      <p>
-        Birds nesting in the hopper suggest the gutter is dry and full
-        of the soft debris that builds a nest. That is a dead giveaway
-        the gutter is blocked solid.
-      </p>
-
-            <div class="not-prose my-8">
-        <BlogFigure slug="kilmarnock-dry-verge-roof-repair-01" />
-      </div>
-
-      <h2>Autumn 2026 — how we quote</h2>
-      <p>
-        Same as the rest of the year — we do not hike prices because it is
-        October. Every job priced individually against house size, access,
-        condition and the length of the run. Typical jobs we cover in
-        autumn across the KA postcodes:
-      </p>
-      <ul>
-        <li>Bungalow, single storey — KA1, KA2, KA3, KA7 or KA9.</li>
-        <li>Standard 3-bed semi anywhere in Kilmarnock, Ayr, Troon or Prestwick.</li>
-        <li>4-bed detached with garage run, complex back roofline.</li>
-        <li>Kilmarnock town-centre tenements, Ayr seafront terraces, Maybole stone cottages with full-height cast-iron runs.</li>
-      </ul>
-      <p>
-        Every job quoted individually — call 07900 255876 or WhatsApp +44 7472 223323 for a FREE no-obligation quote. We cover KA1 to KA9, KA12
-        <a href={`${BASE}/areas/irvine/`}>Irvine</a>, KA17, KA18 and KA19.
-      </p>
-
-      <h2>What the autumn clean actually looks like</h2>
-      <p>
-        Same kit as spring. No ladders on your lawn, no boot prints on
-        the slates. A carbon-fibre vac pole with a camera on the end and
-        a high-suction vac at the base. What is in the price every time:
-      </p>
-      <ul>
-        <li>All gutters, hoppers and outlets vac-cleared.</li>
-        <li>Downpipes flushed with water to confirm flow.</li>
-        <li>Before-and-after photos of each run, sent by WhatsApp.</li>
-        <li>All leaves, moss and silt bagged and taken away — we pay the tip fee.</li>
-        <li>Bracket and joint check while the pole is up.</li>
-        <li>Free written repair quote for anything we spot, no pressure.</li>
-      </ul>
-      <p>
-        Anything we flag feeds into our broader
-        <a href={`${BASE}/services/roofing/`}>roofing and guttering repair</a>
-        work — loose brackets, leaking joints, sagging runs, cracked
-        fascia. You decide whether to book the fix; we will never add it
-        to the invoice without asking.
-      </p>
-
-      <h2>When to leave it alone</h2>
-      <p>
-        If you cleaned in April, have no trees within five metres of the
-        roof, no damp streaks, all downpipes running strongly on wet
-        days, and no moss on the eaves course — you can safely skip
-        autumn and do the next clean in April 2027.
-      </p>
-      <p>
-        Two exceptions: mature trees near the eaves, and any property
-        inside <a href={`${BASE}/areas/irvine/`}>Irvine</a>,
-        <a href={`${BASE}/areas/stewarton/`}>Stewarton</a> or
-        <a href={`${BASE}/areas/kilmaurs/`}>Kilmaurs</a> with a hedge
-        alongside the driveway. Both shed enough debris that one spring
-        clean is not enough.
-      </p>
-
-      <h2>FAQ</h2>
-
-      <h3>When is the autumn window?</h3>
-      <p>
-        First weekend of November is our rule of thumb for the KA
-        postcodes. Trees are mostly bare by then and you catch the
-        debris before the first big low-pressure storm rolls in.
-      </p>
-
-      <h3>Can you clean after a storm has hit?</h3>
-      <p>
-        Yes. Post-storm leaf and twig clearance is a common same-week
-        job. If a downpipe has split or a section of gutter has come
-        loose, we can also make-safe and quote a repair from the same
-        visit.
-      </p>
-
-      <h3>Do you do commercial properties?</h3>
-      <p>
-        Yes. Small commercial, retail units, light industrial. Scheduled
-        maintenance contracts too — half the cost of one-off visits if
-        you want spring and autumn booked in together.
-      </p>
-
-      <h3>How quickly can you get out?</h3>
-      <p>
-        We are booking roughly a week out through autumn 2026. If the
-        issue is active — water pouring down a wall in a storm — we
-        can usually get to you the same day across KA1, KA3 and KA7.
-      </p>
-
-      <h3>What if you find a bigger problem?</h3>
-      <p>
-        We photograph it, quote it separately, and you decide.
-        The clean is still the clean. We do not bundle surprise repairs
-        into the invoice.
-      </p>
-
-      <p>
-        Five-minute walk round the garden this weekend, book the clean
-        if you spot any of the six signs above. Cheaper now than after
-        the first November gale.
-      </p>
-
-      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
-        <p class="text-sm text-navy-900/60">Written by</p>
-        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
-        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
-      </div>
-    </div>
-  </article>
-
-  <RelatedPosts posts={relatedPosts} eyebrow="Keep reading" heading="Related posts" variant="tinted" />
-
-  <CTABlock
-    heading="Autumn gutter clean in Kilmarnock or Ayr?"
-    sub="WhatsApp Fraser a photo of the house front and back — firm price back to you inside an hour."
-    location="Kilmarnock & Ayr"
-  />
+  <section class="container-x py-16 max-w-2xl">
+    <h1 class="font-serif text-4xl font-black text-navy-900">Post retired</h1>
+    <p class="mt-4 text-lg text-navy-900/80">
+      This post has been retired. See our live job diary at
+      <a class="font-semibold text-amber-700 hover:underline" href={`${BASE}/blog/`}>/blog/</a>
+      or recent work at
+      <a class="font-semibold text-amber-700 hover:underline" href={`${BASE}/gallery/`}>/gallery/</a>.
+    </p>
+  </section>
 </BaseLayout>

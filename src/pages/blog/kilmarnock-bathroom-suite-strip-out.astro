@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import { business, BASE } from '../../data/business';
+import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
+
+const post = postBySlug('kilmarnock-bathroom-suite-strip-out')!;
+const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+const url = `${siteUrl}/blog/${post.slug}/`;
+const ogImage = `${siteUrl}${BASE}/gallery/kilmarnock-bathroom-suite-plumbing-02-1600w.jpg`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: post.title,
+  description: post.description,
+  inLanguage: 'en-GB',
+  datePublished: post.date,
+  dateModified: post.date,
+  author: { '@type': 'Person', name: post.author, worksFor: { '@id': `${siteUrl}/#business` } },
+  publisher: { '@id': `${siteUrl}/#business` },
+  image: [ogImage],
+  mainEntityOfPage: url,
+  keywords: [post.keyword],
+  wordCount: post.wordCount,
+};
+---
+<BaseLayout
+  title={`${post.title} | Sorn Handyman Services`}
+  description={post.description}
+  canonicalPath={`/blog/${post.slug}/`}
+  ogImage={ogImage}
+  ogType="article"
+  extraSchema={articleSchema}
+>
+  <Breadcrumbs trail={[
+    { name: 'Home', href: `${BASE}/` },
+    { name: 'Blog', href: `${BASE}/blog/` },
+    { name: post.title },
+  ]} />
+
+  <article class="container-x py-10 lg:py-14 max-w-3xl">
+    <header>
+      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
+        <span>{post.area}</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <span class="text-navy-900/60">{post.readMinutes} min read</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
+      </div>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
+        {post.title}
+      </h1>
+      <p class="mt-5 text-lg text-navy-900/75">
+        A bathroom job in Kilmarnock that turned into a bigger one once the suite
+        came out. The old pipework was leaking, the floor was soft underneath, and
+        the timber had started to rot. We stripped it back to the joists before
+        anything new went in.
+      </p>
+    </header>
+
+    <BlogHero slug="kilmarnock-bathroom-suite-plumbing-02" />
+
+    <div class="prose-sorn mt-8 text-lg cv-auto">
+      <h2>What the job involved</h2>
+      <p>
+        The suite came out first — bath, basin, WC and vanity — so we could see
+        what was going on underneath. As soon as the floor covering lifted, the
+        scale of the hidden damage was obvious. The copper feeds under the bath
+        had a slow weep that had been running long enough to blacken the boards.
+      </p>
+      <p>
+        We replaced the leaking pipework, pulled up the rotten flooring and
+        renewed the timber back to sound joists. Only then did the room get put
+        back — new boards, fresh fixings, clean pipe runs and the suite reset
+        square. It is not glamorous work but it is the difference between a
+        finish that lasts and a finish that hides another leak.
+      </p>
+
+      <BlogFigure slug="kilmarnock-bathroom-suite-plumbing-02" />
+
+      <h2>Things to think about before you start</h2>
+      <p>
+        Soft-feeling floorboards at the bath or WC, a musty smell, or a ceiling
+        stain on the room below are the three signs a bathroom has hidden pipe
+        damage. Any one of them is worth a look before you commit to a new
+        suite, because fitting new ware onto wet timber only buys you a year or
+        two.
+      </p>
+      <p>
+        Plan for the possibility that the floor will need work. Budget for a
+        couple of extra hours, and agree with your fitter up front what happens
+        if the boards need replacing once the suite is out. Honest conversations
+        on day one save arguments on day three.
+      </p>
+
+      <p>
+        If you are in Kilmarnock and need something similar, Fraser will come
+        and look for free. Call <strong>07900 255876</strong> or WhatsApp
+        <strong>+44 7472 223323</strong>. FREE no-obligation quote, every job
+        priced individually.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
+        <p class="text-sm text-navy-900/60">Written by</p>
+        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
+        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
+      </div>
+    </div>
+  </article>
+
+  {relatedPosts.length > 0 && (
+    <RelatedPosts posts={relatedPosts} eyebrow="Keep reading" heading="Related posts" variant="tinted" />
+  )}
+
+  <CTABlock
+    heading="Bathroom starting to show its age?"
+    sub="Send a couple of photos over WhatsApp and Fraser will come and look for free."
+    location="Kilmarnock"
+  />
+</BaseLayout>
