@@ -45,6 +45,12 @@ const core = coreBusiness(canonical);
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#0F2A3F" />
     <meta name="color-scheme" content="light only" />
+    <!-- Security meta (best-effort on static host — headers should also be set upstream if behind a proxy) -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
