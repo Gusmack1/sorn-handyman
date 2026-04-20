@@ -5,12 +5,14 @@ import CTABlock from '../../components/CTABlock.astro';
 import { business, BASE } from '../../data/business';
 import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
 import RelatedPosts from '../../components/RelatedPosts.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
 
 const post = postBySlug('handyman-ayrshire-landlords')!;
 const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
 const siteUrl = business.siteUrl.replace(/\/$/, '');
 const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${post.ogImage}`;
+const ogImage = `${siteUrl}${BASE}/gallery/ayrshire-living-room-emulsion-painting-18-1600w.jpg`;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -69,6 +71,8 @@ const articleSchema = {
         that actually work for portfolios.
       </p>
     </header>
+    <BlogHero slug="ayrshire-living-room-emulsion-painting-18" />
+
 
     <div class="prose-sorn mt-8 text-lg cv-auto">
       <p>
@@ -119,6 +123,10 @@ const articleSchema = {
         every third or fourth tenancy, which is when it is cheapest to
         get the whole flat back to a photographable standard.
       </p>
+
+            <div class="not-prose my-8">
+        <BlogFigure slug="ayrshire-kitchen-refit-belfast-sink-granite-15" />
+      </div>
 
       <h2>Tenant-damage fixes we do every week</h2>
       <p>

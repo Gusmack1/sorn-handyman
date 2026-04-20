@@ -5,12 +5,14 @@ import CTABlock from '../../components/CTABlock.astro';
 import { business, BASE } from '../../data/business';
 import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
 import RelatedPosts from '../../components/RelatedPosts.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
 
 const post = postBySlug('emergency-plumber-mauchline')!;
 const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
 const siteUrl = business.siteUrl.replace(/\/$/, '');
 const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${post.ogImage}`;
+const ogImage = `${siteUrl}${BASE}/gallery/kilmarnock-bathroom-suite-plumbing-02-1600w.jpg`;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -68,6 +70,8 @@ const articleSchema = {
         Every job priced individually.
       </p>
     </header>
+    <BlogHero slug="kilmarnock-bathroom-suite-plumbing-02" />
+
 
     <div class="prose-sorn mt-8 text-lg cv-auto">
       <p>
@@ -105,6 +109,10 @@ const articleSchema = {
         stopcock is seized, ring us — we can talk you through isolating the
         specific line under the sink or behind the boiler over the phone.
       </p>
+
+            <div class="not-prose my-8">
+        <BlogFigure slug="galston-cold-water-feed-pipe-repair-08" />
+      </div>
 
       <h2>What the out-of-hours call-out covers</h2>
       <p>

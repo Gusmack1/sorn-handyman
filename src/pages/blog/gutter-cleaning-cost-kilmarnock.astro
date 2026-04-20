@@ -5,12 +5,14 @@ import CTABlock from '../../components/CTABlock.astro';
 import { business, BASE } from '../../data/business';
 import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
 import RelatedPosts from '../../components/RelatedPosts.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
 
 const post = postBySlug('gutter-cleaning-cost-kilmarnock')!;
 const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
 const siteUrl = business.siteUrl.replace(/\/$/, '');
 const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${post.ogImage}`;
+const ogImage = `${siteUrl}${BASE}/gallery/kilmarnock-dry-verge-roof-repair-01-1600w.jpg`;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -68,6 +70,8 @@ const articleSchema = {
         phone or WhatsApp for a free no-obligation quote.
       </p>
     </header>
+    <BlogHero slug="kilmarnock-dry-verge-roof-repair-01" />
+
 
     <div class="prose-sorn mt-8 text-lg cv-auto">
       <p>
@@ -121,6 +125,10 @@ const articleSchema = {
         and we will tell you honestly whether it needs clearing or replacing
         before we start.
       </p>
+
+            <div class="not-prose my-8">
+        <BlogFigure slug="ayrshire-fascia-board-repair-17" />
+      </div>
 
       <h2>What pushes the price up</h2>
       <p>

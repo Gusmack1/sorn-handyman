@@ -5,12 +5,14 @@ import CTABlock from '../../components/CTABlock.astro';
 import { business, BASE } from '../../data/business';
 import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
 import RelatedPosts from '../../components/RelatedPosts.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
 
 const post = postBySlug('kitchen-tap-replacement-ayrshire')!;
 const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
 const siteUrl = business.siteUrl.replace(/\/$/, '');
 const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${post.ogImage}`;
+const ogImage = `${siteUrl}${BASE}/gallery/ayrshire-kitchen-refit-belfast-sink-granite-15-1600w.jpg`;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -68,6 +70,8 @@ const articleSchema = {
         free no-obligation quote.
       </p>
     </header>
+    <BlogHero slug="ayrshire-kitchen-refit-belfast-sink-granite-15" />
+
 
     <div class="prose-sorn mt-8 text-lg cv-auto">
       <p>
@@ -92,6 +96,10 @@ const articleSchema = {
         <a href={`${BASE}/areas/ayr/`}>Ayr</a>, Troon or anywhere else in the
         KA postcodes — phone 07900 255876 or WhatsApp 07472 223323.
       </p>
+
+            <div class="not-prose my-8">
+        <BlogFigure slug="ayrshire-bath-reseal-04" />
+      </div>
 
       <h2>How long a straight swap actually takes</h2>
       <p>

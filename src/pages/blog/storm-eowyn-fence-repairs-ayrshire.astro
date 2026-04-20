@@ -5,12 +5,14 @@ import CTABlock from '../../components/CTABlock.astro';
 import { business, BASE } from '../../data/business';
 import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
 import RelatedPosts from '../../components/RelatedPosts.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
 
 const post = postBySlug('storm-eowyn-fence-repairs-ayrshire')!;
 const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
 const siteUrl = business.siteUrl.replace(/\/$/, '');
 const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${post.ogImage}`;
+const ogImage = `${siteUrl}${BASE}/gallery/ayrshire-fence-post-replacement-20-1600w.jpg`;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -72,6 +74,8 @@ const articleSchema = {
         not) pay for.
       </p>
     </header>
+    <BlogHero slug="ayrshire-fence-post-replacement-20" />
+
 
     <div class="prose-sorn mt-8 text-lg cv-auto">
       <p>
@@ -121,6 +125,10 @@ const articleSchema = {
           where gates had been sistered one too many times already.
         </li>
       </ul>
+
+            <div class="not-prose my-8">
+        <BlogFigure slug="ayrshire-fence-build-new-11" />
+      </div>
 
       <h2>Make-safe now vs full replace later</h2>
       <p>

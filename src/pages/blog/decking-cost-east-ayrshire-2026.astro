@@ -5,12 +5,14 @@ import CTABlock from '../../components/CTABlock.astro';
 import { business, BASE } from '../../data/business';
 import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
 import RelatedPosts from '../../components/RelatedPosts.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
 
 const post = postBySlug('decking-cost-east-ayrshire-2026')!;
 const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
 const siteUrl = business.siteUrl.replace(/\/$/, '');
 const url = `${siteUrl}/blog/${post.slug}/`;
-const ogImage = `${siteUrl}${post.ogImage}`;
+const ogImage = `${siteUrl}${BASE}/gallery/ayrshire-composite-deck-build-14-1600w.jpg`;
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -73,6 +75,8 @@ const articleSchema = {
         phone or WhatsApp for a free no-obligation quote.
       </p>
     </header>
+    <BlogHero slug="ayrshire-composite-deck-build-14" />
+
 
     <div class="prose-sorn mt-8 text-lg cv-auto">
       <p>
@@ -112,6 +116,10 @@ const articleSchema = {
         it every other spring and you will get to the upper end. Ignore
         it and you will not.
       </p>
+
+            <div class="not-prose my-8">
+        <BlogFigure slug="ayrshire-raised-sleeper-bed-landscaping-19" />
+      </div>
 
       <h2>Composite — the upgrade</h2>
       <p>

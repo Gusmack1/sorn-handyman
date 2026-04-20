@@ -1,0 +1,48 @@
+---
+import { BASE } from '../data/business';
+import { gallery, type GalleryItem } from '../data/gallery';
+
+export interface Props {
+  slug: string;
+  caption?: string;
+  alt?: string;
+}
+
+const { slug, caption, alt } = Astro.props;
+const item: GalleryItem | undefined = gallery.find((g) => g.slug === slug);
+
+if (!item) {
+  throw new Error(`BlogFigure: gallery slug "${slug}" not found in src/data/gallery.ts`);
+}
+
+const webp1600 = `${BASE}/${item.webp1600}`;
+const webp800 = `${BASE}/${item.webp800}`;
+const jpeg1600 = `${BASE}/${item.jpeg1600}`;
+const jpeg800 = `${BASE}/${item.jpeg800}`;
+const captionText = caption ?? item.caption;
+const altText = alt ?? item.alt;
+---
+<figure class="not-prose my-8 rounded-2xl overflow-hidden border border-navy-900/10 bg-cream-50">
+  <picture>
+    <source
+      type="image/webp"
+      srcset={`${webp800} 800w, ${webp1600} 1600w`}
+      sizes="(min-width: 1024px) 768px, 100vw"
+    />
+    <img
+      src={jpeg1600}
+      srcset={`${jpeg800} 800w, ${jpeg1600} 1600w`}
+      sizes="(min-width: 1024px) 768px, 100vw"
+      alt={altText}
+      width={item.width}
+      height={item.height}
+      loading="lazy"
+      decoding="async"
+      class="w-full h-auto block"
+    />
+  </picture>
+  <figcaption class="px-4 py-3 text-sm text-navy-900/60 italic">
+    {captionText}
+    <span class="not-italic text-navy-900/40"> · {item.town}, {item.year}</span>
+  </figcaption>
+</figure>
