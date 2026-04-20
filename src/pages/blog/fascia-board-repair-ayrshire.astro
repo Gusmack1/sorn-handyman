@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import { business, BASE } from '../../data/business';
+import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
+
+const post = postBySlug('fascia-board-repair-ayrshire')!;
+const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+const url = `${siteUrl}/blog/${post.slug}/`;
+const ogImage = `${siteUrl}${BASE}/gallery/ayrshire-fascia-board-repair-17-1600w.jpg`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: post.title,
+  description: post.description,
+  inLanguage: 'en-GB',
+  datePublished: post.date,
+  dateModified: post.date,
+  author: { '@type': 'Person', name: post.author, worksFor: { '@id': `${siteUrl}/#business` } },
+  publisher: { '@id': `${siteUrl}/#business` },
+  image: [ogImage],
+  mainEntityOfPage: url,
+  keywords: [post.keyword],
+  wordCount: post.wordCount,
+};
+---
+<BaseLayout
+  title={`${post.title} | Sorn Handyman Services`}
+  description={post.description}
+  canonicalPath={`/blog/${post.slug}/`}
+  ogImage={ogImage}
+  ogType="article"
+  extraSchema={articleSchema}
+>
+  <Breadcrumbs trail={[
+    { name: 'Home', href: `${BASE}/` },
+    { name: 'Blog', href: `${BASE}/blog/` },
+    { name: post.title },
+  ]} />
+
+  <article class="container-x py-10 lg:py-14 max-w-3xl">
+    <header>
+      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
+        <span>{post.area}</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <span class="text-navy-900/60">{post.readMinutes} min read</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
+      </div>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
+        {post.title}
+      </h1>
+      <p class="mt-5 text-lg text-navy-900/75">
+        Damaged and missing fascia boards replaced on an Ayrshire house — with
+        a wasps nest carefully moved on before any timber came off.
+      </p>
+    </header>
+
+    <BlogHero slug="ayrshire-fascia-board-repair-17" />
+
+    <div class="prose-sorn mt-8 text-lg cv-auto">
+      <h2>What the job involved</h2>
+      <p>
+        The nest came first. We would not touch the fascia until that part was
+        safe — and once it was sorted, the broken and missing sections came
+        off cleanly. Every fixing point was checked for rot before the new
+        boards went up.
+      </p>
+      <p>
+        New fascia was cut to length, primed where needed, and fixed back to
+        sound rafter feet. The gutter line was reset on top so water runs the
+        way it should. A job that looks small from the road but matters a lot
+        to the roof behind it.
+      </p>
+
+      <BlogFigure slug="ayrshire-fascia-board-repair-17" />
+
+      <h2>Things to think about before you start</h2>
+      <p>
+        Fascia damage is usually a symptom, not the problem. A blocked gutter
+        that has been overflowing for a winter or two, a slipped slate letting
+        water track behind the board, or a nest that has chewed through the
+        timber — it is worth finding the cause before you spend on new
+        boards.
+      </p>
+      <p>
+        Any sign of wasps, bees or a wildlife nest changes the job. Do not
+        pull the board off yourself to have a look. Leave it to someone who
+        can work around it, and plan the repair for a dry week when the roof
+        edge is safe to reach.
+      </p>
+
+      <p>
+        If you are in Ayrshire and need something similar, Fraser will come
+        and look for free. Call <strong>07900 255876</strong> or WhatsApp
+        <strong>+44 7472 223323</strong>. FREE no-obligation quote, every job
+        priced individually.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
+        <p class="text-sm text-navy-900/60">Written by</p>
+        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
+        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
+      </div>
+    </div>
+  </article>
+
+  {relatedPosts.length > 0 && (
+    <RelatedPosts posts={relatedPosts} eyebrow="Keep reading" heading="Related posts" variant="tinted" />
+  )}
+
+  <CTABlock
+    heading="Noticed a broken fascia from the garden?"
+    sub="Send a zoomed-in photo over WhatsApp and we will tell you what you are looking at."
+    location="Ayrshire"
+  />
+</BaseLayout>

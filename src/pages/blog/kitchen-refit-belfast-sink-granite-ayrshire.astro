@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import { business, BASE } from '../../data/business';
+import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
+
+const post = postBySlug('kitchen-refit-belfast-sink-granite-ayrshire')!;
+const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+const url = `${siteUrl}/blog/${post.slug}/`;
+const ogImage = `${siteUrl}${BASE}/gallery/ayrshire-kitchen-refit-belfast-sink-granite-15-1600w.jpg`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: post.title,
+  description: post.description,
+  inLanguage: 'en-GB',
+  datePublished: post.date,
+  dateModified: post.date,
+  author: { '@type': 'Person', name: post.author, worksFor: { '@id': `${siteUrl}/#business` } },
+  publisher: { '@id': `${siteUrl}/#business` },
+  image: [ogImage],
+  mainEntityOfPage: url,
+  keywords: [post.keyword],
+  wordCount: post.wordCount,
+};
+---
+<BaseLayout
+  title={`${post.title} | Sorn Handyman Services`}
+  description={post.description}
+  canonicalPath={`/blog/${post.slug}/`}
+  ogImage={ogImage}
+  ogType="article"
+  extraSchema={articleSchema}
+>
+  <Breadcrumbs trail={[
+    { name: 'Home', href: `${BASE}/` },
+    { name: 'Blog', href: `${BASE}/blog/` },
+    { name: post.title },
+  ]} />
+
+  <article class="container-x py-10 lg:py-14 max-w-3xl">
+    <header>
+      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
+        <span>{post.area}</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <span class="text-navy-900/60">{post.readMinutes} min read</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
+      </div>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
+        {post.title}
+      </h1>
+      <p class="mt-5 text-lg text-navy-900/75">
+        A kitchen put back in Ayrshire after underfloor damp works. The room
+        had to come apart before the damp could be fixed. Once the floor was
+        sound again, the refit put everything back in its place — electrics,
+        Belfast sink and tap, granite worktops, cabinets and the original
+        tiles.
+      </p>
+    </header>
+
+    <BlogHero slug="ayrshire-kitchen-refit-belfast-sink-granite-15" />
+
+    <div class="prose-sorn mt-8 text-lg cv-auto">
+      <h2>What the job involved</h2>
+      <p>
+        Electrics went back on first — sockets, switches and the under-cabinet
+        lighting tested before anything covered them. The Belfast sink was
+        reset on its carcass with a fresh bed, the tap plumbed in, and the
+        granite worktops offered up, drilled and lowered into place.
+      </p>
+      <p>
+        Cabinets were refitted, doors hung and adjusted to a tight line, and
+        the original splashback tiles put back where they came from. Sealing,
+        silicone and a final clean finished the day.
+      </p>
+
+      <BlogFigure slug="ayrshire-kitchen-refit-belfast-sink-granite-15" />
+
+      <h2>Things to think about before you start</h2>
+      <p>
+        Granite is heavy. If worktops are coming out and going back, the floor
+        and carcasses underneath have to be dead true before anything sits on
+        top — a millimetre of bounce in the base cabinet turns into a
+        hairline crack in the stone over time. Any damp or floor work is the
+        right time to reset levels.
+      </p>
+      <p>
+        Keep the old tiles if you can. Matching a discontinued splashback is
+        often impossible, and replacing the whole wall for the sake of three
+        cut tiles at the sink is a lot more cost and dust than most people
+        want. Lift carefully, label the backs, and store them flat.
+      </p>
+
+      <p>
+        If you are in Ayrshire and need something similar, Fraser will come
+        and look for free. Call <strong>07900 255876</strong> or WhatsApp
+        <strong>+44 7472 223323</strong>. FREE no-obligation quote, every job
+        priced individually.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
+        <p class="text-sm text-navy-900/60">Written by</p>
+        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
+        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
+      </div>
+    </div>
+  </article>
+
+  {relatedPosts.length > 0 && (
+    <RelatedPosts posts={relatedPosts} eyebrow="Keep reading" heading="Related posts" variant="tinted" />
+  )}
+
+  <CTABlock
+    heading="Kitchen coming apart for damp works?"
+    sub="We can put it back when the floor is ready — give Fraser a call."
+    location="Ayrshire"
+  />
+</BaseLayout>

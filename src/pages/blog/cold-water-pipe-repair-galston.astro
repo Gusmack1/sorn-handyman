@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTABlock from '../../components/CTABlock.astro';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogFigure from '../../components/BlogFigure.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import { business, BASE } from '../../data/business';
+import { postBySlug, postsBySlugs, RELATED_POSTS } from '../../data/posts';
+
+const post = postBySlug('cold-water-pipe-repair-galston')!;
+const relatedPosts = postsBySlugs(RELATED_POSTS[post.slug] ?? []).slice(0, 3);
+const siteUrl = business.siteUrl.replace(/\/$/, '');
+const url = `${siteUrl}/blog/${post.slug}/`;
+const ogImage = `${siteUrl}${BASE}/gallery/galston-cold-water-feed-pipe-repair-08-1600w.jpg`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: post.title,
+  description: post.description,
+  inLanguage: 'en-GB',
+  datePublished: post.date,
+  dateModified: post.date,
+  author: { '@type': 'Person', name: post.author, worksFor: { '@id': `${siteUrl}/#business` } },
+  publisher: { '@id': `${siteUrl}/#business` },
+  image: [ogImage],
+  mainEntityOfPage: url,
+  keywords: [post.keyword],
+  wordCount: post.wordCount,
+};
+---
+<BaseLayout
+  title={`${post.title} | Sorn Handyman Services`}
+  description={post.description}
+  canonicalPath={`/blog/${post.slug}/`}
+  ogImage={ogImage}
+  ogType="article"
+  extraSchema={articleSchema}
+>
+  <Breadcrumbs trail={[
+    { name: 'Home', href: `${BASE}/` },
+    { name: 'Blog', href: `${BASE}/blog/` },
+    { name: post.title },
+  ]} />
+
+  <article class="container-x py-10 lg:py-14 max-w-3xl">
+    <header>
+      <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-600">
+        <span>{post.area}</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <span class="text-navy-900/60">{post.readMinutes} min read</span>
+        <span aria-hidden class="text-navy-900/20">·</span>
+        <time datetime={post.date} class="text-navy-900/60">{post.dateDisplay}</time>
+      </div>
+      <h1 class="mt-4 font-serif text-4xl md:text-5xl font-black text-navy-900 leading-tight">
+        {post.title}
+      </h1>
+      <p class="mt-5 text-lg text-navy-900/75">
+        A cold water feed pipe repaired in an outhouse for a repeat customer
+        in Galston. The sink and tap were back in action the same day.
+      </p>
+    </header>
+
+    <BlogHero slug="galston-cold-water-feed-pipe-repair-08" />
+
+    <div class="prose-sorn mt-8 text-lg cv-auto">
+      <h2>What the job involved</h2>
+      <p>
+        Water was isolated at the stopcock before anything came apart. The
+        damaged section was cut out, the run dried off and the new length of
+        pipe prepped and fitted with sound joints. We held pressure on it for
+        a good while before calling it done.
+      </p>
+      <p>
+        Tap and sink were tested back on, the area dried down and everything
+        tidied up. Outhouse plumbing often gets forgotten about until it
+        gives up — a quick job once it is in front of you, but only if you
+        can get to the pipe cleanly.
+      </p>
+
+      <BlogFigure slug="galston-cold-water-feed-pipe-repair-08" />
+
+      <h2>Things to think about before you start</h2>
+      <p>
+        Know where your stopcock is before a leak starts. On most Ayrshire
+        houses it is under the kitchen sink, but on older properties it can
+        be in a cupboard or under the floor. Trying to find it in a panic
+        with water running is not the moment.
+      </p>
+      <p>
+        Outhouse and garage runs are the first to freeze in a cold winter.
+        Lagging the exposed pipe, trickle-heating the space or fitting an
+        isolator you can close when the weather turns saves a repair bill.
+        If a pipe has already failed once in the cold, it will fail again —
+        fix the cause, not just the joint.
+      </p>
+
+      <p>
+        If you are in Galston and need something similar, Fraser will come
+        and look for free. Call <strong>07900 255876</strong> or WhatsApp
+        <strong>+44 7472 223323</strong>. FREE no-obligation quote, every job
+        priced individually.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-navy-900/10 bg-navy-50/50 p-6">
+        <p class="text-sm text-navy-900/60">Written by</p>
+        <p class="mt-1 font-serif text-xl font-bold text-navy-900">{post.author}</p>
+        <p class="mt-2 text-navy-900/75 text-sm">{post.authorBio}</p>
+      </div>
+    </div>
+  </article>
+
+  {relatedPosts.length > 0 && (
+    <RelatedPosts posts={relatedPosts} eyebrow="Keep reading" heading="Related posts" variant="tinted" />
+  )}
+
+  <CTABlock
+    heading="Weep, drip or full-on leak?"
+    sub="WhatsApp a photo with the water turned off and we will tell you how long a fix should take."
+    location="Galston"
+  />
+</BaseLayout>

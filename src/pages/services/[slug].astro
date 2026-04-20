@@ -127,12 +127,14 @@ const relatedPosts = postsBySlugs(relatedPostSlugs).slice(0, 3);
     </aside>
   </section>
 
-  <RelatedPosts
-    posts={relatedPosts}
-    eyebrow={`Read more on ${service.name.toLowerCase()}`}
-    heading={`More on ${service.name.toLowerCase()} from our blog`}
-    variant="plain"
-  />
+  {relatedPosts.length > 0 && (
+    <RelatedPosts
+      posts={relatedPosts}
+      eyebrow={`Read more on ${service.name.toLowerCase()}`}
+      heading={`More on ${service.name.toLowerCase()} from our blog`}
+      variant="plain"
+    />
+  )}
 
   <!-- Related areas -->
   <section class="bg-navy-50/60 border-y border-navy-900/5 cv-auto">
